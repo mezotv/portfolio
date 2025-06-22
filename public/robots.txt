@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /_next/
+
+# Cliqzbot
+User-agent: Cliqzbot
+Disallow: /
+
+# MJ12bot
+User-agent: MJ12bot
+Disallow: /
+
+# Host
+Host: https://dominikkoch.dev

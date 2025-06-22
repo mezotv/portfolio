@@ -19,9 +19,10 @@ import { cn } from "@/lib/utils";
     <meta name="generator" content={Astro.generator} />
     <title>Dominik Koch - Software Engineer</title>
     <meta name="description" content="Software Engineer based in Germany, 20 years old with a passion for open source. Self proclaimed 10x engineer." />
-    
-    <!-- DataBuddy Analytics -->
-    <script
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- DataDaddy Analytics -->
+    <script is:inline
       src="https://app.databuddy.cc/databuddy.js"
       data-client-id="T7Oky9JBa87U0MJjqmRkH"
       data-track-web-vitals="true"
@@ -29,7 +30,8 @@ import { cn } from "@/lib/utils";
       data-enable-batching="true"
       crossorigin="anonymous"
       async
-    ></script>
+    />
+    
     <style>
       .precise-age {
         font-family: monospace;
@@ -217,7 +219,7 @@ import { cn } from "@/lib/utils";
 
     <script>
       function updateAge() {
-        const birthday = new Date("2005-01-17T00:00:00+01:00").getTime();
+        const birthday = new Date("2005-01-17T11:12:00+01:00").getTime();
         const now = performance.now() + performance.timeOrigin;
         const ageInMs = now - birthday;
         const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365.25);

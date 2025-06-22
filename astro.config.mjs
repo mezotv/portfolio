@@ -5,10 +5,10 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
-export default defineConfig({
+export default defineConfig({	
+	site: "https://dominikkoch.dev",
 	vite: {
 		plugins: [tailwindcss()]
 	},
 	integrations: [react(), sitemap()],
-	site: "https://dominikkoch.dev",
 });
