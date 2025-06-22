@@ -1,0 +1,173 @@
+---
+import { ModeToggle } from "@/components/ModeToggle";
+import "../styles/global.css";
+import { MainTabs } from "@/components/MainTabs";
+import GitHub from "@/components/icons/GitHub.astro";
+import Twitter from "@/components/icons/Twitter.astro";
+import LinkedIn from "@/components/icons/LinkedIn.astro";
+import Cal from "@/components/icons/Cal.astro";
+import { HoverPic } from "@/components/HoverPic";
+import { cn } from "@/lib/utils";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Dominik Koch - Software Engineer</title>
+    <style>
+      .precise-age {
+        font-family: monospace;
+        display: inline-block;
+        min-width: 12ch;
+      }
+      h1 {
+        font-family: "Gambarino", serif;
+      }
+      .parallax-bg {
+        will-change: transform;
+        transform: translateY(0);
+        transition: transform 100ms cubic-bezier(0.1, 0.7, 0.1, 1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="relative min-h-screen w-full bg-white dark:bg-black overflow-hidden"
+    >
+      <div
+        class={cn(
+          "absolute inset-0 parallax-bg",
+          "[background-size:20px_20px]",
+          "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
+          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
+        )}
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"
+      >
+      </div>
+
+      <main
+        class="text-zinc-900 dark:text-zinc-100 max-w-xl mx-auto px-4 py-4 mt-16 relative z-10"
+      >
+        <section class="flex flex-col gap-4 mb-8">
+          <div class="flex items-center justify-between">
+            <HoverPic client:load>
+              <h1 class="text-2xl font-medium tracking-tight">
+                Hi, I'm Dominik Koch
+              </h1>
+            </HoverPic>
+            <ModeToggle client:load />
+          </div>
+          <p class="text-md">
+            Software Engineer based in Germany 🇩🇪, <span
+              id="age"
+              class="precise-age">🤨</span
+            > years old with a passion for open source. Self proclaimed <span
+              >10x engineer</span
+            > currently working on <a
+              href="https://rivo.gg/"
+              target="_blank"
+              class="font-bold relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out">Rivo</a
+            > and <a
+              href="https://wouldyoubot.gg/"
+              target="_blank"
+              class="font-bold relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out">Would You Bot</a
+            >.
+          </p>
+          <div class="flex flex-row gap-4">
+            <a
+              href="https://cal.com/dominikkoch"
+              target="_blank"
+              class="overflow-hidden transition-all text-zinc-900/60 dark:text-zinc-100/60 hover:text-zinc-900/100 dark:hover:text-zinc-100/100"
+            >
+              <p class="sr-only">Cal.com</p>
+              <Cal class="h-5 w-5 transition-all" />
+            </a>
+            <a
+              href="https://github.com/mezotv"
+              target="_blank"
+              class="overflow-hidden transition-all text-zinc-900/60 dark:text-zinc-100/60 hover:text-zinc-900/100 dark:hover:text-zinc-100/100"
+            >
+              <p class="sr-only">GitHub</p>
+              <GitHub class="h-5 w-5 transition-all" />
+            </a>
+            <a
+              href="https://twitter.com/dominikdoesdev"
+              target="_blank"
+              class="overflow-hidden transition-all text-zinc-900/60 dark:text-zinc-100/60 hover:text-zinc-900/100 dark:hover:text-zinc-100/100"
+            >
+              <p class="sr-only">Twitter</p>
+              <Twitter class="h-5 w-5 transition-all" />
+            </a>
+            <a
+              href="https://linkedin.com/in/dominikkoch"
+              target="_blank"
+              class="overflow-hidden transition-all text-zinc-900/60 dark:text-zinc-100/60 hover:text-zinc-900/100 dark:hover:text-zinc-100/100"
+            >
+              <p class="sr-only">LinkedIn</p>
+              <LinkedIn class="h-5 w-5 transition-all" />
+            </a>
+          </div>
+        </section>
+        <MainTabs client:load />
+      </main>
+    </div>
+
+    <script is:inline>
+      const getThemePreference = () => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      };
+      const isDark = getThemePreference() === "dark";
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+      if (typeof localStorage !== "undefined") {
+        const observer = new MutationObserver(() => {
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+
+      // Parallax scroll effect
+      window.addEventListener("scroll", () => {
+        const parallaxBg = document.querySelector(".parallax-bg");
+        if (parallaxBg) {
+          const scrolled = window.pageYOffset;
+          parallaxBg.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+      });
+    </script>
+
+    <script>
+      function updateAge() {
+        const birthday = new Date("2005-01-17T00:00:00+01:00").getTime(); // German timezone (CET)
+        const now = performance.now() + performance.timeOrigin;
+        const ageInMs = now - birthday;
+        const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365.25);
+        const ageElement = document.getElementById("age");
+        if (ageElement) {
+          ageElement.textContent = ageInYears.toFixed(11);
+        }
+        requestAnimationFrame(updateAge);
+      }
+      updateAge();
+    </script>
+  </body>
+</html>
