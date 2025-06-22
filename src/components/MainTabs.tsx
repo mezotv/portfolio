@@ -1,6 +1,7 @@
 import React, { Suspense } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Experience } from "./Experience"
+import { Projects } from "./Projects"
 import { Tools } from "./Tools"
 import { QueryProvider } from "./QueryProvider"
 
@@ -42,9 +43,7 @@ export function MainTabs() {
         <TabsTrigger className="cursor-pointer" value="other">Other</TabsTrigger>
       </TabsList>
       <TabsContent value="projects">
-        <div>
-          <h2>Projects</h2>
-        </div>
+        <Projects />
       </TabsContent>
       <TabsContent value="experience">
         <Experience />
@@ -53,8 +52,7 @@ export function MainTabs() {
         <Tools />
       </TabsContent>
       <TabsContent value="other">
-      <h2 className="text-2xl font-bold mb-4">Countries I visited</h2>
-      
+      <h2 className="text-2xl font-bold mb-4">Countries Visited</h2>
         <QueryProvider>
           <Suspense fallback={<MapLoadingFallback />}>
             <MapComponent 

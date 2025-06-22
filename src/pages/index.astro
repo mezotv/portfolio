@@ -7,6 +7,7 @@ import Twitter from "@/components/icons/Twitter.astro";
 import LinkedIn from "@/components/icons/LinkedIn.astro";
 import Cal from "@/components/icons/Cal.astro";
 import { HoverPic } from "@/components/HoverPic";
+import Sponsors from "@/components/Sponsors.astro";
 import { cn } from "@/lib/utils";
 ---
 
@@ -14,9 +15,21 @@ import { cn } from "@/lib/utils";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/ico" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>Dominik Koch - Software Engineer</title>
+    <meta name="description" content="Software Engineer based in Germany, 20 years old with a passion for open source. Self proclaimed 10x engineer." />
+    
+    <!-- DataBuddy Analytics -->
+    <script
+      src="https://app.databuddy.cc/databuddy.js"
+      data-client-id="T7Oky9JBa87U0MJjqmRkH"
+      data-track-web-vitals="true"
+      data-track-errors="true"
+      data-enable-batching="true"
+      crossorigin="anonymous"
+      async
+    ></script>
     <style>
       .precise-age {
         font-family: monospace;
@@ -79,7 +92,7 @@ import { cn } from "@/lib/utils";
             Software Engineer based in Germany, <span
               id="age"
               class="precise-age">🤨</span
-            > years old with a passion for open source. Self proclaimed <span
+            > years old with a passion for open source. Self proclaimed <span class=" relative after:absolute after:bg-yellow-400 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
               >10x engineer</span
             > currently working on <a
               href="https://rivo.gg/"
@@ -127,17 +140,21 @@ import { cn } from "@/lib/utils";
           </div>
         </section>
         <MainTabs client:load />
+        <section class="mt-8">
+          <Sponsors />
+        </section>
       </main>
-      <footer class="fixed bottom-0 left-0 right-0">
+      <footer class="mt-8 relative z-50">
         <div class="flex items-center justify-between max-w-xl mx-auto px-4 py-4">
-          <p class="text-muted-foreground">
-            Made with <span class="text-red-500">❤️</span> by Dominik Koch
+          <p class="text-zinc-900 dark:text-muted-foreground">
+            Made with <span class="text-red-500 dark:text-red-400">❤️</span> by <span class="font-bold text-black/90 dark:text-zinc-100">Dominik Koch</span>
           </p>
-          <p class="text-muted-foreground">
+          <p class="text-zinc-900 dark:text-muted-foreground">
             Inspired by <a
-              href="https://ahmet.studio/"
+              href="https://ahmet.studio"
               target="_blank"
-              class="overflow-hidden transition-all text-muted-foreground hover:text-foreground"
+              rel="noopener noreferrer"
+              class="font-bold text-black/90 dark:text-zinc-100 relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
             >Ahmet Kilinc</a>!
           </p>
         </div>
@@ -200,7 +217,7 @@ import { cn } from "@/lib/utils";
 
     <script>
       function updateAge() {
-        const birthday = new Date("2005-01-17T00:00:00+01:00").getTime(); // German timezone (CET)
+        const birthday = new Date("2005-01-17T00:00:00+01:00").getTime();
         const now = performance.now() + performance.timeOrigin;
         const ageInMs = now - birthday;
         const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365.25);

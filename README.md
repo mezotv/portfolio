@@ -1,13 +1,48 @@
-# Astro with Tailwind
+# Dominik Koch's Portfolio
 
+Personal portfolio website built with Astro and Tailwind CSS, featuring GitHub Sponsors integration.
+
+## Setup
+
+1. Install dependencies:
 ```sh
-bun create astro@latest -- --template with-tailwindcss
+bun install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/with-tailwindcss/devcontainer.json)
+2. Set up environment variables:
+Create a `.env` file and add your GitHub Personal Access Token:
+```sh
+GITHUB_TOKEN=your_github_token_here
+```
 
-Astro comes with [Tailwind](https://tailwindcss.com) support out of the box. This example showcases how to style your Astro project with Tailwind.
+**Important**: Use `GITHUB_TOKEN` (without `PUBLIC_` prefix) to keep your token secure on the server-side.
 
-For complete setup instructions, please see our [Tailwind Integration Guide](https://docs.astro.build/en/guides/integrations-guide/tailwind).
+To create a GitHub token:
+1. Go to [GitHub Settings > Personal Access Tokens](https://github.com/settings/tokens)
+2. Click "Generate new token (classic)"
+3. Give it a name like "Portfolio Sponsors"
+4. Select the `read:user` scope (and `read:org` if you want to see organization sponsors)
+5. Generate the token and copy it to your `.env` file
+
+3. Start the development server:
+```sh
+bun dev
+```
+
+## Features
+
+- **GitHub Sponsors Integration**: Automatically displays sponsors from the GitHub Sponsors API
+- **Dark/Light Mode**: Theme toggle with system preference detection
+- **Responsive Design**: Mobile-first responsive layout
+- **Interactive Elements**: Hover effects and smooth animations
+
+## GitHub Sponsors
+
+The sponsors section is built as an Astro component that fetches your GitHub sponsors at build time using the GraphQL API. This provides:
+
+- **Server-side rendering**: No client-side JavaScript needed
+- **Better performance**: Pre-rendered at build time
+- **Security**: GitHub token stays secure on the server
+- **Better SEO**: Sponsors are indexed by search engines
+
+If no token is configured, it will show a fallback message with a link to become a sponsor.

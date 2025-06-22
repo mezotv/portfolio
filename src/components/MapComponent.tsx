@@ -52,14 +52,41 @@ export function MapComponent({
 
     console.log(`Styling country: ${countryCode}, visited: ${isVisited}`);
 
-    // Simple styling: visited countries are blue, others are gray
+    // Check if dark mode is active
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    // Define colors for both modes
+    const colors = {
+      visited: {
+        light: {
+          border: isHovered ? "rgba(59, 130, 246, 0.9)" : "rgba(59, 130, 246, 0.6)",
+          fill: "#3b82f6"
+        },
+        dark: {
+          border: isHovered ? "rgba(96, 165, 250, 0.9)" : "rgba(96, 165, 250, 0.6)",
+          fill: "#60a5fa"
+        }
+      },
+      unvisited: {
+        light: {
+          border: "rgba(107, 114, 128, 0.4)",
+          fill: "#d1d5db"
+        },
+        dark: {
+          border: "rgba(75, 85, 99, 0.5)",
+          fill: "#374151"
+        }
+      }
+    };
+
+    const currentTheme = isDark ? 'dark' : 'light';
+    const currentColors = isVisited ? colors.visited[currentTheme] : colors.unvisited[currentTheme];
+
     return {
-      color: isVisited 
-        ? (isHovered ? "rgba(59, 130, 246, 0.9)" : "rgba(59, 130, 246, 0.6)")
-        : "rgba(156, 163, 175, 0.3)",
+      color: currentColors.border,
       weight: isVisited ? (isHovered ? 2.5 : 1.5) : 0.5,
       fill: true,
-      fillColor: isVisited ? "#3b82f6" : "#e5e7eb",
+      fillColor: currentColors.fill,
       fillOpacity: isVisited ? (isHovered ? 0.8 : 0.6) : 0.3,
       opacity: 1,
     };
@@ -106,7 +133,7 @@ export function MapComponent({
     return (
       <div className="h-full flex items-center justify-center bg-muted/20 rounded">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
+          <div className="h-8 w-8 rounded-full border-2 border-blue-500 dark:border-blue-400 border-t-transparent animate-spin" />
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Loading map...
           </span>
@@ -150,7 +177,7 @@ export function MapComponent({
         height: height,
       }}
       ref={containerRef}
-      className="relative bg-muted rounded-lg overflow-hidden"
+      className="relative bg-zinc-800 rounded-lg overflow-hidden"
     >
       <MapContainer
         preferCanvas={true}
@@ -175,12 +202,11 @@ export function MapComponent({
 
       {tooltipContent && (
         <div
-          className="fixed z-50 bg-muted text-foreground rounded-lg p-3 shadow-xl border border-border text-sm pointer-events-none backdrop-blur-sm"
+          className="fixed z-50 bg-muted text-foreground rounded-lg p-3 shadow-xl border border-border text-sm pointer-events-none backdrop-blur-sm dark:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3),0_4px_6px_-2px_rgba(0,0,0,0.2)]"
           style={{
             left: tooltipPosition.x,
             top: tooltipPosition.y - 10,
             transform: "translate(-50%, -100%)",
-            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
           }}
         >
           <div className="font-medium flex items-center gap-2">
