@@ -37,7 +37,7 @@ export const experiences: ExperienceItem[] = [
         role: "Software Engineer",
         type: "Internship",
         startDate: new Date("2024-09-01"),
-        endDate: new Date("2024-09-30"),
+        endDate: new Date("2024-10-01"),
         location: "Ulm, Baden-Württemberg, Deutschland"
       }
     ],

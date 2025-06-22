@@ -26,10 +26,10 @@ import { cn } from "@/lib/utils";
       h1 {
         font-family: "Gambarino", serif;
       }
-      .parallax-bg {
-        will-change: transform;
-        transform: translateY(0);
-        transition: transform 100ms cubic-bezier(0.1, 0.7, 0.1, 1);
+      .grid-bg {
+        will-change: mask-image;
+        --mouse-x: 50%;
+        --mouse-y: 50%;
       }
     </style>
   </head>
@@ -40,15 +40,26 @@ import { cn } from "@/lib/utils";
     >
       <div
         class={cn(
-          "absolute inset-0 parallax-bg",
+          "fixed inset-0 grid-bg",
           "[background-size:20px_20px]",
           "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
           "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
         )}
+        style="mask-image: radial-gradient(circle 200px at var(--mouse-x) var(--mouse-y), transparent 0%, transparent 30%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.8) 100%), radial-gradient(circle 400px at var(--mouse-x) var(--mouse-y), rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%)"
       >
       </div>
       <div
-        class="pointer-events-none absolute inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"
+        class={cn(
+          "fixed inset-0 pointer-events-none",
+          "[background-size:20px_20px]",
+          "[background-image:radial-gradient(#3b82f6_1px,transparent_1px)]",
+          "dark:[background-image:radial-gradient(#60a5fa_1px,transparent_1px)]"
+        )}
+        style="mask-image: radial-gradient(circle 200px at var(--mouse-x) var(--mouse-y), black 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.2) 70%, transparent 100%)"
+      >
+      </div>
+      <div
+        class="pointer-events-none fixed inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"
       >
       </div>
 
@@ -65,7 +76,7 @@ import { cn } from "@/lib/utils";
             <ModeToggle client:load />
           </div>
           <p class="text-md">
-            Software Engineer based in Germany 🇩🇪, <span
+            Software Engineer based in Germany, <span
               id="age"
               class="precise-age">🤨</span
             > years old with a passion for open source. Self proclaimed <span
@@ -117,6 +128,20 @@ import { cn } from "@/lib/utils";
         </section>
         <MainTabs client:load />
       </main>
+      <footer class="fixed bottom-0 left-0 right-0">
+        <div class="flex items-center justify-between max-w-xl mx-auto px-4 py-4">
+          <p class="text-muted-foreground">
+            Made with <span class="text-red-500">❤️</span> by Dominik Koch
+          </p>
+          <p class="text-muted-foreground">
+            Inspired by <a
+              href="https://ahmet.studio/"
+              target="_blank"
+              class="overflow-hidden transition-all text-muted-foreground hover:text-foreground"
+            >Ahmet Kilinc</a>!
+          </p>
+        </div>
+      </footer>
     </div>
 
     <script is:inline>
@@ -145,14 +170,32 @@ import { cn } from "@/lib/utils";
         });
       }
 
-      // Parallax scroll effect
-      window.addEventListener("scroll", () => {
-        const parallaxBg = document.querySelector(".parallax-bg");
-        if (parallaxBg) {
-          const scrolled = window.pageYOffset;
-          parallaxBg.style.transform = `translateY(${scrolled * 0.1}px)`;
-        }
-      });
+      // Mouse cursor effect for grid background
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      
+      function updateMousePosition(e) {
+        targetX = (e.clientX / window.innerWidth) * 100;
+        targetY = (e.clientY / window.innerHeight) * 100;
+      }
+      
+      function animateGrid() {
+        mouseX += (targetX - mouseX) * 0.1;
+        mouseY += (targetY - mouseY) * 0.1;
+        
+        const gridBgs = document.querySelectorAll('.grid-bg, .grid-bg + div');
+        gridBgs.forEach(bg => {
+          bg.style.setProperty('--mouse-x', `${mouseX}%`);
+          bg.style.setProperty('--mouse-y', `${mouseY}%`);
+        });
+        
+        requestAnimationFrame(animateGrid);
+      }
+      
+      window.addEventListener('mousemove', updateMousePosition);
+      animateGrid();
     </script>
 
     <script>

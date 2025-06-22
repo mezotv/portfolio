@@ -53,7 +53,7 @@ export function Tools() {
     <div className="space-y-12">
       {toolGroups.map((group) => (
         <div key={group.title} className="space-y-6">
-          <h3 className="text-lg font-medium text-muted-foreground">{group.title}</h3>
+          <h2 className="text-2xl font-bold">{group.title}</h2>
           <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
             {group.tools.map((tool) => (
               <ToolCard key={tool.name} {...tool} />
