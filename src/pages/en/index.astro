@@ -1,6 +1,6 @@
 ---
 import { ModeToggle } from "@/components/ModeToggle";
-import "../styles/global.css";
+import "../../styles/global.css";
 import { MainTabs } from "@/components/MainTabs";
 import GitHub from "@/components/icons/GitHub.astro";
 import Twitter from "@/components/icons/Twitter.astro";
@@ -10,10 +10,9 @@ import { HoverPic } from "@/components/HoverPic";
 import Sponsors from "@/components/Sponsors.astro";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "@/i18n/utils";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
-// Default to English for root path
-const lang = 'en';
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
@@ -29,9 +28,9 @@ const t = useTranslations(lang);
     <meta name="theme-color" content="#FDC700" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     
-    <!-- Canonical and hreflang tags - Root is the canonical English -->
+    <!-- Canonical and hreflang tags -->
     <link rel="canonical" href="https://dominikkoch.dev/" />
-    <link rel="alternate" hreflang="en" href="https://dominikkoch.dev/" />
+    <link rel="alternate" hreflang="en" href="https://dominikkoch.dev/en/" />
     <link rel="alternate" hreflang="de" href="https://dominikkoch.dev/de/" />
     <link rel="alternate" hreflang="x-default" href="https://dominikkoch.dev/" />
 
@@ -249,4 +248,4 @@ const t = useTranslations(lang);
       updateAge();
     </script>
   </body>
-</html>---
+</html> 

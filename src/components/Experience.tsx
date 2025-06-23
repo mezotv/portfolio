@@ -1,7 +1,16 @@
 import { experiences, type Position, type ExperienceItem } from '../data/experience';
+import { useTranslations } from '@/i18n/utils';
+import { experienceTranslations, generalTranslations, type ExperienceKey } from '../data/experienceTranslations';
 
 function formatDate(date: Date) {
   return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+}
+
+function translateLocation(location: string, lang: 'en' | 'de'): string {
+  if (lang === 'de') {
+    return location.replace(/Germany/g, 'Deutschland');
+  }
+  return location;
 }
 
 function calculateDuration(startDate: Date, endDate: Date): string {
@@ -21,25 +30,35 @@ function calculateDuration(startDate: Date, endDate: Date): string {
   }
 }
 
-function PositionCard({ position, grade, isEducation }: { position: Position; grade?: string; isEducation: boolean }) {
+function PositionCard({ position, grade, isEducation, lang = 'en', experienceKey }: { position: Position; grade?: string; isEducation: boolean; lang?: string; experienceKey: ExperienceKey }) {
+  const t = useTranslations(lang as 'en' | 'de');
   const duration = calculateDuration(position.startDate, position.endDate);
   const now = new Date();
   const isOngoing = position.endDate > now && position.startDate <= now;
   const showPresent = isOngoing && !isEducation;
 
+  // Get translated role and type
+  const translatedExperience = experienceTranslations[experienceKey];
+  const getTranslatedRole = (role: string) => {
+    if (translatedExperience && translatedExperience[lang as 'en' | 'de'].roles[role as keyof typeof translatedExperience.en.roles]) {
+      return translatedExperience[lang as 'en' | 'de'].roles[role as keyof typeof translatedExperience.en.roles];
+    }
+    return role;
+  };
+
   return (
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center">
-        <h4 className="text-base font-semibold mr-2">{position.role}</h4>
-        <span className="text-sm text-muted-foreground">{position.type}</span>
+        <h4 className="text-base font-semibold mr-2">{getTranslatedRole(position.role)}</h4>
+        <span className="text-sm text-muted-foreground">{getTranslatedRole(position.type)}</span>
       </div>
       <div className="text-sm text-muted-foreground">
-        {formatDate(position.startDate)} - {showPresent ? 'Present' : formatDate(position.endDate)} · {duration}
+        {formatDate(position.startDate)} - {showPresent ? t('experience.current') : formatDate(position.endDate)} · {duration}
       </div>
-      <span className="text-sm text-muted-foreground">{position.location}</span>
+      <span className="text-sm text-muted-foreground">{translateLocation(position.location, lang as 'en' | 'de')}</span>
       {grade && (
         <span className="text-sm text-muted-foreground mt-1">
-          Grade: {grade}
+          {t('experience.grade')}: {grade}
         </span>
       )}
     </div>
@@ -61,7 +80,7 @@ function SkillsList({ skills }: { skills: { name: string }[] }) {
   );
 }
 
-function ExperienceSection({ title, items }: { title: string; items: ExperienceItem[] }) {
+function ExperienceSection({ title, items, lang = 'en' }: { title: string; items: ExperienceItem[]; lang?: string }) {
   if (items.length === 0) return null;
   
   return (
@@ -75,13 +94,26 @@ function ExperienceSection({ title, items }: { title: string; items: ExperienceI
           );
           const isEducation = experience.category === 'education';
 
+          // Get translated experience data if available
+          const experienceKey = experience.company as ExperienceKey;
+          const translatedExperience = experienceTranslations[experienceKey];
+          const displayCompany = translatedExperience ? translatedExperience[lang as 'en' | 'de'].company : experience.company;
+          const displayLocation = translatedExperience ? translatedExperience[lang as 'en' | 'de'].location : translateLocation(experience.location, lang as 'en' | 'de');
+          
+          const getTranslatedRole = (role: string) => {
+            if (translatedExperience && translatedExperience[lang as 'en' | 'de'].roles[role as keyof typeof translatedExperience.en.roles]) {
+              return translatedExperience[lang as 'en' | 'de'].roles[role as keyof typeof translatedExperience.en.roles];
+            }
+            return role;
+          };
+
           return (
             <div key={index} className="flex gap-4">
               <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 border border-border bg-muted">
                 {experience.logo ? (
                   <img 
                     src={experience.logo} 
-                    alt={experience.company} 
+                    alt={displayCompany} 
                     className="w-full h-full object-cover" 
                   />
                 ) : (
@@ -96,11 +128,11 @@ function ExperienceSection({ title, items }: { title: string; items: ExperienceI
               <div className="flex flex-col flex-grow">
                 <div className="flex flex-col mb-2">
                   <h3 className="text-lg font-semibold">
-                    {experience.company}
+                    {displayCompany}
                   </h3>
                   {!isEducation && (
                     <span className="text-sm text-muted-foreground">
-                      {duration} · {experience.currentPosition.type}
+                      {duration} · {getTranslatedRole(experience.currentPosition.type)}
                     </span>
                   )}
                 </div>
@@ -114,7 +146,7 @@ function ExperienceSection({ title, items }: { title: string; items: ExperienceI
                         <div className="w-3 h-3 rounded-full bg-primary z-10" />
                       </div>
                       <div className="flex-grow pt-1">
-                        <PositionCard position={experience.currentPosition} grade={experience.grade} isEducation={isEducation} />
+                        <PositionCard position={experience.currentPosition} grade={experience.grade} isEducation={isEducation} lang={lang} experienceKey={experienceKey} />
                         <SkillsList skills={experience.skills} />
                       </div>
                     </div>
@@ -125,7 +157,7 @@ function ExperienceSection({ title, items }: { title: string; items: ExperienceI
                           <div className="w-2 h-2 rounded-full bg-muted z-10" />
                         </div>
                         <div className="flex-grow pt-1">
-                          <PositionCard position={position} isEducation={isEducation} />
+                          <PositionCard position={position} isEducation={isEducation} lang={lang} experienceKey={experienceKey} />
                           <SkillsList skills={experience.skills} />
                         </div>
                       </div>
@@ -133,7 +165,7 @@ function ExperienceSection({ title, items }: { title: string; items: ExperienceI
                   </div>
                 ) : (
                   <div className="flex flex-col">
-                    <PositionCard position={experience.currentPosition} grade={experience.grade} isEducation={isEducation} />
+                    <PositionCard position={experience.currentPosition} grade={experience.grade} isEducation={isEducation} lang={lang} experienceKey={experienceKey} />
                     <SkillsList skills={experience.skills} />
                   </div>
                 )}
@@ -146,14 +178,15 @@ function ExperienceSection({ title, items }: { title: string; items: ExperienceI
   );
 }
 
-export function Experience() {
+export function Experience({ lang = 'en' }: { lang?: string }) {
+  const t = useTranslations(lang as 'en' | 'de');
   const workExperience = experiences.filter(exp => exp.category === 'work');
   const education = experiences.filter(exp => exp.category === 'education');
 
   return (
     <div className="flex flex-col gap-12 w-full max-w-3xl">
-      <ExperienceSection title="Work Experience" items={workExperience} />
-      <ExperienceSection title="Education" items={education} />
+      <ExperienceSection title={t('experience.work')} items={workExperience} lang={lang} />
+      <ExperienceSection title={t('experience.education')} items={education} lang={lang} />
     </div>
   );
 } 

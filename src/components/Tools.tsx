@@ -1,3 +1,5 @@
+import { useTranslations } from '@/i18n/utils';
+
 interface ToolProps {
   name: string;
   icon: string;
@@ -48,12 +50,27 @@ function ToolCard({ name, icon }: ToolProps) {
   );
 }
 
-export function Tools() {
+export function Tools({ lang = 'en' }: { lang?: string }) {
+  const t = useTranslations(lang as 'en' | 'de');
+  
+  const getTranslatedTitle = (title: string) => {
+    switch (title) {
+      case 'Frontend':
+        return t('tools.frontend');
+      case 'Backend & Infrastructure':
+        return t('tools.backend');
+      case 'Development Tools':
+        return t('tools.devtools');
+      default:
+        return title;
+    }
+  };
+
   return (
     <div className="space-y-12">
       {toolGroups.map((group) => (
         <div key={group.title} className="space-y-6">
-          <h2 className="text-2xl font-bold">{group.title}</h2>
+          <h2 className="text-2xl font-bold">{getTranslatedTitle(group.title)}</h2>
           <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
             {group.tools.map((tool) => (
               <ToolCard key={tool.name} {...tool} />

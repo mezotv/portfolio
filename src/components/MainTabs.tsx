@@ -4,22 +4,27 @@ import { Experience } from "./Experience"
 import { Projects } from "./Projects"
 import { Tools } from "./Tools"
 import { QueryProvider } from "./QueryProvider"
+import { useTranslations } from "@/i18n/utils"
 
 // Dynamic import for MapComponent (heavy Leaflet/D3 dependencies) using React.lazy
 const MapComponent = React.lazy(() => 
   import("@/components/MapComponent").then(mod => ({ default: mod.MapComponent }))
 );
 
-const MapLoadingFallback = () => (
-  <div className="h-full flex items-center justify-center bg-muted/20 rounded">
-    <div className="flex flex-col items-center gap-3">
-      <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-      <span className="text-sm font-medium text-muted-foreground">Loading map...</span>
+const MapLoadingFallback = ({ lang }: { lang: string }) => {
+  const t = useTranslations(lang as 'en' | 'de');
+  return (
+    <div className="h-full flex items-center justify-center bg-muted/20 rounded">
+      <div className="flex flex-col items-center gap-3">
+        <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        <span className="text-sm font-medium text-muted-foreground">{t('loading.map')}</span>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-export function MainTabs() {
+export function MainTabs({ lang = 'en' }: { lang?: string }) {
+  const t = useTranslations(lang as 'en' | 'de');
   const visitedCountries = [
     "US",
     "DE",
@@ -37,24 +42,24 @@ export function MainTabs() {
   return (
     <Tabs defaultValue="projects" className="w-full max-w-3xl mb-8">
       <TabsList className="mb-4">
-        <TabsTrigger className="cursor-pointer" value="projects">Projects</TabsTrigger>
-        <TabsTrigger className="cursor-pointer" value="experience">Experience</TabsTrigger>
-        <TabsTrigger className="cursor-pointer" value="tools">Tools</TabsTrigger>
-        <TabsTrigger className="cursor-pointer" value="other">Other</TabsTrigger>
+        <TabsTrigger className="cursor-pointer" value="projects">{t('tabs.projects')}</TabsTrigger>
+        <TabsTrigger className="cursor-pointer" value="experience">{t('tabs.experience')}</TabsTrigger>
+        <TabsTrigger className="cursor-pointer" value="tools">{t('tabs.tools')}</TabsTrigger>
+        <TabsTrigger className="cursor-pointer" value="other">{t('tabs.other')}</TabsTrigger>
       </TabsList>
       <TabsContent value="projects">
-        <Projects />
+        <Projects lang={lang} />
       </TabsContent>
       <TabsContent value="experience">
-        <Experience />
+        <Experience lang={lang} />
       </TabsContent>
       <TabsContent value="tools">
-        <Tools />
+        <Tools lang={lang} />
       </TabsContent>
       <TabsContent value="other">
-      <h2 className="text-2xl font-bold mb-4">Countries Visited</h2>
+      <h2 className="text-2xl font-bold mb-4">{t('other.countries')}</h2>
         <QueryProvider>
-          <Suspense fallback={<MapLoadingFallback />}>
+          <Suspense fallback={<MapLoadingFallback lang={lang} />}>
             <MapComponent 
               height="400px" 
               visitedCountries={visitedCountries}

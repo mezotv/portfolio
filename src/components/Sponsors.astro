@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
 interface Sponsor {
   __typename: 'User' | 'Organization';
   login: string;
@@ -7,6 +9,9 @@ interface Sponsor {
   url: string;
   websiteUrl?: string;
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const SPONSORS_QUERY = `
   query($username: String!) {
@@ -85,9 +90,9 @@ try {
     <div class="text-center py-8 text-zinc-600 dark:text-zinc-400">
       {error === 'GitHub token not configured' ? (
         <>
-          <p>GitHub Sponsors integration not configured yet.</p>
+          <p>{t('sponsors.notConfigured')}</p>
           <p class="text-sm mt-2">
-            Add your GitHub token to display sponsors here.
+            {t('sponsors.addToken')}
           </p>
           <a
             href="https://github.com/sponsors/mezotv"
@@ -95,33 +100,33 @@ try {
             rel="noopener noreferrer"
             class="inline-block mt-4 px-4 py-2 bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700 text-white rounded-lg transition-colors"
           >
-            Become a Sponsor
+            {t('sponsors.become')}
           </a>
         </>
       ) : (
         <>
-          <p>Unable to load sponsors at the moment.</p>
-          <p class="text-sm mt-2">Check back later!</p>
+          <p>{t('sponsors.loadError')}</p>
+          <p class="text-sm mt-2">{t('sponsors.checkBack')}</p>
         </>
       )}
     </div>
   ) : sponsors.length === 0 ? (
     <div class="text-center py-8 text-zinc-600 dark:text-zinc-400">
-      <p>No sponsors yet, but you can be the first! ❤️</p>
+      <p>{t('sponsors.noSponsors')}</p>
       <a
         href="https://github.com/sponsors/mezotv"
         target="_blank"
         rel="noopener noreferrer"
         class="inline-block mt-4 px-4 py-2 bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700 text-white rounded-lg transition-colors"
       >
-        Become a Sponsor
+        {t('sponsors.become')}
       </a>
     </div>
   ) : (
     <>
       <div class="flex items-center justify-between">
         <h3 class="text-lg font-semibold">
-          Sponsors ({totalCount})
+          {t('sponsors.title')} ({totalCount})
         </h3>
         <a
           href="https://github.com/sponsors/mezotv"
@@ -129,7 +134,7 @@ try {
           rel="noopener noreferrer"
           class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
-          Become a sponsor →
+          {t('sponsors.becomeLink')}
         </a>
       </div>
       
@@ -158,7 +163,7 @@ try {
       
       <div class="text-center pt-4">
         <p class="text-md text-muted-foreground">
-          Thank you to all my amazing sponsors! ❤️
+          {t('sponsors.thanks')}
         </p>
       </div>
     </>
