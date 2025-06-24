@@ -9,6 +9,7 @@ import Cal from "@/components/icons/Cal.astro";
 import { HoverPic } from "@/components/HoverPic";
 import Sponsors from "@/components/Sponsors.astro";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { GitHubButton } from "@/components/GitHubButton";
 import { cn } from "@/lib/utils";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
@@ -22,8 +23,26 @@ const t = useTranslations(lang);
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Font preloading for better performance -->
+    <link rel="preload" href="/fonts/Gambarino-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    
     <title>{t('site.title')}</title>
     <meta name="description" content={t('site.description')} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dominikkoch.dev/en/" />
+    <meta property="og:title" content={t('site.title')} />
+    <meta property="og:description" content={t('site.description')} />
+    <meta property="og:image" content="https://dominikkoch.dev/images/me.webp" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://dominikkoch.dev/en/" />
+    <meta property="twitter:title" content={t('site.title')} />
+    <meta property="twitter:description" content={t('site.description')} />
+    <meta property="twitter:image" content="https://dominikkoch.dev/images/me.webp" />
     <meta name="author" content="Dominik Koch" />
     <meta name="theme-color" content="#FDC700" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -102,6 +121,7 @@ const t = useTranslations(lang);
               </h1>
             </HoverPic>
             <div class="flex items-center gap-4">
+              <GitHubButton client:load />
               <LanguageToggle client:load />
               <ModeToggle client:load />
             </div>
@@ -210,13 +230,22 @@ const t = useTranslations(lang);
       let mouseY = 0;
       let targetX = 0;
       let targetY = 0;
+      let isAnimating = true;
       
+      // Throttle mouse updates for better performance
+      let lastMouseUpdate = 0;
       function updateMousePosition(e) {
-        targetX = (e.clientX / window.innerWidth) * 100;
-        targetY = (e.clientY / window.innerHeight) * 100;
+        const now = performance.now();
+        if (now - lastMouseUpdate > 16) { // Limit to ~60fps
+          targetX = (e.clientX / window.innerWidth) * 100;
+          targetY = (e.clientY / window.innerHeight) * 100;
+          lastMouseUpdate = now;
+        }
       }
       
       function animateGrid() {
+        if (!isAnimating) return;
+        
         mouseX += (targetX - mouseX) * 0.1;
         mouseY += (targetY - mouseY) * 0.1;
         
@@ -229,7 +258,14 @@ const t = useTranslations(lang);
         requestAnimationFrame(animateGrid);
       }
       
-      window.addEventListener('mousemove', updateMousePosition);
+      window.addEventListener('mousemove', updateMousePosition, { passive: true });
+      
+      // Pause animation when tab is not visible for better performance
+      document.addEventListener('visibilitychange', () => {
+        isAnimating = !document.hidden;
+        if (isAnimating) animateGrid();
+      });
+      
       animateGrid();
     </script>
 
