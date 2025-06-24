@@ -38,7 +38,7 @@ const t = useTranslations(lang);
     <meta property="og:image" content="https://dominikkoch.dev/images/me.webp" />
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content="summary" />
     <meta property="twitter:url" content="https://dominikkoch.dev/de/" />
     <meta property="twitter:title" content={t('site.title')} />
     <meta property="twitter:description" content={t('site.description')} />
@@ -231,12 +231,13 @@ const t = useTranslations(lang);
       let targetX = 0;
       let targetY = 0;
       let isAnimating = true;
+      const FRAME_TIME_MS = 16
       
       // Throttle mouse updates for better performance
       let lastMouseUpdate = 0;
       function updateMousePosition(e) {
         const now = performance.now();
-        if (now - lastMouseUpdate > 16) { // Limit to ~60fps
+        if (now - lastMouseUpdate > FRAME_TIME_MS) { // Limit to ~60fps
           targetX = (e.clientX / window.innerWidth) * 100;
           targetY = (e.clientY / window.innerHeight) * 100;
           lastMouseUpdate = now;
