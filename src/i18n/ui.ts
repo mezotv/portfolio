@@ -21,6 +21,7 @@ export const ui = {
     'tabs.tools': 'Tools',
     'tabs.other': 'Other',
     'other.countries': 'Countries Visited',
+    'other.friends': 'Friends',
     'footer.made': 'Made with',
     'footer.by': 'by',
     'footer.inspired': 'Inspired by',
@@ -37,8 +38,15 @@ export const ui = {
     'experience.work': 'Work Experience',
     'experience.education': 'Education',
     'experience.current': 'Current',
+    'experience.present': 'Present',
     'experience.promotion': 'Promotion',
     'experience.grade': 'Grade',
+    // Position Types
+    'experience.types.co-op': 'Co-op',
+    'experience.types.internship': 'Internship',
+    'experience.types.part-time': 'Part-time',
+    'experience.types.full-time': 'Full-time',
+    'experience.types.self-employed': 'Self-Employed',
     // Tools
     'tools.frontend': 'Frontend',
     'tools.backend': 'Backend & Infrastructure',
@@ -53,6 +61,12 @@ export const ui = {
     'sponsors.addToken': 'Add your GitHub token to display sponsors here.',
     'sponsors.loadError': 'Unable to load sponsors at the moment.',
     'sponsors.checkBack': 'Check back later!',
+    // Friends
+    'friends.buttons.title': '88x31 Webbutton',
+    'friends.buttons.description': 'Feel free to add my 88x31px webbutton with the above HTML snippet, and if you know me and have an 88x31px button let me know and I\'ll add it!',
+    'friends.buttons.addYours': '',
+    'friends.webrings.title': 'webrings',
+    'friends.webrings.coming': 'Coming soon...',
   },
   de: {
     'site.title': 'Dominik Koch - Software-Entwickler',
@@ -69,6 +83,7 @@ export const ui = {
     'tabs.tools': 'Tools',
     'tabs.other': 'Sonstiges',
     'other.countries': 'Besuchte Länder',
+    'other.friends': 'Freunde',
     'footer.made': 'Gemacht mit',
     'footer.by': 'von',
     'footer.inspired': 'Inspiriert von',
@@ -85,8 +100,15 @@ export const ui = {
     'experience.work': 'Berufserfahrung',
     'experience.education': 'Bildung',
     'experience.current': 'Aktuell',
+    'experience.present': 'Heute',
     'experience.promotion': 'Beförderung',
     'experience.grade': 'Note',
+    // Position Types
+    'experience.types.co-op': 'Duales Studium',
+    'experience.types.internship': 'Praktikum',
+    'experience.types.part-time': 'Teilzeit',
+    'experience.types.full-time': 'Vollzeit',
+    'experience.types.self-employed': 'Selbstständig',
     // Tools
     'tools.frontend': 'Frontend',
     'tools.backend': 'Backend & Infrastruktur',
@@ -101,5 +123,11 @@ export const ui = {
     'sponsors.addToken': 'Füge dein GitHub Token hinzu, um Sponsoren hier anzuzeigen.',
     'sponsors.loadError': 'Sponsoren können momentan nicht geladen werden.',
     'sponsors.checkBack': 'Schau später noch einmal vorbei!',
+    // Friends
+    'friends.buttons.title': '88x31 Webbutton',
+    'friends.buttons.description': 'Füge gerne meinen 88x31px Webbutton mit dem obigen HTML-Snippet hinzu, und wenn du mich kennst und einen 88x31px Button hast, lass es mich wissen und ich füge ihn hinzu!',
+    'friends.buttons.addYours': '',
+    'friends.webrings.title': 'Webrings',
+    'friends.webrings.coming': 'Kommt bald...',
   },
 } as const; 

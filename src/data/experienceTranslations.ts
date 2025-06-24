@@ -13,6 +13,24 @@ export const generalTranslations = {
 } as const;
 
 export const experienceTranslations = {
+  "Rivo": {
+    en: {
+      company: "Rivo",
+      location: "Riedlingen, Baden-Württemberg, Germany",
+      roles: {
+        "Founder & Lead Developer": "Founder & Lead Developer",
+        "Self-Employed": "Self-Employed"
+      }
+    },
+    de: {
+      company: "Rivo",
+      location: "Riedlingen, Baden-Württemberg, Deutschland",
+      roles: {
+        "Founder & Lead Developer": "Gründer & Lead Developer",
+        "Self-Employed": "Selbstständig"
+      }
+    }
+  },
   "RSU GmbH - E-Commerce": {
     en: {
       company: "RSU GmbH - E-Commerce",
@@ -29,6 +47,42 @@ export const experienceTranslations = {
       roles: {
         "Software Engineer": "Software-Entwickler",
         "Co-op": "Duales Studium",
+        "Internship": "Praktikum"
+      }
+    }
+  },
+  "Koch - Bautechnik Energieberatung": {
+    en: {
+      company: "Koch - Bautechnik Energieberatung",
+      location: "Riedlingen, Baden-Württemberg, Germany",
+      roles: {
+        "Office Assistant": "Office Assistant",
+        "Part-time": "Part-time"
+      }
+    },
+    de: {
+      company: "Koch - Bautechnik Energieberatung",
+      location: "Riedlingen, Baden-Württemberg, Deutschland",
+      roles: {
+        "Office Assistant": "Büroassistent",
+        "Part-time": "Teilzeit"
+      }
+    }
+  },
+  "BFG MEDIA GROUP®": {
+    en: {
+      company: "BFG MEDIA GROUP®",
+      location: "Aulendorf, Baden-Württemberg, Germany",
+      roles: {
+        "Digital Marketing": "Digital Marketing",
+        "Internship": "Internship"
+      }
+    },
+    de: {
+      company: "BFG MEDIA GROUP®",
+      location: "Aulendorf, Baden-Württemberg, Deutschland",
+      roles: {
+        "Digital Marketing": "Digital Marketing",
         "Internship": "Praktikum"
       }
     }

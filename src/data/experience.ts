@@ -2,16 +2,19 @@ export interface Skill {
   name: string;
 }
 
+export type PositionType = "Co-op" | "Internship" | "Part-time" | "Full-time" | "Self-Employed";
+
 export interface Position {
   role: string;
-  type: string;
+  type: PositionType;
   startDate: Date;
-  endDate: Date;
+  endDate: Date | "present";
   location: string;
 }
 
 export interface ExperienceItem {
   company: string;
+  companyUrl?: string;
   location: string;
   skills: Skill[];
   logo?: string;
@@ -23,13 +26,34 @@ export interface ExperienceItem {
 
 export const experiences: ExperienceItem[] = [
   {
+    company: "Rivo",
+    companyUrl: "https://rivo.gg/",
+    location: "Riedlingen, Baden-Württemberg, Germany",
+    currentPosition: {
+      role: "Founder & Lead Developer",
+        type: "Self-Employed",
+        startDate: new Date("2023-02-01"),
+        endDate: "present",
+        location: "Riedlingen, Baden-Württemberg, Deutschland"
+    },
+    skills: [
+      { name: "TypeScript" },
+      { name: "GoLang" },
+      { name: "SEO" },
+      { name: "PostgreSQL" },
+    ],
+    logo: "/images/rivo.webp",
+    category: 'work'
+  },
+  {
     company: "RSU GmbH - E-Commerce",
+    companyUrl: "https://www.rsu.de",
     location: "Ulm, Baden-Württemberg, Germany",
     currentPosition: {
       role: "Software Engineer",
       type: "Co-op",
       startDate: new Date("2024-10-01"),
-      endDate: new Date("2025-07-31"),
+      endDate: "present",
       location: "Ulm, Baden-Württemberg, Germany"
     },
     promotions: [
@@ -47,6 +71,43 @@ export const experiences: ExperienceItem[] = [
       { name: "Laravel" }
     ],
     logo: "/images/RSU.webp",
+    category: 'work'
+  },
+  {
+    company: "Koch - Bautechnik Energieberatung",
+    companyUrl: "https://www.koch-bautechnik.de/",
+    location: "Riedlingen, Baden-Württemberg, Germany",
+    currentPosition: {
+      role: "Office Assistant",
+        type: "Part-time",
+        startDate: new Date("2021-08-01"),
+        endDate: "present",
+        location: "Ulm, Baden-Württemberg, Deutschland"
+    },
+    skills: [
+      { name: "Adobe Photoshop" },
+      { name: "Adobe XD" },
+    ],
+    logo: "/images/koch-bautechnik.webp",
+    category: 'work'
+  },
+  {
+    company: "BFG MEDIA GROUP®",
+    companyUrl: "https://www.bfg-mediagroup.com/",
+    location: "Aulendorf, Baden-Württemberg, Germany",
+    currentPosition: {
+      role: "Digital Marketing",
+        type: "Internship",
+        startDate: new Date("2020-11-02"),
+        endDate: new Date("2020-11-06"),
+        location: "Aulendorf, Baden-Württemberg, Deutschland"
+    },
+    skills: [
+      { name: "Adobe Lightroom" },
+      { name: "Adobe Premiere Pro" },
+      { name: "Adobe Photoshop" },
+    ],
+    logo: "/images/BFG.webp",
     category: 'work'
   },
   {

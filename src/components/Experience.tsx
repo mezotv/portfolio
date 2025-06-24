@@ -1,6 +1,7 @@
-import { experiences, type Position, type ExperienceItem } from '../data/experience';
+import { experiences, type Position, type ExperienceItem, type PositionType } from '../data/experience';
 import { useTranslations } from '@/i18n/utils';
 import { experienceTranslations, generalTranslations, type ExperienceKey } from '../data/experienceTranslations';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 function formatDate(date: Date) {
   return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
@@ -13,9 +14,44 @@ function translateLocation(location: string, lang: 'en' | 'de'): string {
   return location;
 }
 
-function calculateDuration(startDate: Date, endDate: Date): string {
+function translatePositionType(type: PositionType, lang: 'en' | 'de'): string {
+  const typeKey = type.toLowerCase().replace('-', '-') as 'co-op' | 'internship' | 'part-time' | 'full-time';
+  const translationKey = `experience.types.${typeKey}` as const;
+  
+  // Use a simple mapping for now since we can't access t() here
+  const translations = {
+    en: {
+      'Co-op': 'Co-op',
+      'Internship': 'Internship', 
+      'Part-time': 'Part-time',
+      'Full-time': 'Full-time',
+      'Self-Employed': 'Self-Employed'
+    },
+    de: {
+      'Co-op': 'Duales Studium',
+      'Internship': 'Praktikum',
+      'Part-time': 'Teilzeit', 
+      'Full-time': 'Vollzeit',
+      'Self-Employed': 'Selbstständig'
+    }
+  };
+  
+  return translations[lang][type] || type;
+}
+
+function calculateDuration(startDate: Date, endDate: Date | "present"): string {
   const start = new Date(startDate);
-  const end = new Date(endDate);
+  const end = endDate === "present" ? new Date() : new Date(endDate);
+  
+  // Calculate total days first
+  const diffInDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  
+  // If less than 30 days, show days
+  if (diffInDays < 30) {
+    return `${diffInDays} day${diffInDays !== 1 ? 's' : ''}`;
+  }
+  
+  // Otherwise calculate months and years
   const diffInMonths = (end.getFullYear() - start.getFullYear()) * 12 + end.getMonth() - start.getMonth();
   
   const years = Math.floor(diffInMonths / 12);
@@ -30,11 +66,32 @@ function calculateDuration(startDate: Date, endDate: Date): string {
   }
 }
 
+function calculateTotalCompanyDuration(experience: ExperienceItem): string {
+  // Find the earliest start date and latest end date across all positions
+  let earliestStart = experience.currentPosition.startDate;
+  let latestEnd = experience.currentPosition.endDate;
+  
+  if (experience.promotions && experience.promotions.length > 0) {
+    experience.promotions.forEach(position => {
+      if (position.startDate < earliestStart) {
+        earliestStart = position.startDate;
+      }
+      if (position.endDate !== "present" && latestEnd !== "present") {
+        if (position.endDate > (latestEnd as Date)) {
+          latestEnd = position.endDate;
+        }
+      }
+    });
+  }
+  
+  return calculateDuration(earliestStart, latestEnd);
+}
+
 function PositionCard({ position, grade, isEducation, lang = 'en', experienceKey }: { position: Position; grade?: string; isEducation: boolean; lang?: string; experienceKey: ExperienceKey }) {
   const t = useTranslations(lang as 'en' | 'de');
   const duration = calculateDuration(position.startDate, position.endDate);
   const now = new Date();
-  const isOngoing = position.endDate > now && position.startDate <= now;
+  const isOngoing = position.endDate === "present" || (position.endDate instanceof Date && position.endDate > now && position.startDate <= now);
   const showPresent = isOngoing && !isEducation;
 
   // Get translated role and type
@@ -50,10 +107,10 @@ function PositionCard({ position, grade, isEducation, lang = 'en', experienceKey
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center">
         <h4 className="text-base font-semibold mr-2">{getTranslatedRole(position.role)}</h4>
-        <span className="text-sm text-muted-foreground">{getTranslatedRole(position.type)}</span>
+        <span className="text-sm text-muted-foreground">{translatePositionType(position.type, lang as 'en' | 'de')}</span>
       </div>
       <div className="text-sm text-muted-foreground">
-        {formatDate(position.startDate)} - {showPresent ? t('experience.current') : formatDate(position.endDate)} · {duration}
+        {formatDate(position.startDate)} - {position.endDate === "present" ? t('experience.present') : (showPresent ? t('experience.current') : formatDate(position.endDate as Date))} · {duration}
       </div>
       <span className="text-sm text-muted-foreground">{translateLocation(position.location, lang as 'en' | 'de')}</span>
       {grade && (
@@ -71,11 +128,23 @@ function SkillsList({ skills }: { skills: { name: string }[] }) {
   const skillCount = skills.length;
   const displaySkills = skills.slice(0, 2);
   const remainingCount = skillCount - 2;
+  const allSkills = skills.map(skill => skill.name).join(', ');
 
   return (
     <div className="text-sm font-medium mt-2">
       {displaySkills.map(skill => skill.name).join(', ')}
-      {remainingCount > 0 && ` and +${remainingCount} skills`}
+      {remainingCount > 0 && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="cursor-help underline decoration-dotted underline-offset-2">
+              {` and +${remainingCount} skill${remainingCount !== 1 ? 's' : ''}`}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="max-w-48 text-xs">{allSkills}</p>
+          </TooltipContent>
+        </Tooltip>
+      )}
     </div>
   );
 }
@@ -88,10 +157,7 @@ function ExperienceSection({ title, items, lang = 'en' }: { title: string; items
       <h2 className="text-2xl font-bold">{title}</h2>
       <div className="flex flex-col gap-8">
         {items.map((experience, index) => {
-          const duration = calculateDuration(
-            experience.currentPosition.startDate,
-            experience.currentPosition.endDate
-          );
+          const duration = calculateTotalCompanyDuration(experience);
           const isEducation = experience.category === 'education';
 
           // Get translated experience data if available
@@ -128,11 +194,22 @@ function ExperienceSection({ title, items, lang = 'en' }: { title: string; items
               <div className="flex flex-col flex-grow">
                 <div className="flex flex-col mb-2">
                   <h3 className="text-lg font-semibold">
-                    {displayCompany}
+                    {experience.companyUrl ? (
+                      <a 
+                        href={experience.companyUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors underline decoration-transparent hover:decoration-current"
+                      >
+                        {displayCompany}
+                      </a>
+                    ) : (
+                      displayCompany
+                    )}
                   </h3>
                   {!isEducation && (
                     <span className="text-sm text-muted-foreground">
-                      {duration} · {getTranslatedRole(experience.currentPosition.type)}
+                      {duration} · {translatePositionType(experience.currentPosition.type, lang as 'en' | 'de')}
                     </span>
                   )}
                 </div>

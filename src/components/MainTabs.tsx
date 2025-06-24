@@ -3,8 +3,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Experience } from "./Experience"
 import { Projects } from "./Projects"
 import { Tools } from "./Tools"
+import { Friends } from "./Friends"
 import { QueryProvider } from "./QueryProvider"
 import { useTranslations } from "@/i18n/utils"
+import { visitedCountries } from "@/data/countries"
 
 // Dynamic import for MapComponent (heavy Leaflet/D3 dependencies) using React.lazy
 const MapComponent = React.lazy(() => 
@@ -25,19 +27,6 @@ const MapLoadingFallback = ({ lang }: { lang: string }) => {
 
 export function MainTabs({ lang = 'en' }: { lang?: string }) {
   const t = useTranslations(lang as 'en' | 'de');
-  const visitedCountries = [
-    "US",
-    "DE",
-    "GB",
-    "IT",
-    "ES",
-    "AT",
-    "CH",
-    "TR",
-    "EG",
-    "GR",
-    "FR"
-  ];
 
   return (
     <Tabs defaultValue="projects" className="w-full max-w-3xl mb-8">
@@ -57,16 +46,24 @@ export function MainTabs({ lang = 'en' }: { lang?: string }) {
         <Tools lang={lang} />
       </TabsContent>
       <TabsContent value="other">
-      <h2 className="text-2xl font-bold mb-4">{t('other.countries')}</h2>
-        <QueryProvider>
-          <Suspense fallback={<MapLoadingFallback lang={lang} />}>
-            <MapComponent 
-              height="400px" 
-              visitedCountries={visitedCountries}
-              isLoading={false} 
-            />
-          </Suspense>
-        </QueryProvider>
+        <div className="space-y-8">
+          <div>
+            <h2 className="text-2xl font-bold mb-4">{t('other.countries')}</h2>
+            <QueryProvider>
+              <Suspense fallback={<MapLoadingFallback lang={lang} />}>
+                <MapComponent 
+                  height="400px" 
+                  visitedCountries={visitedCountries}
+                  isLoading={false} 
+                />
+              </Suspense>
+            </QueryProvider>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold mb-4">{t('other.friends')}</h2>
+            <Friends lang={lang} />
+          </div>
+        </div>
       </TabsContent>
     </Tabs>
   )
