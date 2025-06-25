@@ -139,26 +139,34 @@ try {
       </div>
       
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {sponsors.map((sponsor) => (
-          <a
-            href={sponsor.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex flex-col items-center p-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors"
-          >
-            <img
-              src={sponsor.avatarUrl}
-              alt={sponsor.name || sponsor.login}
-              class="w-12 h-12 rounded-full mb-2 group-hover:scale-105 transition-transform"
-            />
-            <h4 class="text-sm font-medium text-center truncate w-full">
-              {sponsor.name || sponsor.login}
-            </h4>
-            <p class="text-xs text-zinc-600 dark:text-zinc-400 text-center truncate w-full">
-              @{sponsor.login}
-            </p>
-          </a>
-        ))}
+        {sponsors.map((sponsor) => {
+          // Optimize GitHub avatar URL with size and webp format
+          const optimizedAvatarUrl = `${sponsor.avatarUrl}&s=96&format=webp`;
+          
+          return (
+            <a
+              href={sponsor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col items-center p-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors"
+            >
+              <img
+                src={optimizedAvatarUrl}
+                alt={sponsor.name || sponsor.login}
+                class="w-12 h-12 rounded-full mb-2 group-hover:scale-105 transition-transform"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+              <h4 class="text-sm font-medium text-center truncate w-full">
+                {sponsor.name || sponsor.login}
+              </h4>
+              <p class="text-xs text-zinc-600 dark:text-zinc-400 text-center truncate w-full">
+                @{sponsor.login}
+              </p>
+            </a>
+          );
+        })}
       </div>
       
       <div class="text-center pt-4">
