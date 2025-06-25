@@ -14,57 +14,84 @@ import { cn } from "@/lib/utils";
 import { useTranslations } from "@/i18n/utils";
 
 // Default to English for root path
-const lang = 'en';
+const lang = "en";
 const t = useTranslations(lang);
 ---
 
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+      name="viewport"
+    />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Font preloading for better performance -->
-    <link rel="preload" href="/fonts/Gambarino-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    
-    <title>{t('site.title')}</title>
-    <meta name="description" content={t('site.description')} />
-    
+    <link
+      rel="preload"
+      href="/fonts/Gambarino-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <title>{t("site.title")}</title>
+    <meta name="description" content={t("site.description")} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dominikkoch.dev/" />
-    <meta property="og:title" content={t('site.title')} />
-    <meta property="og:description" content={t('site.description')} />
-    <meta property="og:image" content="https://dominikkoch.dev/images/me.webp" />
-    
+    <meta property="og:title" content={t("site.title")} />
+    <meta property="og:description" content={t("site.description")} />
+    <meta
+      property="og:image"
+      content="https://dominikkoch.dev/images/me.webp"
+    />
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary" />
     <meta property="twitter:url" content="https://dominikkoch.dev/" />
-    <meta property="twitter:title" content={t('site.title')} />
-    <meta property="twitter:description" content={t('site.description')} />
-    <meta property="twitter:image" content="https://dominikkoch.dev/images/me.webp" />
+    <meta property="twitter:title" content={t("site.title")} />
+    <meta property="twitter:description" content={t("site.description")} />
+    <meta
+      property="twitter:image"
+      content="https://dominikkoch.dev/images/me.webp"
+    />
     <meta name="author" content="Dominik Koch" />
     <meta name="theme-color" content="#FDC700" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    
+
     <!-- Canonical and hreflang tags - Root is the canonical English -->
     <link rel="canonical" href="https://dominikkoch.dev/" />
     <link rel="alternate" hreflang="en" href="https://dominikkoch.dev/" />
     <link rel="alternate" hreflang="de" href="https://dominikkoch.dev/de/" />
-    <link rel="alternate" hreflang="x-default" href="https://dominikkoch.dev/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://dominikkoch.dev/"
+    />
 
     <!-- DataDaddy Analytics -->
-    <script is:inline
+    <script
+      is:inline
       src="https://app.databuddy.cc/databuddy.js"
       data-client-id="T7Oky9JBa87U0MJjqmRkH"
       data-track-web-vitals="true"
       data-track-errors="true"
       data-enable-batching="true"
       crossorigin="anonymous"
-      async
-    />
-    
+      async></script>
+
+    <!-- Rybbit Analytics -->
+    <script
+      is:inline
+      src="https://rybbit.rivo.gg/api/script.js"
+      data-site-id="4"
+      crossorigin="anonymous"
+      async></script>
+
     <style>
       .precise-age {
         font-family: monospace;
@@ -118,7 +145,7 @@ const t = useTranslations(lang);
           <div class="flex items-center justify-between">
             <HoverPic client:load>
               <h1 class="text-2xl font-medium tracking-tight">
-                {t('intro.hi')}
+                {t("intro.hi")}
               </h1>
             </HoverPic>
             <div class="flex items-center gap-4">
@@ -128,19 +155,24 @@ const t = useTranslations(lang);
             </div>
           </div>
           <p class="text-md">
-            {t('intro.description')} <span
-              id="age"
-              class="precise-age">🤨</span
-            > {t('intro.years')} <span class=" relative after:absolute after:bg-yellow-400 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
-              >{t('intro.engineer')}</span
-            > {t('intro.working')} <a
+            {t("intro.description")}
+            <span id="age" class="precise-age">🤨</span>
+            {t("intro.years")}
+            <span
+              class="relative after:absolute after:bg-yellow-400 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
+              >{t("intro.engineer")}</span
+            >
+            {t("intro.working")}
+            <a
               href="https://rivo.gg/"
               target="_blank"
-              class="font-bold relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out">Rivo</a
+              class="font-bold relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
+              >Rivo</a
             > and <a
               href="https://wouldyoubot.gg/"
               target="_blank"
-              class="font-bold relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out">Would You Bot</a
+              class="font-bold relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
+              >Would You Bot</a
             >.
           </p>
           <div class="flex flex-row gap-4">
@@ -184,17 +216,26 @@ const t = useTranslations(lang);
         </section>
       </main>
       <footer class="mt-8 relative z-50">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between items-center gap-2 sm:gap-0 max-w-xl mx-auto px-4 py-4 text-center sm:text-left">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between items-center gap-2 sm:gap-0 max-w-xl mx-auto px-4 py-4 text-center sm:text-left"
+        >
           <p class="text-zinc-900 dark:text-muted-foreground text-sm">
-            {t('footer.made')} <span class="text-red-500 dark:text-red-400">❤️</span> {t('footer.by')} <span class="font-bold text-black/90 dark:text-zinc-100">Dominik Koch</span>
+            {t("footer.made")}
+            <span class="text-red-500 dark:text-red-400">❤️</span>
+            {t("footer.by")}
+            <span class="font-bold text-black/90 dark:text-zinc-100"
+              >Dominik Koch</span
+            >
           </p>
           <p class="text-zinc-900 dark:text-muted-foreground text-sm">
-            {t('footer.inspired')} <a
+            {t("footer.inspired")}
+            <a
               href="https://ahmet.studio"
               target="_blank"
               rel="noopener noreferrer"
               class="font-bold text-black/90 dark:text-zinc-100 relative after:absolute after:bg-zinc-900 dark:after:bg-zinc-100 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-in-out"
-            >Ahmet Kilinc</a>!
+              >Ahmet Kilinc</a
+            >!
           </p>
         </div>
       </footer>
@@ -232,42 +273,45 @@ const t = useTranslations(lang);
       let targetX = 0;
       let targetY = 0;
       let isAnimating = true;
-      const FRAME_TIME_MS = 16
-      
+      const FRAME_TIME_MS = 16;
+
       // Throttle mouse updates for better performance
       let lastMouseUpdate = 0;
       function updateMousePosition(e) {
         const now = performance.now();
-        if (now - lastMouseUpdate > FRAME_TIME_MS) { // Limit to ~60fps
+        if (now - lastMouseUpdate > FRAME_TIME_MS) {
+          // Limit to ~60fps
           targetX = (e.clientX / window.innerWidth) * 100;
           targetY = (e.clientY / window.innerHeight) * 100;
           lastMouseUpdate = now;
         }
       }
-      
+
       function animateGrid() {
         if (!isAnimating) return;
-        
+
         mouseX += (targetX - mouseX) * 0.1;
         mouseY += (targetY - mouseY) * 0.1;
-        
-        const gridBgs = document.querySelectorAll('.grid-bg, .grid-bg + div');
-        gridBgs.forEach(bg => {
-          bg.style.setProperty('--mouse-x', `${mouseX}%`);
-          bg.style.setProperty('--mouse-y', `${mouseY}%`);
+
+        const gridBgs = document.querySelectorAll(".grid-bg, .grid-bg + div");
+        gridBgs.forEach((bg) => {
+          bg.style.setProperty("--mouse-x", `${mouseX}%`);
+          bg.style.setProperty("--mouse-y", `${mouseY}%`);
         });
-        
+
         requestAnimationFrame(animateGrid);
       }
-      
-      window.addEventListener('mousemove', updateMousePosition, { passive: true });
-      
+
+      window.addEventListener("mousemove", updateMousePosition, {
+        passive: true,
+      });
+
       // Pause animation when tab is not visible for better performance
-      document.addEventListener('visibilitychange', () => {
+      document.addEventListener("visibilitychange", () => {
         isAnimating = !document.hidden;
         if (isAnimating) animateGrid();
       });
-      
+
       animateGrid();
     </script>
 
