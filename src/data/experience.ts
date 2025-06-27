@@ -34,7 +34,7 @@ export const experiences: ExperienceItem[] = [
         type: "Self-Employed",
         startDate: new Date("2023-02-01"),
         endDate: "present",
-        location: "Riedlingen, Baden-Württemberg, Deutschland"
+        location: "Riedlingen, Baden-Württemberg, Germany",
     },
     skills: [
       { name: "TypeScript" },
@@ -62,7 +62,7 @@ export const experiences: ExperienceItem[] = [
         type: "Internship",
         startDate: new Date("2024-09-01"),
         endDate: new Date("2024-10-01"),
-        location: "Ulm, Baden-Württemberg, Deutschland"
+        location: "Riedlingen, Baden-Württemberg, Germany",
       }
     ],
     skills: [
@@ -82,7 +82,7 @@ export const experiences: ExperienceItem[] = [
         type: "Part-time",
         startDate: new Date("2021-08-01"),
         endDate: "present",
-        location: "Riedlingen, Baden-Württemberg, Deutschland"
+        location: "Riedlingen, Baden-Württemberg, Germany",
     },
     skills: [
       { name: "Adobe Photoshop" },
@@ -100,7 +100,7 @@ export const experiences: ExperienceItem[] = [
         type: "Internship",
         startDate: new Date("2020-11-02"),
         endDate: new Date("2020-11-06"),
-        location: "Aulendorf, Baden-Württemberg, Deutschland"
+        location: "Aulendorf, Baden-Württemberg, Germany",
     },
     skills: [
       { name: "Adobe Lightroom" },

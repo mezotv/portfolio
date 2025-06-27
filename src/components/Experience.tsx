@@ -7,8 +7,8 @@ import {
 import { useTranslations } from "@/i18n/utils";
 import {
   experienceTranslations,
-  generalTranslations,
   type ExperienceKey,
+  type PositionTranslation,
 } from "../data/experienceTranslations";
 import {
   Tooltip,
@@ -28,13 +28,6 @@ function translateLocation(location: string, lang: "en" | "de"): string {
 }
 
 function translatePositionType(type: PositionType, lang: "en" | "de"): string {
-  const typeKey = type.toLowerCase().replace("-", "-") as
-    | "co-op"
-    | "internship"
-    | "part-time"
-    | "full-time";
-  const translationKey = `experience.types.${typeKey}` as const;
-
   // Use a simple mapping for now since we can't access t() here
   const translations = {
     en: {
@@ -111,6 +104,72 @@ function calculateTotalCompanyDuration(experience: ExperienceItem): string {
   return calculateDuration(earliestStart, latestEnd);
 }
 
+function getPositionTranslationKey(position: Position): string {
+  // Create a unique key for each position based on role and type
+  // For promotions with the same role but different types, we use role_type
+  return position.role + (position.type !== "Full-time" ? `_${position.type}` : "");
+}
+
+function isValidPositionTranslation(value: unknown): value is PositionTranslation {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'role' in value &&
+    'type' in value &&
+    'location' in value &&
+    typeof (value as PositionTranslation).role === 'string' &&
+    typeof (value as PositionTranslation).type === 'string' &&
+    typeof (value as PositionTranslation).location === 'string'
+  );
+}
+
+function getTranslatedPosition(
+  position: Position,
+  experienceKey: ExperienceKey,
+  lang: "en" | "de"
+): { role: string; type: string; location: string } {
+  const translatedExperience = experienceTranslations[experienceKey];
+  
+  if (!translatedExperience) {
+    return {
+      role: position.role,
+      type: translatePositionType(position.type, lang),
+      location: translateLocation(position.location, lang),
+    };
+  }
+
+  const positionKey = getPositionTranslationKey(position);
+  const translations = translatedExperience[lang].positions;
+  
+  // Try to find exact match first using safe property access
+  let candidateTranslation: unknown = undefined;
+  
+  if (Object.hasOwn(translations, positionKey)) {
+    candidateTranslation = translations[positionKey as keyof typeof translations];
+  }
+  
+  // If not found, try with just the role
+  if (!candidateTranslation && Object.hasOwn(translations, position.role)) {
+    candidateTranslation = translations[position.role as keyof typeof translations];
+  }
+  
+  // Use type guard to safely access the translation
+  if (isValidPositionTranslation(candidateTranslation)) {
+    return {
+      role: candidateTranslation.role,
+      type: candidateTranslation.type,
+      location: candidateTranslation.location,
+    };
+  }
+
+  // Fallback to original values with basic translation
+  return {
+    role: position.role,
+    type: translatePositionType(position.type, lang),
+    location: translateLocation(position.location, lang),
+  };
+}
+
 function PositionCard({
   position,
   grade,
@@ -134,30 +193,17 @@ function PositionCard({
       position.startDate <= now);
   const showPresent = isOngoing && !isEducation;
 
-  // Get translated role and type
-  const translatedExperience = experienceTranslations[experienceKey];
-  const getTranslatedRole = (role: string) => {
-    if (
-      translatedExperience &&
-      translatedExperience[lang as "en" | "de"].roles[
-        role as keyof typeof translatedExperience.en.roles
-      ]
-    ) {
-      return translatedExperience[lang as "en" | "de"].roles[
-        role as keyof typeof translatedExperience.en.roles
-      ];
-    }
-    return role;
-  };
+  // Get translated position data
+  const translatedPosition = getTranslatedPosition(position, experienceKey, lang as "en" | "de");
 
   return (
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center">
         <h4 className="text-base font-semibold mr-2">
-          {getTranslatedRole(position.role)}
+          {translatedPosition.role}
         </h4>
         <span className="text-sm text-muted-foreground">
-          {translatePositionType(position.type, lang as "en" | "de")}
+          {translatedPosition.type}
         </span>
       </div>
       <div className="text-sm text-muted-foreground">
@@ -170,7 +216,7 @@ function PositionCard({
         · {duration}
       </div>
       <span className="text-sm text-muted-foreground">
-        {translateLocation(position.location, lang as "en" | "de")}
+        {translatedPosition.location}
       </span>
       {grade && (
         <span className="text-sm text-muted-foreground mt-1">
@@ -242,19 +288,7 @@ function ExperienceSection({
             ? translatedExperience[lang as "en" | "de"].location
             : translateLocation(experience.location, lang as "en" | "de");
 
-          const getTranslatedRole = (role: string) => {
-            if (
-              translatedExperience &&
-              translatedExperience[lang as "en" | "de"].roles[
-                role as keyof typeof translatedExperience.en.roles
-              ]
-            ) {
-              return translatedExperience[lang as "en" | "de"].roles[
-                role as keyof typeof translatedExperience.en.roles
-              ];
-            }
-            return role;
-          };
+
 
           return (
             <div key={index} className="flex gap-4">

@@ -12,22 +12,46 @@ export const generalTranslations = {
   }
 } as const;
 
+// Type definitions for translation structure
+export interface PositionTranslation {
+  role: string;
+  type: string;
+  location: string;
+}
+
+export interface ExperienceLanguageTranslation {
+  company: string;
+  location: string;
+  positions: Record<string, PositionTranslation>;
+}
+
+export interface ExperienceTranslationItem {
+  en: ExperienceLanguageTranslation;
+  de: ExperienceLanguageTranslation;
+}
+
 export const experienceTranslations = {
   "Rivo": {
     en: {
       company: "Rivo",
       location: "Riedlingen, Baden-Württemberg, Germany",
-      roles: {
-        "Founder & Lead Developer": "Founder & Lead Developer",
-        "Self-Employed": "Self-Employed"
+      positions: {
+        "Founder & Lead Developer": {
+          role: "Founder & Lead Developer",
+          type: "Self-Employed",
+          location: "Riedlingen, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "Rivo",
       location: "Riedlingen, Baden-Württemberg, Deutschland",
-      roles: {
-        "Founder & Lead Developer": "Gründer & Lead Developer",
-        "Self-Employed": "Selbstständig"
+      positions: {
+        "Founder & Lead Developer": {
+          role: "Gründer & Lead Developer",
+          type: "Selbstständig",
+          location: "Riedlingen, Baden-Württemberg, Deutschland"
+        }
       }
     }
   },
@@ -35,19 +59,33 @@ export const experienceTranslations = {
     en: {
       company: "RSU GmbH - E-Commerce",
       location: "Ulm, Baden-Württemberg, Germany",
-      roles: {
-        "Software Engineer": "Software Engineer",
-        "Co-op": "Co-op",
-        "Internship": "Internship"
+      positions: {
+        "Software Engineer": {
+          role: "Software Engineer",
+          type: "Co-op",
+          location: "Ulm, Baden-Württemberg, Germany"
+        },
+        "Software Engineer_Internship": {
+          role: "Software Engineer",
+          type: "Internship",
+          location: "Ulm, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "RSU GmbH - E-Commerce",
       location: "Ulm, Baden-Württemberg, Deutschland",
-      roles: {
-        "Software Engineer": "Software-Entwickler",
-        "Co-op": "Duales Studium",
-        "Internship": "Praktikum"
+      positions: {
+        "Software Engineer": {
+          role: "Software-Entwickler",
+          type: "Duales Studium",
+          location: "Ulm, Baden-Württemberg, Deutschland"
+        },
+        "Software Engineer_Internship": {
+          role: "Software-Entwickler",
+          type: "Praktikum",
+          location: "Riedlingen, Baden-Württemberg, Deutschland"
+        }
       }
     }
   },
@@ -55,17 +93,23 @@ export const experienceTranslations = {
     en: {
       company: "Koch - Bautechnik Energieberatung",
       location: "Riedlingen, Baden-Württemberg, Germany",
-      roles: {
-        "Office Assistant": "Office Assistant",
-        "Part-time": "Part-time"
+      positions: {
+        "Office Assistant": {
+          role: "Office Assistant",
+          type: "Part-time",
+          location: "Riedlingen, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "Koch - Bautechnik Energieberatung",
       location: "Riedlingen, Baden-Württemberg, Deutschland",
-      roles: {
-        "Office Assistant": "Büroassistent",
-        "Part-time": "Teilzeit"
+      positions: {
+        "Office Assistant": {
+          role: "Büroassistent",
+          type: "Teilzeit",
+          location: "Riedlingen, Baden-Württemberg, Deutschland"
+        }
       }
     }
   },
@@ -73,17 +117,23 @@ export const experienceTranslations = {
     en: {
       company: "BFG MEDIA GROUP®",
       location: "Aulendorf, Baden-Württemberg, Germany",
-      roles: {
-        "Digital Marketing": "Digital Marketing",
-        "Internship": "Internship"
+      positions: {
+        "Digital Marketing": {
+          role: "Digital Marketing",
+          type: "Internship",
+          location: "Aulendorf, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "BFG MEDIA GROUP®",
       location: "Aulendorf, Baden-Württemberg, Deutschland",
-      roles: {
-        "Digital Marketing": "Digital Marketing",
-        "Internship": "Praktikum"
+      positions: {
+        "Digital Marketing": {
+          role: "Digital Marketing",
+          type: "Praktikum",
+          location: "Aulendorf, Baden-Württemberg, Deutschland"
+        }
       }
     }
   },
@@ -91,17 +141,23 @@ export const experienceTranslations = {
     en: {
       company: "Baden-Wuerttemberg Cooperative State University Heidenheim",
       location: "Heidenheim, Baden-Württemberg, Germany",
-      roles: {
-        "Bachelor of Science - BS, Computer Science": "Bachelor of Science - BS, Computer Science",
-        "Full-time": "Full-time"
+      positions: {
+        "Bachelor of Science - BS, Computer Science": {
+          role: "Bachelor of Science - BS, Computer Science",
+          type: "Full-time",
+          location: "Heidenheim, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "Duale Hochschule Baden-Württemberg Heidenheim",
       location: "Heidenheim, Baden-Württemberg, Deutschland",
-      roles: {
-        "Bachelor of Science - BS, Computer Science": "Bachelor of Science - BS, Informatik",
-        "Full-time": "Vollzeit"
+      positions: {
+        "Bachelor of Science - BS, Computer Science": {
+          role: "Bachelor of Science - BS, Informatik",
+          type: "Vollzeit",
+          location: "Heidenheim, Baden-Württemberg, Deutschland"
+        }
       }
     }
   },
@@ -109,17 +165,23 @@ export const experienceTranslations = {
     en: {
       company: "Kaufmännische Schule Ehingen",
       location: "Ehingen, Baden-Württemberg, Germany",
-      roles: {
-        "Fachhochschulreife, Foreign Languages": "Fachhochschulreife, Foreign Languages",
-        "Full-time": "Full-time"
+      positions: {
+        "Fachhochschulreife, Foreign Languages": {
+          role: "Fachhochschulreife, Foreign Languages",
+          type: "Full-time",
+          location: "Ehingen, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "Kaufmännische Schule Ehingen",
       location: "Ehingen, Baden-Württemberg, Deutschland",
-      roles: {
-        "Fachhochschulreife, Foreign Languages": "Fachhochschulreife, Fremdsprachen",
-        "Full-time": "Vollzeit"
+      positions: {
+        "Fachhochschulreife, Foreign Languages": {
+          role: "Fachhochschulreife, Fremdsprachen",
+          type: "Vollzeit",
+          location: "Ehingen, Baden-Württemberg, Deutschland"
+        }
       }
     }
   },
@@ -127,17 +189,23 @@ export const experienceTranslations = {
     en: {
       company: "Geschwister-Scholl-Realschule Riedlingen",
       location: "Riedlingen, Baden-Württemberg, Germany",
-      roles: {
-        "Middle School Diploma": "Middle School Diploma",
-        "Full-time": "Full-time"
+      positions: {
+        "Middle School Diploma": {
+          role: "Middle School Diploma",
+          type: "Full-time",
+          location: "Riedlingen, Baden-Württemberg, Germany"
+        }
       }
     },
     de: {
       company: "Geschwister-Scholl-Realschule Riedlingen",
       location: "Riedlingen, Baden-Württemberg, Deutschland",
-      roles: {
-        "Middle School Diploma": "Realschulabschluss",
-        "Full-time": "Vollzeit"
+      positions: {
+        "Middle School Diploma": {
+          role: "Realschulabschluss",
+          type: "Vollzeit",
+          location: "Riedlingen, Baden-Württemberg, Deutschland"
+        }
       }
     }
   }
