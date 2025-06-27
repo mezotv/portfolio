@@ -82,7 +82,7 @@ export const experiences: ExperienceItem[] = [
         type: "Part-time",
         startDate: new Date("2021-08-01"),
         endDate: "present",
-        location: "Ulm, Baden-Württemberg, Deutschland"
+        location: "Riedlingen, Baden-Württemberg, Deutschland"
     },
     skills: [
       { name: "Adobe Photoshop" },
