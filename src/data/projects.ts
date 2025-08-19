@@ -10,10 +10,25 @@ export interface ProjectItem {
   liveUrl?: string;
   image?: string;
   status: 'active' | 'completed' | 'archived';
-  category: 'web' | 'mobile' | 'api' | 'tool' | 'game' | 'other';
+  category: 'web' | 'mobile' | 'api' | 'tool' | 'game' | 'other' | 'saas';
 }
 
 export const projects: ProjectItem[] = [
+  {
+    name: "Marble",
+    description: "A modern, open-source headless CMS designed for blogs and content management, built with TypeScript and Nextjs.",
+    technologies: [
+      { name: "Next.js" },
+      { name: "Postgres" },
+      { name: "TypeScript" },
+      { name: "Prisma" },
+      { name: "Upstash" }
+    ],
+    liveUrl: "https://marblecms.com/",
+    image: "/images/marble.webp",
+    status: 'active',
+    category: 'saas'
+  },
   {
     name: "Would You Bot",
     description: "Interactive Discord bot providing engaging 'Would You Rather' questions and community features.",

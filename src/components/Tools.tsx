@@ -26,6 +26,7 @@ const toolGroups: ToolGroupProps[] = [
       { name: "Bun", icon: "/stack/bun.svg" },
       { name: "PostgreSQL", icon: "/stack/postgresql.svg" },
       { name: "Hono", icon: "/stack/hono.svg" },
+      { name: "Neon", icon: "/stack/neon.svg" },
     ],
   },
   {

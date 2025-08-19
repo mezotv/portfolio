@@ -10,7 +10,6 @@ import { HoverPic } from "@/components/HoverPic";
 import Sponsors from "@/components/Sponsors.astro";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { GitHubButton } from "@/components/GitHubButton";
-import { cn } from "@/lib/utils";
 import { useTranslations } from "@/i18n/utils";
 
 // Default to English for root path
@@ -101,43 +100,13 @@ const t = useTranslations(lang);
       h1 {
         font-family: "Gambarino", serif;
       }
-      .grid-bg {
-        will-change: mask-image;
-        --mouse-x: 50%;
-        --mouse-y: 50%;
-      }
     </style>
   </head>
 
   <body>
     <div
-      class="relative min-h-screen w-full bg-white dark:bg-black overflow-hidden"
+      class="relative min-h-screen w-full bg-zinc-50 dark:bg-zinc-900 overflow-hidden"
     >
-      <div
-        class={cn(
-          "fixed inset-0 grid-bg",
-          "[background-size:20px_20px]",
-          "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
-          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
-        )}
-        style="mask-image: radial-gradient(circle 200px at var(--mouse-x) var(--mouse-y), transparent 0%, transparent 30%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.8) 100%), radial-gradient(circle 400px at var(--mouse-x) var(--mouse-y), rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%)"
-      >
-      </div>
-      <div
-        class={cn(
-          "fixed inset-0 pointer-events-none",
-          "[background-size:20px_20px]",
-          "[background-image:radial-gradient(#3b82f6_1px,transparent_1px)]",
-          "dark:[background-image:radial-gradient(#60a5fa_1px,transparent_1px)]"
-        )}
-        style="mask-image: radial-gradient(circle 200px at var(--mouse-x) var(--mouse-y), black 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.2) 70%, transparent 100%)"
-      >
-      </div>
-      <div
-        class="pointer-events-none fixed inset-0 bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"
-      >
-      </div>
-
       <main
         class="text-zinc-900 dark:text-zinc-100 max-w-xl mx-auto px-4 py-4 mt-16 relative z-10"
       >
@@ -330,4 +299,4 @@ const t = useTranslations(lang);
       updateAge();
     </script>
   </body>
-</html>---
+</html>
