@@ -53,7 +53,7 @@ export const experiences: ExperienceItem[] = [
       role: "Software Engineer",
       type: "Co-op",
       startDate: new Date("2024-10-01"),
-      endDate: "present",
+      endDate: new Date("2025-08-19"),
       location: "Ulm, Baden-Württemberg, Germany"
     },
     promotions: [
@@ -117,7 +117,7 @@ export const experiences: ExperienceItem[] = [
       role: "Bachelor of Science - BS, Computer Science",
       type: "Full-time",
       startDate: new Date("2024-10-01"),
-      endDate: new Date("2027-12-31"),
+      endDate: new Date("2025-08-11"),
       location: "Heidenheim, Baden-Württemberg, Germany"
     },
     skills: [],
