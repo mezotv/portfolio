@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
+    "@lingo.dev/compiler": "^0.1.2",
     "@phosphor-icons/react": "^2.1.10",
     "babel-plugin-react-compiler": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "next": "16.1.1",
+    "next-themes": "^0.4.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "shadcn": "^3.6.2",

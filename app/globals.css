@@ -2,6 +2,29 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/**
+* @license
+*
+* Font Family: Gambarino
+* Designed by: Théo Guillard
+* URL: https://www.fontshare.com/fonts/gambarino
+* © 2025 Indian Type Foundry
+*
+* Gambarino Regular 
+
+*
+*/
+@font-face {
+  font-family: 'Gambarino-Regular';
+  src: url('/public/fonts/Gambarino-Regular.woff2') format('woff2'),
+       url('/public/fonts/Gambarino-Regular.woff') format('woff'),
+       url('/public/fonts/Gambarino-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -123,4 +146,14 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@utility font-gambarino {
+  font-family: "Gambarino", serif;
+}
+
+.precise-age {
+  font-family: monospace;
+  display: inline-block;
+  min-width: 12ch;
 }
