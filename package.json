@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
+    "@databuddy/sdk": "^2.3.2",
     "@phosphor-icons/react": "^2.1.10",
     "@toolwind/corner-shape": "^0.0.8-3",
     "@usemarble/core": "^0.1.3",
