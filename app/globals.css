@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+
+@plugin "@tailwindcss/typography";
+@plugin "@toolwind/corner-shape";
 
 /**
 * @license

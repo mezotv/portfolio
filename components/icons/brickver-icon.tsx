@@ -12,7 +12,7 @@ export function BrickverIcon({
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-        <title>Brickver Logo</title>
+      <title>Brickver Logo</title>
       <path
         d="M32 15.994c8.115 0 14.694-2.981 14.694-6.659S40.115 2.676 32 2.676 17.306 5.658 17.306 9.335c0 3.678 6.579 6.659 14.694 6.659"
         stroke="currentColor"
