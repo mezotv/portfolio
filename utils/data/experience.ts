@@ -7,7 +7,8 @@ export type PositionType =
   | "Internship"
   | "Part-time"
   | "Full-time"
-  | "Self-Employed";
+  | "Self-Employed"
+  | "Contract";
 
 export interface Position {
   role: string;
@@ -48,6 +49,25 @@ export const experiences: ExperienceItem[] = [
       { name: "PostgreSQL" },
     ],
     logo: "/images/rivo.webp",
+    category: "work",
+  },
+  {
+    company: "Mail0 (X25)",
+    companyUrl: "https://0.email/",
+    location: "Remote, Germany",
+    currentPosition: {
+      role: "Discord Community Manager",
+      type: "Contract",
+      startDate: new Date("2025-07-17"),
+      endDate: new Date("2025-08-17"),
+      location: "Remote, Germany",
+    },
+    skills: [
+      { name: "Discord" },
+      { name: "Community" },
+      { name: "Management" },
+    ],
+    logo: "/images/mail0.webp",
     category: "work",
   },
   {

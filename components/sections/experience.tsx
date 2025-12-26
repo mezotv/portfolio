@@ -121,7 +121,8 @@ function PositionCard({
       </div>
       <div className="text-muted-foreground text-sm">
         {formatDate(position.startDate)} -{" "}
-        {getEndDateText(position.endDate, showPresent)} · {duration}
+        {getEndDateText(position.endDate, showPresent)}
+        {duration !== "1 mo" && ` · ${duration}`}
       </div>
       <span className="text-muted-foreground text-sm">{position.location}</span>
       {note && <span className="mt-1 text-foreground text-sm">{note}</span>}
@@ -270,14 +271,41 @@ function ExperienceSection({
   );
 }
 
+function getLatestEndDate(experience: ExperienceItem): Date {
+  let latestEnd = experience.currentPosition.endDate;
+
+  if (experience.promotions && experience.promotions.length > 0) {
+    for (const position of experience.promotions) {
+      const isPromotionNewer =
+        position.endDate !== "present" &&
+        latestEnd !== "present" &&
+        position.endDate > (latestEnd as Date);
+
+      if (isPromotionNewer) {
+        latestEnd = position.endDate;
+      }
+    }
+  }
+
+  return latestEnd === "present" ? new Date() : (latestEnd as Date);
+}
+
+function sortByEndDate(items: ExperienceItem[]): ExperienceItem[] {
+  return [...items].sort((a, b) => {
+    const endDateA = getLatestEndDate(a);
+    const endDateB = getLatestEndDate(b);
+    return endDateB.getTime() - endDateA.getTime();
+  });
+}
+
 export function Experience() {
   const workExperience = experiences.filter((exp) => exp.category === "work");
   const education = experiences.filter((exp) => exp.category === "education");
 
   return (
     <div className="flex w-full max-w-xl flex-col gap-12">
-      <ExperienceSection items={workExperience} title="Work" />
-      <ExperienceSection items={education} title="Education" />
+      <ExperienceSection items={sortByEndDate(workExperience)} title="Work" />
+      <ExperienceSection items={sortByEndDate(education)} title="Education" />
     </div>
   );
 }
