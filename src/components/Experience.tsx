@@ -292,7 +292,7 @@ function ExperienceSection({
 
           return (
             <div key={index} className="flex gap-4">
-              <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 border border-border bg-muted">
+              <div className="w-12 h-12 rounded-md overflow-hidden shrink-0 border border-border bg-muted">
                 {experience.logo ? (
                   <img
                     src={experience.logo}
@@ -319,7 +319,7 @@ function ExperienceSection({
                 )}
               </div>
 
-              <div className="flex flex-col flex-grow">
+              <div className="flex flex-col grow">
                 <div className="flex flex-col mb-2">
                   <h3 className="text-lg font-semibold">
                     {experience.companyUrl ? (
@@ -354,7 +354,7 @@ function ExperienceSection({
                       <div className="relative flex items-center justify-center w-3 h-full">
                         <div className="w-3 h-3 rounded-full bg-primary z-10" />
                       </div>
-                      <div className="flex-grow pt-1">
+                      <div className="grow pt-1">
                         <PositionCard
                           position={experience.currentPosition}
                           grade={experience.grade}
@@ -371,7 +371,7 @@ function ExperienceSection({
                         <div className="relative flex items-center justify-center w-3 h-full">
                           <div className="w-2 h-2 rounded-full bg-muted z-10" />
                         </div>
-                        <div className="flex-grow pt-1">
+                        <div className="grow pt-1">
                           <PositionCard
                             position={position}
                             isEducation={isEducation}
