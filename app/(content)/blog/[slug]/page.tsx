@@ -79,19 +79,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           )}
         </div>
-
-        {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
-            {post.tags.map((tag) => (
-              <span
-                className="rounded-full bg-muted px-3 py-1 font-medium text-muted-foreground text-xs"
-                key={tag.id}
-              >
-                {tag.name}
-              </span>
-            ))}
-          </div>
-        )}
       </header>
 
       {post.coverImage && (
