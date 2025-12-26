@@ -6,6 +6,7 @@ import { LinkedInIcon } from "@/components/icons/linkedin-icon";
 import { TwitterIcon } from "@/components/icons/twitter-icon";
 import { ModeToggle } from "@/components/mode-toggle";
 import { SectionTabs } from "@/components/sections/section-tabs";
+import { Sponsors } from "@/components/sections/sponsors";
 
 const age = 20.940_063_403_62;
 
@@ -114,6 +115,10 @@ export default function ContentLayout({
           <section className="mt-8 flex flex-col gap-8">
             <SectionTabs />
             {children}
+          </section>
+
+          <section className="mt-12">
+            <Sponsors />
           </section>
         </main>
         <footer className="relative z-50 mt-8">

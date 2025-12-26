@@ -1,6 +1,6 @@
 import { Databuddy } from "@databuddy/sdk/react";
 
-export  function DatabuddyAnalytics() {
+export function DatabuddyAnalytics() {
   return (
     <>
       {process.env.NEXT_PUBLIC_DATABUDDY_CLIENT_ID && (

@@ -27,7 +27,7 @@ const toolGroups: ToolGroupProps[] = [
       { name: "PostgreSQL", icon: "/tools/postgresql.svg" },
       { name: "Hono", icon: "/tools/hono.svg" },
       { name: "Neon", icon: "/tools/neon.svg" },
-      { name: "Drizzle", icon: "/tools/drizzle-orm.svg" }
+      { name: "Drizzle", icon: "/tools/drizzle-orm.svg" },
     ],
   },
   {

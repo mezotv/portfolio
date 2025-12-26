@@ -1,5 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { type ProjectItem, projects, statusConfig } from "@/utils/data/projects";
+import {
+  type ProjectItem,
+  projects,
+  statusConfig,
+} from "@/utils/data/projects";
 
 function _formatDate(date: Date) {
   return date.toLocaleString("en-US", { month: "short", year: "numeric" });

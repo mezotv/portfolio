@@ -10,18 +10,15 @@ export const statusConfig = {
   },
   completed: {
     label: "Completed",
-    className:
-      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
   },
   archived: {
     label: "Archived",
-    className:
-      "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
+    className: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
   },
   inactive: {
     label: "Inactive",
-    className:
-      "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+    className: "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
   },
 } as const;
 
