@@ -1,48 +1,36 @@
-# Dominik Koch's Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Personal portfolio website built with Astro and Tailwind CSS, featuring GitHub Sponsors integration.
+## Getting Started
 
-## Setup
+First, run the development server:
 
-1. Install dependencies:
-```sh
-bun install
-```
-
-2. Set up environment variables:
-Create a `.env` file and add your GitHub Personal Access Token:
-```sh
-GITHUB_TOKEN=your_github_token_here
-```
-
-**Important**: Use `GITHUB_TOKEN` (without `PUBLIC_` prefix) to keep your token secure on the server-side.
-
-To create a GitHub token:
-1. Go to [GitHub Settings > Personal Access Tokens](https://github.com/settings/tokens)
-2. Click "Generate new token (classic)"
-3. Give it a name like "Portfolio Sponsors"
-4. Select the `read:user` scope (and `read:org` if you want to see organization sponsors)
-5. Generate the token and copy it to your `.env` file
-
-3. Start the development server:
-```sh
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
 bun dev
 ```
 
-## Features
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- **GitHub Sponsors Integration**: Automatically displays sponsors from the GitHub Sponsors API
-- **Dark/Light Mode**: Theme toggle with system preference detection
-- **Responsive Design**: Mobile-first responsive layout
-- **Interactive Elements**: Hover effects and smooth animations
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## GitHub Sponsors
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-The sponsors section is built as an Astro component that fetches your GitHub sponsors at build time using the GraphQL API. This provides:
+## Learn More
 
-- **Server-side rendering**: No client-side JavaScript needed
-- **Better performance**: Pre-rendered at build time
-- **Security**: GitHub token stays secure on the server
-- **Better SEO**: Sponsors are indexed by search engines
+To learn more about Next.js, take a look at the following resources:
 
-If no token is configured, it will show a fallback message with a link to become a sponsor.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
