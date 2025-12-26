@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
-    "@lingo.dev/compiler": "^0.1.2",
     "@phosphor-icons/react": "^2.1.10",
     "babel-plugin-react-compiler": "^1.0.0",
     "class-variance-authority": "^0.7.1",
