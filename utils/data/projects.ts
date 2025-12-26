@@ -2,6 +2,36 @@ export interface Technology {
   name: string;
 }
 
+export const statusConfig = {
+  active: {
+    label: "Active",
+    className:
+      "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  },
+  completed: {
+    label: "Completed",
+    className:
+      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  },
+  archived: {
+    label: "Archived",
+    className:
+      "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
+  },
+  inactive: {
+    label: "Inactive",
+    className:
+      "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+  },
+} as const;
+
+export type StatusType = keyof typeof statusConfig;
+
+export interface ProjectStatus {
+  type: StatusType;
+  label?: string;
+}
+
 export interface ProjectItem {
   name: string;
   description: string;
@@ -9,7 +39,7 @@ export interface ProjectItem {
   githubUrl?: string;
   liveUrl?: string;
   image?: string;
-  status: "active" | "completed" | "archived" | "inactive";
+  status: ProjectStatus;
   category: "web" | "mobile" | "api" | "tool" | "game" | "other" | "saas";
 }
 
@@ -20,7 +50,9 @@ export const projects: ProjectItem[] = [
     technologies: [{ name: "Next.js" }, { name: "TypeScript" }],
     liveUrl: "https://usenotra.com/",
     image: "/images/notra.webp",
-    status: "active",
+    status: {
+      type: "active",
+    },
     category: "saas",
   },
   {
@@ -36,7 +68,10 @@ export const projects: ProjectItem[] = [
     ],
     liveUrl: "https://marblecms.com/",
     image: "/images/marble.webp",
-    status: "inactive",
+    status: {
+      type: "inactive",
+      label: "Paused",
+    },
     category: "saas",
   },
   {
@@ -52,7 +87,9 @@ export const projects: ProjectItem[] = [
     ],
     liveUrl: "https://wouldyoubot.gg/",
     image: "/images/wouldyoubot.webp",
-    status: "inactive",
+    status: {
+      type: "inactive",
+    },
     category: "tool",
   },
 ];

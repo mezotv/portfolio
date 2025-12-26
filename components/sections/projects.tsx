@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { type ProjectItem, projects } from "@/utils/data/projects";
+import { type ProjectItem, projects, statusConfig } from "@/utils/data/projects";
 
 function _formatDate(date: Date) {
   return date.toLocaleString("en-US", { month: "short", year: "numeric" });
@@ -92,36 +92,14 @@ function ProjectLinks({
 }
 
 function StatusBadge({ status }: { status: ProjectItem["status"] }) {
-  const statusConfig: Record<string, { label: string; className: string }> = {
-    active: {
-      label: "Active",
-      className:
-        "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    },
-    completed: {
-      label: "Completed",
-      className:
-        "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-    },
-    archived: {
-      label: "Archived",
-      className:
-        "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
-    },
-    inactive: {
-      label: "Inactive",
-      className:
-        "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
-    },
-  };
-
-  const config = statusConfig[status];
+  const config = statusConfig[status.type];
+  const label = status.label ?? config.label;
 
   return (
     <span
       className={`rounded-md px-2 py-1 font-medium text-xs ${config.className}`}
     >
-      {config.label}
+      {label}
     </span>
   );
 }
@@ -177,16 +155,16 @@ function ProjectSection({
 
 export function Projects() {
   const activeProjects = projects.filter(
-    (project) => project.status === "active"
+    (project) => project.status.type === "active"
   );
   const completedProjects = projects.filter(
-    (project) => project.status === "completed"
+    (project) => project.status.type === "completed"
   );
   const inactiveProjects = projects.filter(
-    (project) => project.status === "inactive"
+    (project) => project.status.type === "inactive"
   );
   const archivedProjects = projects.filter(
-    (project) => project.status === "archived"
+    (project) => project.status.type === "archived"
   );
 
   const allActiveAndCompleted = [
