@@ -69,8 +69,8 @@ export const projects: ProjectItem[] = [
     liveUrl: "https://marblecms.com/",
     image: "/images/marble.webp",
     status: {
-      type: "inactive",
-      label: "Paused",
+      type: "active",
+      label: "Left",
     },
     category: "saas",
   },
@@ -89,6 +89,7 @@ export const projects: ProjectItem[] = [
     image: "/images/wouldyoubot.webp",
     status: {
       type: "inactive",
+      label: "Paused",
     },
     category: "tool",
   },
