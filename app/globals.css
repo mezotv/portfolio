@@ -15,15 +15,15 @@
 *
 */
 @font-face {
-  font-family: 'Gambarino-Regular';
-  src: url('/public/fonts/Gambarino-Regular.woff2') format('woff2'),
-       url('/public/fonts/Gambarino-Regular.woff') format('woff'),
-       url('/public/fonts/Gambarino-Regular.ttf') format('truetype');
+  font-family: "Gambarino-Regular";
+  src:
+    url("/public/fonts/Gambarino-Regular.woff2") format("woff2"),
+    url("/public/fonts/Gambarino-Regular.woff") format("woff"),
+    url("/public/fonts/Gambarino-Regular.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -89,11 +89,11 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.83 0.10 230);
+  --chart-1: oklch(0.83 0.1 230);
   --chart-2: oklch(0.75 0.14 233);
   --chart-3: oklch(0.68 0.15 237);
   --chart-4: oklch(0.59 0.14 242);
-  --chart-5: oklch(0.50 0.12 243);
+  --chart-5: oklch(0.5 0.12 243);
   --radius: 0.45rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -124,11 +124,11 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.83 0.10 230);
+  --chart-1: oklch(0.83 0.1 230);
   --chart-2: oklch(0.75 0.14 233);
   --chart-3: oklch(0.68 0.15 237);
   --chart-4: oklch(0.59 0.14 242);
-  --chart-5: oklch(0.50 0.12 243);
+  --chart-5: oklch(0.5 0.12 243);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.75 0.14 233);
