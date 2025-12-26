@@ -95,11 +95,11 @@ function getEndDateText(
 
 function PositionCard({
   position,
-  grade,
+  note,
   isEducation,
 }: {
   position: Position;
-  grade?: string;
+  note?: string;
   isEducation: boolean;
 }) {
   const duration = calculateDuration(position.startDate, position.endDate);
@@ -124,7 +124,7 @@ function PositionCard({
         {getEndDateText(position.endDate, showPresent)} · {duration}
       </div>
       <span className="text-muted-foreground text-sm">{position.location}</span>
-      {grade && <span className="mt-1 text-sm text-white">Grade: {grade}</span>}
+      {note && <span className="mt-1 text-foreground text-sm">{note}</span>}
     </div>
   );
 }
@@ -225,8 +225,8 @@ function ExperienceSection({
                       </div>
                       <div className="grow pt-1">
                         <PositionCard
-                          grade={experience.grade}
                           isEducation={isEducation}
+                          note={experience.note}
                           position={experience.currentPosition}
                         />
                         <SkillsList skills={experience.skills} />
@@ -254,8 +254,8 @@ function ExperienceSection({
                 ) : (
                   <div className="flex flex-col">
                     <PositionCard
-                      grade={experience.grade}
                       isEducation={isEducation}
+                      note={experience.note}
                       position={experience.currentPosition}
                     />
                     <SkillsList skills={experience.skills} />

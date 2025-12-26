@@ -26,7 +26,7 @@ export interface ExperienceItem {
   currentPosition: Position;
   promotions?: Position[];
   category: "work" | "education";
-  grade?: string;
+  note?: string;
 }
 
 export const experiences: ExperienceItem[] = [
@@ -121,6 +121,7 @@ export const experiences: ExperienceItem[] = [
     skills: [],
     logo: "/images/DHBW.webp",
     category: "education",
+    note: "Dropped Out"
   },
   {
     company: "Kaufmännische Schule Ehingen",
@@ -135,7 +136,7 @@ export const experiences: ExperienceItem[] = [
     skills: [],
     logo: "/images/KSE.webp",
     category: "education",
-    grade: "2.9",
+    note: "2.9",
   },
   {
     company: "Geschwister-Scholl-Realschule Riedlingen",
