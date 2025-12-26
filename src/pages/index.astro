@@ -11,6 +11,7 @@ import Sponsors from "@/components/Sponsors.astro";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { GitHubButton } from "@/components/GitHubButton";
 import { useTranslations } from "@/i18n/utils";
+import Brickver from "@/components/icons/Brickver.astro";
 
 // Default to English for root path
 const lang = "en";
@@ -176,6 +177,14 @@ const t = useTranslations(lang);
             >
               <p class="sr-only">LinkedIn</p>
               <LinkedIn class="h-5 w-5 transition-all" />
+            </a>
+            <a
+              href="https://brickver.com/@dominik?ref=dominik"
+              target="_blank"
+              class="overflow-hidden transition-all text-zinc-900/60 dark:text-zinc-100/60 hover:text-zinc-900/100 dark:hover:text-zinc-100/100"
+            >
+              <p class="sr-only">Brickver</p>
+              <Brickver class="h-5 w-5 transition-all" />
             </a>
           </div>
         </section>

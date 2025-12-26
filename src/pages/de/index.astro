@@ -11,6 +11,7 @@ import Sponsors from "@/components/Sponsors.astro";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { GitHubButton } from "@/components/GitHubButton";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import Brickver from "@/components/icons/Brickver.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -62,8 +63,8 @@ const t = useTranslations(lang);
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Canonical and hreflang tags - English is canonical -->
-    <link rel="canonical" href="https://dominikkoch.dev/en/" />
-    <link rel="alternate" hreflang="en" href="https://dominikkoch.dev/en/" />
+    <link rel="canonical" href="https://dominikkoch.dev/" />
+    <link rel="alternate" hreflang="en" href="https://dominikkoch.dev/" />
     <link rel="alternate" hreflang="de" href="https://dominikkoch.dev/de/" />
     <link
       rel="alternate"
@@ -176,6 +177,14 @@ const t = useTranslations(lang);
             >
               <p class="sr-only">LinkedIn</p>
               <LinkedIn class="h-5 w-5 transition-all" />
+            </a>
+            <a
+              href="https://brickver.com/@dominik?ref=dominik"
+              target="_blank"
+              class="overflow-hidden transition-all text-zinc-900/60 dark:text-zinc-100/60 hover:text-zinc-900/100 dark:hover:text-zinc-100/100"
+            >
+              <p class="sr-only">Brickver</p>
+              <Brickver class="h-5 w-5 transition-all" />
             </a>
           </div>
         </section>

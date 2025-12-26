@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.0",
-    "@astrojs/react": "^4.3.0",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/mdx": "4.3.13",
+    "@astrojs/react": "4.4.2",
+    "@astrojs/rss": "4.0.14",
+    "@astrojs/sitemap": "3.6.0",
     "@radix-ui/react-hover-card": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
@@ -21,7 +21,7 @@
     "@tanstack/react-query": "^5.81.2",
     "@twemoji/api": "^16.0.1",
     "@types/canvas-confetti": "^1.9.0",
-    "astro": "^5.10.0",
+    "astro": "5.16.6",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
