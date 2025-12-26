@@ -70,7 +70,7 @@ export const projects: ProjectItem[] = [
     image: "/images/marble.webp",
     status: {
       type: "active",
-      label: "Left",
+      label: "Left the Project",
     },
     category: "saas",
   },
