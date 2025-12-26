@@ -46,7 +46,7 @@ export const projects: ProjectItem[] = [
     description: "WIP: Content Engine",
     technologies: [{ name: "Next.js" }, { name: "TypeScript" }],
     liveUrl: "https://usenotra.com/",
-    image: "/images/notra.webp",
+    image: undefined,
     status: {
       type: "active",
     },
