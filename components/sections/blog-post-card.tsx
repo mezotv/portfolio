@@ -18,9 +18,9 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       <article className="group relative flex w-full flex-col gap-3 rounded-lg border border-transparent px-4 py-6 transition-colors hover:border-border hover:bg-muted/50">
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-1 flex-col gap-2">
-            <h3 className="font-semibold text-lg transition-colors group-hover:text-foreground">
+            <h1 className="font-semibold text-lg transition-colors group-hover:text-foreground">
               {post.title}
-            </h3>
+            </h1>
             <p className="line-clamp-2 text-muted-foreground text-sm">
               {post.description}
             </p>

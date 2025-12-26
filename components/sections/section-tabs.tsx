@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function SectionTabs() {
+  const router = useRouter();
   const pathname = usePathname();
 
   const getTabs = () => [
@@ -36,9 +36,13 @@ export function SectionTabs() {
     <Tabs defaultValue={currentTab} value={currentTab}>
       <TabsList>
         {tabs.map((tab) => (
-          <Link href={tab.href} key={tab.value}>
-            <TabsTrigger value={tab.value}>{tab.label}</TabsTrigger>
-          </Link>
+          <TabsTrigger
+            key={tab.value}
+            onClick={() => router.push(tab.href)}
+            value={tab.value}
+          >
+            {tab.label}
+          </TabsTrigger>
         ))}
       </TabsList>
     </Tabs>

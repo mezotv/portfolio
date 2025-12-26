@@ -86,7 +86,7 @@ export async function Sponsors() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg">Sponsors ({totalCount})</h3>
+        <h2 className="font-semibold text-lg">Sponsors ({totalCount})</h2>
         <a
           className="text-muted-foreground text-sm transition-colors hover:text-foreground"
           href="https://github.com/sponsors/mezotv"

@@ -193,7 +193,7 @@ function ExperienceSection({
 
               <div className="flex grow flex-col">
                 <div className="mb-2 flex flex-col">
-                  <h3 className="font-semibold text-lg">
+                  <h2 className="font-semibold text-lg">
                     {experience.companyUrl ? (
                       <a
                         className="underline decoration-transparent transition-colors hover:text-primary hover:decoration-current"
@@ -206,7 +206,7 @@ function ExperienceSection({
                     ) : (
                       experience.company
                     )}
-                  </h3>
+                  </h2>
                   {!isEducation && (
                     <span className="text-muted-foreground text-sm">
                       {duration} ·{" "}

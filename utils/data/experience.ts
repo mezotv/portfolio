@@ -121,7 +121,7 @@ export const experiences: ExperienceItem[] = [
     skills: [],
     logo: "/images/DHBW.webp",
     category: "education",
-    note: "Dropped Out"
+    note: "Dropped Out",
   },
   {
     company: "Kaufmännische Schule Ehingen",
