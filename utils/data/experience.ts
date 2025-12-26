@@ -136,7 +136,7 @@ export const experiences: ExperienceItem[] = [
     skills: [],
     logo: "/images/KSE.webp",
     category: "education",
-    note: "2.9",
+    note: "Grade: 2.9",
   },
   {
     company: "Geschwister-Scholl-Realschule Riedlingen",
