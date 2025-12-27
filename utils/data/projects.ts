@@ -68,7 +68,7 @@ export const projects: ProjectItem[] = [
     liveUrl: "https://marblecms.com/",
     image: "/images/marble.webp",
     status: {
-      type: "active",
+      type: "inactive",
       label: "Past Maintainer",
     },
     category: "saas",
