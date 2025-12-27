@@ -129,6 +129,17 @@ export default function ContentLayout({
                 Dominik Koch
               </span>
             </p>
+            <p className="text-sm text-zinc-900 dark:text-muted-foreground">
+              Inspired by{" "}
+              <a
+                className="font-bold text-black/90 underline transition-opacity hover:opacity-75 dark:text-zinc-100"
+                href="https://ahmet.studio/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Ahmet Kilinc
+              </a>
+            </p>
           </div>
         </footer>
       </div>
