@@ -8,23 +8,10 @@ import {
   type ExperienceItem,
   experiences,
   type Position,
-  type PositionType,
 } from "@/utils/data/experience";
 
 function formatDate(date: Date) {
   return date.toLocaleString("en-US", { month: "short", year: "numeric" });
-}
-
-function translatePositionType(type: PositionType): string {
-  const translations: Record<PositionType, string> = {
-    "Co-op": "Co-op",
-    Internship: "Internship",
-    "Part-time": "Part-time",
-    "Full-time": "Full-time",
-    "Self-Employed": "Self-Employed",
-  };
-
-  return translations[type];
 }
 
 function calculateDuration(startDate: Date, endDate: Date | "present"): string {
@@ -115,9 +102,7 @@ function PositionCard({
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center">
         <h4 className="mr-2 font-semibold text-base">{position.role}</h4>
-        <span className="text-muted-foreground text-sm">
-          {translatePositionType(position.type)}
-        </span>
+        <span className="text-muted-foreground text-sm">{position.type}</span>
       </div>
       <div className="text-muted-foreground text-sm">
         {formatDate(position.startDate)} -{" "}
@@ -210,8 +195,7 @@ function ExperienceSection({
                   </h2>
                   {!isEducation && (
                     <span className="text-muted-foreground text-sm">
-                      {duration} ·{" "}
-                      {translatePositionType(experience.currentPosition.type)}
+                      {duration} · {experience.currentPosition.type}
                     </span>
                   )}
                 </div>
