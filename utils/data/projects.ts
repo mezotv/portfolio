@@ -85,8 +85,8 @@ export const projects: ProjectItem[] = [
     liveUrl: "https://wouldyoubot.gg/",
     image: "/images/wouldyoubot.webp",
     status: {
-      type: "inactive",
-      label: "Paused",
+      type: "active",
+      label: "On Hold",
     },
     category: "tool",
   },
