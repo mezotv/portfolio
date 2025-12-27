@@ -41,6 +41,7 @@ export interface ProjectItem {
 }
 
 export const projects: ProjectItem[] = [
+  /* 
   {
     name: "Notra",
     description: "WIP: Content Engine",
@@ -52,6 +53,7 @@ export const projects: ProjectItem[] = [
     },
     category: "saas",
   },
+  */
   {
     name: "Marble",
     description:
