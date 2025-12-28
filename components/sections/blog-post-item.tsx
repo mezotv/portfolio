@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type { Post } from "@/lib/marble/types";
 
 interface BlogPostItemProps {
@@ -9,7 +6,6 @@ interface BlogPostItemProps {
 }
 
 export function BlogPostItem({ post }: BlogPostItemProps) {
-  const router = useRouter();
   const href = `/blog/${post.slug}`;
 
   const publishDate = new Date(post.publishedAt);
@@ -20,11 +16,7 @@ export function BlogPostItem({ post }: BlogPostItemProps) {
   });
 
   return (
-    <Link
-      href={href}
-      onMouseEnter={() => router.prefetch(href)}
-      prefetch={false}
-    >
+    <Link href={href} prefetch={false}>
       <article className="-mx-4 mb-8 rounded-sm border-border border-b px-4 py-2 transition-colors last:border-b-0 hover:bg-muted/50">
         <div className="flex flex-col gap-3">
           <div className="flex items-baseline justify-between gap-4">
