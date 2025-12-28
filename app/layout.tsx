@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { DatabuddyAnalytics } from "@/components/databuddy";
@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     template: "%s | Dominik Koch",
   },
   description: "Software Engineer based in Germany. Open source enthusiast.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "var(--background)",
 };
 
 export default function RootLayout({
