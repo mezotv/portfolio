@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Link from "next/link";
 
 export function SectionTabs() {
   const pathname = usePathname();
@@ -38,9 +38,9 @@ export function SectionTabs() {
         {tabs.map((tab) => (
           <TabsTrigger
             key={tab.value}
-            value={tab.value}
-            render={<Link href={tab.href} />}
             nativeButton={false}
+            render={<Link href={tab.href} />}
+            value={tab.value}
           >
             {tab.label}
           </TabsTrigger>
