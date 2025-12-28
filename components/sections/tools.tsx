@@ -45,7 +45,7 @@ function ToolCard({ name, icon }: ToolProps) {
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="flex h-10 w-10 items-center justify-center">
-        <Image alt={name} height={32} src={icon} unoptimized width={32} />
+        <Image alt={name} height={32} loading="eager" src={icon} width={32} />
       </div>
       <span className="text-muted-foreground text-xs">{name}</span>
     </div>

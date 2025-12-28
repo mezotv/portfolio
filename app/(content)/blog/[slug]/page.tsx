@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Prose } from "@/components/prose";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/marble/client";
@@ -80,18 +79,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           )}
         </div>
       </header>
-
-      {post.coverImage && (
-        <div className="aspect-video overflow-hidden rounded-lg bg-muted">
-          <Image
-            alt={post.title}
-            className="h-full w-full object-cover"
-            height={720}
-            src={post.coverImage}
-            width={1280}
-          />
-        </div>
-      )}
 
       <div className="prose prose-sm dark:prose-invert max-w-none">
         <Prose html={post.content} />
