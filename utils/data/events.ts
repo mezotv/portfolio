@@ -40,7 +40,10 @@ export const events: EventItem[] = [
     startDate: "2026-01-22T17:00:00+01:00",
     endDate: "2026-01-22T20:00:00+01:00",
     eventLocation: {
+      name: "Netlight Consulting",
+      streetAddress: "Prannerstraße 4",
       addressLocality: "Munich",
+      postalCode: "80333",
       addressRegion: "Bavaria",
       addressCountry: "DE",
     },

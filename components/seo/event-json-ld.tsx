@@ -53,6 +53,7 @@ export function EventJsonLd({ events, baseUrl }: EventJsonLdProps) {
 
   return (
     <script
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Cant be modified
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(
           structuredData.length === 1 ? structuredData[0] : structuredData
