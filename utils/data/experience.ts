@@ -32,6 +32,20 @@ export interface ExperienceItem {
 
 export const experiences: ExperienceItem[] = [
   {
+    company: "RentMyHeader",
+    companyUrl: "https://rentmyheader.com/",
+    location: "Remote",
+    currentPosition: {
+      role: "Software Engineer",
+      type: "Contract",
+      startDate: new Date("2025-11-28"),
+      endDate: "present",
+      location: "Remote",
+    },
+    skills: [{ name: "TypeScript" }, { name: "Next.js" }, { name: "Drizzle" }],
+    category: "work",
+  },
+  {
     company: "Rivo",
     companyUrl: "https://rivo.gg/",
     location: "Riedlingen, Baden-Württemberg, Germany",

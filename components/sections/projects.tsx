@@ -178,11 +178,11 @@ export function Projects() {
   ];
 
   return (
-    <div className="flex w-full max-w-xl flex-col gap-12">
+    <>
       <ProjectSection items={allActiveAndCompleted} title="Projects" />
       {archivedProjects.length > 0 && (
         <ProjectSection items={archivedProjects} title="Archived" />
       )}
-    </div>
+    </>
   );
 }

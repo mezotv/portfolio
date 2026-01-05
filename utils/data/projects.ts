@@ -41,19 +41,21 @@ export interface ProjectItem {
 }
 
 export const projects: ProjectItem[] = [
-  /* 
   {
     name: "Notra",
-    description: "WIP: Content Engine",
-    technologies: [{ name: "Next.js" }, { name: "TypeScript" }],
+    description: "Notra is a content engine you turns your work into content.",
+    technologies: [
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "Drizzle" },
+    ],
     liveUrl: "https://usenotra.com/",
-    image: undefined,
+    image: "/images/notra.svg",
     status: {
       type: "active",
     },
     category: "saas",
   },
-  */
   {
     name: "Marble",
     description:

@@ -42,8 +42,8 @@ export default function ContentLayout({
               <span className="precise-age" id="age">
                 {age}
               </span>{" "}
-              years old with a passion for open source. Self proclaimed 10x
-              engineer currently working on{" "}
+              years old with a passion for open source. Currently working as a
+              part-time software engineer and on{" "}
               <a
                 className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
                 href="https://rivo.gg/"

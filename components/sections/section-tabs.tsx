@@ -8,14 +8,18 @@ export function SectionTabs() {
   const pathname = usePathname();
 
   const getTabs = () => [
-    { label: "Projects", href: "/", value: "projects" },
+    { label: "About", href: "/", value: "about" },
+    { label: "Projects", href: "/projects", value: "projects" },
     { label: "Experience", href: "/experience", value: "experience" },
     { label: "Tools", href: "/tools", value: "tools" },
     { label: "Blog", href: "/blog", value: "blog" },
   ];
 
   const currentTab = (() => {
-    if (pathname === "/" || pathname === "/projects") {
+    if (pathname === "/") {
+      return "about";
+    }
+    if (pathname === "/projects") {
       return "projects";
     }
     if (pathname === "/experience") {
@@ -27,7 +31,7 @@ export function SectionTabs() {
     if (pathname.startsWith("/blog")) {
       return "blog";
     }
-    return "projects";
+    return "about";
   })();
 
   const tabs = getTabs();

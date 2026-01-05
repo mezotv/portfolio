@@ -21,7 +21,8 @@ export const metadata: Metadata = {
     default: "Dominik Koch",
     template: "%s | Dominik Koch",
   },
-  description: "Software Engineer based in Germany. Open source enthusiast.",
+  description:
+    "Software Engineer based in Germany with a passion for open source. Currently working on Rivo and Notra.",
 };
 
 export const viewport: Viewport = {

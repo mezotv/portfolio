@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Projects } from "@/components/sections/projects";
+import { About } from "@/components/sections/about";
 
 export const metadata: Metadata = {
-  description: "My latest projects and open source contributions.",
+  description: "Software Engineer based in Germany. Open source enthusiast.",
 };
 
-export const dynamic = "force-static";
-
-export default function Page() {
-  return <Projects />;
+export default async function Page() {
+  return <About />;
 }
