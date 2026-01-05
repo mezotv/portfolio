@@ -1,8 +1,22 @@
-import type { EventItem } from "@/utils/data/events";
+import type { EventItem, EventOrganizer } from "@/utils/data/events";
 
 interface EventJsonLdProps {
   events: EventItem[];
   baseUrl: string;
+}
+
+function formatOrganizers(organizers: EventOrganizer[] | undefined) {
+  if (!organizers || organizers.length === 0) {
+    return undefined;
+  }
+
+  const formatted = organizers.map((org) => ({
+    "@type": org.type,
+    name: org.name,
+    url: org.url,
+  }));
+
+  return formatted.length === 1 ? formatted[0] : formatted;
 }
 
 export function EventJsonLd({ events, baseUrl }: EventJsonLdProps) {
@@ -34,11 +48,7 @@ export function EventJsonLd({ events, baseUrl }: EventJsonLdProps) {
         },
     image: event.image ? `${baseUrl}${event.image}` : undefined,
     url: `https://lu.ma/event/${event.lumaEventId}`,
-    organizer: {
-      "@type": "Person",
-      name: "Dominik Koch",
-      url: baseUrl,
-    },
+    organizer: formatOrganizers(event.organizers),
   }));
 
   return (

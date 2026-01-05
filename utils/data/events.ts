@@ -7,6 +7,12 @@ export interface EventLocation {
   addressCountry: string;
 }
 
+export interface EventOrganizer {
+  type: "Person" | "Organization";
+  name: string;
+  url?: string;
+}
+
 export interface EventItem {
   name: string;
   description: string;
@@ -18,6 +24,7 @@ export interface EventItem {
   startDate: string;
   endDate?: string;
   eventLocation?: EventLocation;
+  organizers?: EventOrganizer[];
 }
 
 export const events: EventItem[] = [
@@ -37,5 +44,12 @@ export const events: EventItem[] = [
       addressRegion: "Bavaria",
       addressCountry: "DE",
     },
+    organizers: [
+      {
+        type: "Organization",
+        name: "Vercel",
+        url: "https://vercel.com",
+      },
+    ],
   },
 ];
