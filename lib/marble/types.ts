@@ -43,6 +43,11 @@ export interface Category {
   slug: string;
 }
 
+export interface Attribution {
+  url: string;
+  author: string;
+}
+
 export interface Post {
   id: string;
   title: string;
@@ -56,6 +61,7 @@ export interface Post {
   authors: Author[];
   category?: Category;
   coverImage?: string;
+  attribution?: Attribution;
 }
 
 export interface MarblePost {
