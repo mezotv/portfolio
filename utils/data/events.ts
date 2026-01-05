@@ -50,6 +50,16 @@ export const events: EventItem[] = [
         name: "Vercel",
         url: "https://vercel.com",
       },
+      {
+        type: "Person",
+        name: "Dominik Koch",
+        url: "https://dominikkoch.dev",
+      },
+      {
+        type: "Person",
+        name: "Gabby Shires",
+        url: "https://x.com/gabbyshires",
+      },
     ],
   },
 ];
