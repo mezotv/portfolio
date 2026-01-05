@@ -1,3 +1,12 @@
+export interface EventLocation {
+  name?: string;
+  streetAddress?: string;
+  addressLocality: string;
+  addressRegion?: string;
+  postalCode?: string;
+  addressCountry: string;
+}
+
 export interface EventItem {
   name: string;
   description: string;
@@ -6,6 +15,9 @@ export interface EventItem {
   location: string;
   image?: string;
   lumaEventId: string;
+  startDate: string;
+  endDate?: string;
+  eventLocation?: EventLocation;
 }
 
 export const events: EventItem[] = [
@@ -18,5 +30,12 @@ export const events: EventItem[] = [
     location: "Munich, Germany",
     image: "/images/events/vercel-munich-2026.webp",
     lumaEventId: "evt-t82Utu2HPEFxUB3",
+    startDate: "2026-01-22T17:00:00+01:00",
+    endDate: "2026-01-22T20:00:00+01:00",
+    eventLocation: {
+      addressLocality: "Munich",
+      addressRegion: "Bavaria",
+      addressCountry: "DE",
+    },
   },
 ];
