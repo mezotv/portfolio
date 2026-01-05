@@ -199,7 +199,7 @@ export function About() {
           >
             shadcn/ui
           </a>{" "}
-          or{" "}
+          and{" "}
           <a
             className="text-foreground underline underline-offset-4 hover:text-foreground/80"
             href="https://github.com/47ng/nuqs/pull/1271"
