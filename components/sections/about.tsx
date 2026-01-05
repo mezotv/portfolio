@@ -188,7 +188,7 @@ export function About() {
             rel="noopener noreferrer"
             target="_blank"
           >
-            security vulnerability in Dokploy
+            critical security vulnerability in Dokploy
           </a>{" "}
           and PRs to{" "}
           <a
@@ -198,6 +198,15 @@ export function About() {
             target="_blank"
           >
             shadcn/ui
+          </a>{" "}
+          or{" "}
+          <a
+            className="text-foreground underline underline-offset-4 hover:text-foreground/80"
+            href="https://github.com/47ng/nuqs/pull/1271"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Nuqs
           </a>
           .
         </p>
