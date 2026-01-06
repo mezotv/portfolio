@@ -47,7 +47,7 @@ export function EventJsonLd({ events, baseUrl }: EventJsonLdProps) {
           name: event.location,
         },
     image: event.image ? `${baseUrl}${event.image}` : undefined,
-    url: `https://lu.ma/event/${event.lumaEventId}`,
+    url: `https://lu.ma/event/${event.lumaEventId}?utm_source=dominikkoch.dev`,
     organizer: formatOrganizers(event.organizers),
   }));
 

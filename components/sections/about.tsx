@@ -90,7 +90,7 @@ function EventPreview() {
         {upcomingEvents.map((event) => (
           <a
             className="-mx-2 flex cursor-pointer flex-col gap-3 rounded-md p-2 transition-colors hover:bg-muted/50"
-            href={`https://lu.ma/event/${event.lumaEventId}`}
+            href={`https://lu.ma/event/${event.lumaEventId}?utm_source=dominikkoch.dev`}
             key={event.name}
             target="_blank"
           >
