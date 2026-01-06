@@ -179,7 +179,7 @@ export function About() {
       <div className="flex flex-col gap-3">
         <h1 className="font-bold text-2xl">About</h1>
         <p className="text-muted-foreground">
-          Software engineer focused on building SaaS products and developer
+          Software Engineer focused on building SaaS products and developer
           tools. I enjoy security research, contributing to open source, and
           organizing tech meetups. Notable contributions include a{" "}
           <a
