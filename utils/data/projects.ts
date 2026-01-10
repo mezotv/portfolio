@@ -49,7 +49,7 @@ export const projects: ProjectItem[] = [
       { name: "TypeScript" },
       { name: "Drizzle" },
     ],
-    liveUrl: "https://usenotra.com/",
+    liveUrl: "https://www.usenotra.com/",
     image: "/images/notra.svg",
     status: {
       type: "active",

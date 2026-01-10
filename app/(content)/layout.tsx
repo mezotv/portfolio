@@ -55,7 +55,7 @@ export default function ContentLayout({
               and{" "}
               <a
                 className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
-                href="https://usenotra.com/"
+                href="https://www.usenotra.com/"
                 rel="noopener"
                 target="_blank"
               >
