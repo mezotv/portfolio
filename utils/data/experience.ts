@@ -43,6 +43,7 @@ export const experiences: ExperienceItem[] = [
       location: "Remote",
     },
     skills: [{ name: "TypeScript" }, { name: "Next.js" }, { name: "Drizzle" }],
+    logo: "/images/rentmyheader.svg",
     category: "work",
   },
   {
