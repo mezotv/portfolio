@@ -132,13 +132,11 @@ function SkillsList({ skills }: { skills: { name: string }[] }) {
         <>
           <span> </span>
           <Tooltip>
-            <TooltipTrigger
-              render={
-                <span className="cursor-help underline decoration-dotted underline-offset-2">
-                  {`and +${remainingCount} skill${remainingCount !== 1 ? "s" : ""}`}
-                </span>
-              }
-            />
+            <TooltipTrigger>
+              <span className="cursor-help underline decoration-dotted underline-offset-2">
+                {`and +${remainingCount} skill${remainingCount !== 1 ? "s" : ""}`}
+              </span>
+            </TooltipTrigger>
             <TooltipContent>
               <p className="max-w-48 text-xs">{allSkills}</p>
             </TooltipContent>

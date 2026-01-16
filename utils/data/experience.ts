@@ -32,6 +32,21 @@ export interface ExperienceItem {
 
 export const experiences: ExperienceItem[] = [
   {
+    company: "Databricks (Neon)",
+    companyUrl: "https://neon.com/",
+    location: "Remote",
+    currentPosition: {
+      role: "Neon.com Template Developer",
+      type: "Contract",
+      startDate: new Date("2026-01-15"),
+      endDate: "present",
+      location: "Remote",
+    },
+    skills: [{ name: "v0" }, { name: "Next.js" }, { name: "TailwindCSS" }],
+    logo: "/images/databricks.svg",
+    category: "work",
+  },
+  {
     company: "RentMyHeader",
     companyUrl: "https://rentmyheader.com/",
     location: "Remote",
