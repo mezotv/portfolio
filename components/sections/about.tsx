@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getBlogPosts } from "@/lib/marble/client";
+import { getBlogPosts } from "@/lib/marble/queries";
 import { events } from "@/utils/data/events";
 import { projects, statusConfig } from "@/utils/data/projects";
 

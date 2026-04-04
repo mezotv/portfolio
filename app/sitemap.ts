@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getBlogPosts } from "@/lib/marble/client";
+import { getBlogPosts } from "@/lib/marble/queries";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://dominikkoch.dev";
 
