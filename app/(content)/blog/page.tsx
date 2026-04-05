@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BlogPostItem } from "@/components/sections/blog-post-item";
-import { getBlogPosts, getExternalPosts } from "@/lib/marble/client";
+import { getBlogPosts, getExternalPosts } from "@/lib/marble/queries";
 
 export const metadata: Metadata = {
   title: "Blog",

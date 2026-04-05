@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Prose } from "@/components/prose";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/marble/client";
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/marble/queries";
 
 interface BlogPostPageProps {
   params: {
@@ -34,8 +34,8 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       type: "article",
-      publishedTime: post.publishedAt,
-      modifiedTime: post.updatedAt,
+      publishedTime: post.publishedAt.toISOString(),
+      modifiedTime: post.updatedAt.toISOString(),
       images: post.coverImage ? [{ url: post.coverImage }] : undefined,
     },
     twitter: {
@@ -68,7 +68,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <h1 className="font-bold text-2xl">{post.title}</h1>
 
         <div className="flex flex-col gap-2 text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <time dateTime={post.publishedAt}>{formattedDate}</time>
+          <time dateTime={post.publishedAt.toISOString()}>{formattedDate}</time>
           {post.authors && post.authors.length > 0 && (
             <div>
               by{" "}

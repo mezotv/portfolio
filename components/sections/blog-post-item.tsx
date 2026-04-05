@@ -1,12 +1,14 @@
 import Link from "next/link";
-import type { Post } from "@/lib/marble/types";
+import type { Post } from "@usemarble/sdk/models";
 
 interface BlogPostItemProps {
   post: Post;
 }
 
 export function BlogPostItem({ post }: BlogPostItemProps) {
-  const isExternal = post.category?.slug === "external";
+  const isExternal = post.category.slug === "external";
+  const originalAuthor = post.fields.original_author ? post.fields.original_author : undefined;
+  const originalUrl = post.fields.original_url ? post.fields.original_url : undefined;
   const publishDate = new Date(post.publishedAt);
   const formattedDate = publishDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -26,10 +28,8 @@ export function BlogPostItem({ post }: BlogPostItemProps) {
 
         <p className="text-muted-foreground">{post.description}</p>
 
-        {isExternal && post.attribution && (
-          <p className="text-muted-foreground text-sm">
-            by {post.attribution.author}
-          </p>
+        {isExternal && originalAuthor && (
+          <p className="text-muted-foreground text-sm">by {originalAuthor}</p>
         )}
 
         {post.tags && post.tags.length > 0 && (
@@ -48,9 +48,9 @@ export function BlogPostItem({ post }: BlogPostItemProps) {
     </article>
   );
 
-  if (isExternal && post.attribution?.url) {
+  if (isExternal && originalUrl) {
     return (
-      <a href={post.attribution.url} rel="noopener noreferrer" target="_blank">
+      <a href={originalUrl} rel="noopener noreferrer" target="_blank">
         {content}
       </a>
     );
