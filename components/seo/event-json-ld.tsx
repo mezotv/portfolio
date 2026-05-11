@@ -1,4 +1,4 @@
-import type { EventItem, EventOrganizer } from "@/utils/data/events";
+import type { EventItem, EventOrganizer } from "@/types/event";
 
 interface EventJsonLdProps {
   events: EventItem[];

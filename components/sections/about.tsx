@@ -1,9 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
+import { EventCard } from "@/components/sections/event-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getBlogPosts } from "@/lib/marble/queries";
 import { events } from "@/utils/data/events";
 import { projects, statusConfig } from "@/utils/data/projects";
+import { getLatestEventsByStartDate } from "@/utils/event";
 
 function SectionHeader({
   title,
@@ -77,51 +78,18 @@ function ProjectPreview() {
 }
 
 function EventPreview() {
-  const upcomingEvents = events.slice(0, 1);
-
-  if (upcomingEvents.length === 0) {
+  if (events.length === 0) {
     return null;
   }
 
+  const previewEvents = getLatestEventsByStartDate(events, 2);
+
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="font-bold text-xl">Events</h2>
+      <SectionHeader href="/events" linkText="View all" title="Events" />
       <div className="flex flex-col gap-4">
-        {upcomingEvents.map((event) => (
-          <a
-            className="-mx-2 flex cursor-pointer flex-col gap-3 rounded-md p-2 transition-colors hover:bg-muted/50"
-            href={`https://lu.ma/event/${event.lumaEventId}?utm_source=dominikkoch.dev`}
-            key={event.name}
-            target="_blank"
-          >
-            <div className="flex items-start gap-3">
-              {event.image ? (
-                <Image
-                  alt={event.name}
-                  className="rounded-md object-cover"
-                  height={80}
-                  src={event.image}
-                  width={80}
-                />
-              ) : (
-                <div className="flex h-20 w-20 items-center justify-center rounded-md bg-muted font-medium text-xl">
-                  {event.name.charAt(0)}
-                </div>
-              )}
-              <div className="flex min-w-0 flex-1 flex-col">
-                <h3 className="font-medium">{event.name}</h3>
-                <p className="text-muted-foreground text-sm">
-                  {event.date} &middot; {event.time}
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  {event.location}
-                </p>
-              </div>
-            </div>
-            <p className="line-clamp-2 text-muted-foreground text-sm">
-              {event.description}
-            </p>
-          </a>
+        {previewEvents.map((event) => (
+          <EventCard clampDescription event={event} key={event.lumaEventId} />
         ))}
       </div>
     </div>

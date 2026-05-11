@@ -8,7 +8,6 @@ import type {
 } from "@usemarble/sdk/models";
 import { marble } from "@/lib/marble/client";
 
-
 interface GetPostsOptions {
   categories?: string[];
   excludeCategories?: string[];
@@ -38,7 +37,9 @@ export async function getTags(): Promise<TagsListResponse | undefined> {
   }
 }
 
-export async function getCategories(): Promise<CategoriesListResponse | undefined> {
+export async function getCategories(): Promise<
+  CategoriesListResponse | undefined
+> {
   try {
     const data = await marble.categories.list();
     return data.result;

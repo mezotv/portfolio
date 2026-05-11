@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Post } from "@usemarble/sdk/models";
+import Link from "next/link";
 
 interface BlogPostItemProps {
   post: Post;
@@ -7,8 +7,12 @@ interface BlogPostItemProps {
 
 export function BlogPostItem({ post }: BlogPostItemProps) {
   const isExternal = post.category.slug === "external";
-  const originalAuthor = post.fields.original_author ? post.fields.original_author : undefined;
-  const originalUrl = post.fields.original_url ? post.fields.original_url : undefined;
+  const originalAuthor = post.fields.original_author
+    ? post.fields.original_author
+    : undefined;
+  const originalUrl = post.fields.original_url
+    ? post.fields.original_url
+    : undefined;
   const publishDate = new Date(post.publishedAt);
   const formattedDate = publishDate.toLocaleDateString("en-US", {
     year: "numeric",
