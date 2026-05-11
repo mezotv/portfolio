@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
   reactCompiler: true,
+  experimental: {
+    turbopackFileSystemCacheForDev: false,
+  },
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     remotePatterns: [
       {
