@@ -12,6 +12,7 @@
     "@base-ui/react": "^1.0.0",
     "@databuddy/sdk": "^2.3.2",
     "@phosphor-icons/react": "^2.1.10",
+    "@tanstack/react-hotkeys": "^0.10.0",
     "@toolwind/corner-shape": "^0.0.8-3",
     "@usemarble/sdk": "^1.1.4",
     "babel-plugin-react-compiler": "^1.0.0",
