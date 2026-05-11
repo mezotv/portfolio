@@ -36,7 +36,7 @@ export const experiences: ExperienceItem[] = [
     companyUrl: "https://neon.com/",
     location: "Remote",
     currentPosition: {
-      role: "Neon.com Template Developer",
+      role: "DX Engineer",
       type: "Contract",
       startDate: new Date("2026-01-15"),
       endDate: "present",
