@@ -12,7 +12,7 @@ import { getLatestEventsByStartDate } from "@/utils/event";
 const EVENTS_DESCRIPTION = "Events I hosted or helped out at.";
 
 const eventsTitleTriggerClass =
-  "cursor-help border-0 bg-transparent p-0 font-inherit text-inherit underline-offset-4 decoration-2 decoration-wavy decoration-foreground outline-none transition-colors hover:underline focus-visible:underline";
+  "relative cursor-help border-0 bg-transparent p-0 font-inherit text-inherit outline-none after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 focus-visible:after:scale-x-100 dark:after:bg-zinc-100";
 
 export function Events() {
   const sortedEvents = getLatestEventsByStartDate(events, events.length);

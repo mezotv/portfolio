@@ -90,7 +90,6 @@ export const projects: ProjectItem[] = [
     image: "/images/wouldyoubot.webp",
     status: {
       type: "active",
-      label: "On Hold",
     },
     category: "tool",
   },

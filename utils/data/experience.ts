@@ -54,7 +54,7 @@ export const experiences: ExperienceItem[] = [
       role: "Software Engineer",
       type: "Contract",
       startDate: new Date("2025-11-28"),
-      endDate: "present",
+      endDate: new Date("2026-03-31"),
       location: "Remote",
     },
     skills: [{ name: "TypeScript" }, { name: "Next.js" }, { name: "Drizzle" }],

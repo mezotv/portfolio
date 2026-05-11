@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Dominik Koch",
   },
   description:
-    "Software Engineer based in Germany with a passion for open source. Currently working on Rivo and Notra.",
+    "Software Engineer based in Germany with a passion for open source. Currently working full-time on Notra and maintaining Hotkeys and Rivo.",
 };
 
 export const viewport: Viewport = {
