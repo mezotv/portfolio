@@ -18,7 +18,7 @@ export function Events() {
   const sortedEvents = getLatestEventsByStartDate(events, events.length);
 
   return (
-    <div className="flex w-full max-w-xl flex-col gap-12">
+    <div className="flex w-full max-w-xl flex-col gap-6">
       <h1 className="font-bold text-2xl">
         <Tooltip>
           <TooltipTrigger
