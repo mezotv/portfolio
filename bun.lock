@@ -7,6 +7,9 @@
       "dependencies": {
         "@base-ui/react": "^1.0.0",
         "@databuddy/sdk": "^2.3.2",
+        "@dualmark/converters": "^0.7.0",
+        "@dualmark/core": "^0.7.0",
+        "@dualmark/nextjs": "^0.7.0",
         "@phosphor-icons/react": "^2.1.10",
         "@tanstack/react-hotkeys": "^0.10.0",
         "@toolwind/corner-shape": "^0.0.8-3",
@@ -130,6 +133,12 @@
     "@databuddy/sdk": ["@databuddy/sdk@2.3.2", "", { "peerDependencies": { "@ai-sdk/provider": "^2.0.0", "ai": "^5.0.51", "msw": "^2.11.5", "react": ">=18", "tokenlens": "^2.0.0-alpha.3", "vue": ">=3" }, "optionalPeers": ["@ai-sdk/provider", "ai", "msw", "react", "tokenlens", "vue"] }, "sha512-vRrWWKRBVTO2/c8dQrLmYL39BAYzO68s2ODkQH/sJGp1hQh85lzZk3R5c2xNs7VE9Y7hxemEo0/Ycu/I2bwdXw=="],
 
     "@dotenvx/dotenvx": ["@dotenvx/dotenvx@1.51.2", "", { "dependencies": { "commander": "^11.1.0", "dotenv": "^17.2.1", "eciesjs": "^0.4.10", "execa": "^5.1.1", "fdir": "^6.2.0", "ignore": "^5.3.0", "object-treeify": "1.1.33", "picomatch": "^4.0.2", "which": "^4.0.0" }, "bin": { "dotenvx": "src/cli/dotenvx.js" } }, "sha512-+693mNflujDZxudSEqSNGpn92QgFhJlBn9q2mDQ9yGWyHuz3hZ8B5g3EXCwdAz4DMJAI+OFCIbfEFZS+YRdrEA=="],
+
+    "@dualmark/converters": ["@dualmark/converters@0.7.0", "", { "dependencies": { "@dualmark/core": "0.7.0" } }, "sha512-CiY/iQ1MBjkzkdpzY+2GsNDF+hcxppAkgMsxynBJlkkiBr9iGUXbwz4Imjydp1v9e8/CeFVk0dq8FAOnHphbrg=="],
+
+    "@dualmark/core": ["@dualmark/core@0.7.0", "", {}, "sha512-1mm6fXlfB8aUPhNqT55NyMH7IDeQhkW/nD2cCfP2urMpkV+hQCVl9f8vOVDBJefvaNwT05TmVJXTv5jMGSLnBw=="],
+
+    "@dualmark/nextjs": ["@dualmark/nextjs@0.7.0", "", { "dependencies": { "@dualmark/converters": "0.7.0", "@dualmark/core": "0.7.0" }, "peerDependencies": { "next": ">=14.0.0" } }, "sha512-Ha6U2A8C9cnKMgzBWKeemkbOg5OARwhKAE+FGkrRAyfUWYY5xLkaEq8TGLCPwuV9ZovugZlPgyOk+atX6k8SYA=="],
 
     "@ecies/ciphers": ["@ecies/ciphers@0.2.5", "", { "peerDependencies": { "@noble/ciphers": "^1.0.0" } }, "sha512-GalEZH4JgOMHYYcYmVqnFirFsjZHeoGMDt9IxEnM9F7GRUUyUksJ7Ou53L83WHJq3RWKD3AcBpo0iQh0oMpf8A=="],
 
