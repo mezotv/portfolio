@@ -14,12 +14,12 @@ export interface BlogPost {
 }
 
 export interface PostEventData {
-  event: string;
+  type: string;
   data: BlogPost;
-  timestamp: string;
+  createdAt: string;
 }
 
 export interface WebhookPayload {
-  event: string;
+  type: string;
   data: BlogPost;
 }

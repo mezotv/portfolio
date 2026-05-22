@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   }
 
   const payload = JSON.parse(bodyText) as PostEventData;
-  if (!(payload.event && payload.data)) {
+  if (!(payload.type && payload.data)) {
     return Response.json(
       { error: "Invalid payload structure" },
       { status: 400 }

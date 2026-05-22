@@ -26,7 +26,7 @@ export function verifySignature(
 }
 
 export function handleWebhookEvent(payload: PostEventData) {
-  const event = payload.event;
+  const event = payload.type;
   const data = payload.data;
 
   if (event.startsWith("post")) {
