@@ -1,6 +1,5 @@
 import { createLlmsTxtHandler } from "@dualmark/nextjs";
-
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://dominikkoch.dev";
+import { SITE_URL } from "@/lib/constants";
 
 const handler = createLlmsTxtHandler({
   brandName: "Dominik Koch",

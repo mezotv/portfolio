@@ -1,7 +1,6 @@
 import type { DualmarkNextConfig } from "@dualmark/nextjs";
+import { SITE_URL } from "@/lib/constants";
 import { getBlogPosts } from "@/lib/marble/queries";
-
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://dominikkoch.dev";
 
 async function getBlogEntries() {
   const posts = await getBlogPosts();

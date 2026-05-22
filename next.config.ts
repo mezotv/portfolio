@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { withDualmark } from "@dualmark/nextjs";
+import { SITE_URL } from "./lib/constants";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
@@ -20,5 +21,5 @@ const nextConfig: NextConfig = {
 };
 
 export default withDualmark(nextConfig, {
-  siteUrl: process.env.NEXT_PUBLIC_BASE_URL || "https://dominikkoch.dev",
+  siteUrl: SITE_URL,
 });
