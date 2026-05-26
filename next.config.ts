@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
 import { withDualmark } from "@dualmark/nextjs";
+import type { NextConfig } from "next";
 import { SITE_URL } from "./lib/constants";
 
 const nextConfig: NextConfig = {
