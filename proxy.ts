@@ -4,7 +4,7 @@ import { SITE_URL } from "@/lib/constants";
 export default createDualmarkMiddleware({
   siteUrl: SITE_URL,
   middleware: {
-    skipPaths: ["/api", "/llms.txt", "/robots.txt", "/sitemap.xml"],
+    skipPaths: ["/api", "/r", "/llms.txt", "/robots.txt", "/sitemap.xml"],
   },
 });
 

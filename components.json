@@ -20,5 +20,7 @@
   },
   "menuColor": "default",
   "menuAccent": "subtle",
-  "registries": {}
+  "registries": {
+    "@dominik-ui": "https://dominikkoch.dev/r/{name}.json"
+  }
 }
