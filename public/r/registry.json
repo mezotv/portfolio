@@ -11,7 +11,13 @@
       "files": [
         {
           "path": "components/ui/braille-loader.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "@ui/braille-loader.tsx"
+        },
+        {
+          "path": "lib/text-to-braille.ts",
+          "type": "registry:lib",
+          "target": "@lib/text-to-braille.ts"
         }
       ]
     }
