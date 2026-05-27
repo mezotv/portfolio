@@ -12,7 +12,6 @@ export function SectionTabs() {
     { label: "Projects", href: "/projects", value: "projects" },
     { label: "Experience", href: "/experience", value: "experience" },
     { label: "Events", href: "/events", value: "events" },
-    { label: "Tech Stack", href: "/tools", value: "tech-stack" },
     { label: "Blog", href: "/blog", value: "blog" },
   ];
 
@@ -28,9 +27,6 @@ export function SectionTabs() {
     }
     if (pathname === "/events") {
       return "events";
-    }
-    if (pathname === "/tools") {
-      return "tech-stack";
     }
     if (pathname.startsWith("/blog")) {
       return "blog";
