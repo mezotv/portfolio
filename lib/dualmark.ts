@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/constants";
 import { getBlogPosts } from "@/lib/marble/queries";
 
 async function getBlogEntries() {
-  const posts = await getBlogPosts();
+  const posts = await getBlogPosts("markdown");
 
   return posts.map((post) => ({
     id: post.slug,

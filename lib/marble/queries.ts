@@ -1,6 +1,7 @@
 import type {
   AuthorsListResponse,
   CategoriesListResponse,
+  ContentFormat,
   Post,
   PostResponse,
   PostsListResponse,
@@ -11,6 +12,7 @@ import { marble } from "@/lib/marble/client";
 interface GetPostsOptions {
   categories?: string[];
   excludeCategories?: string[];
+  format?: ContentFormat;
 }
 
 export async function getPosts(
@@ -20,6 +22,7 @@ export async function getPosts(
     const data = await marble.posts.list({
       categories: options?.categories,
       excludeCategories: options?.excludeCategories,
+      format: options?.format,
     });
 
     return data.result;
@@ -87,8 +90,8 @@ function sortPosts(posts: Post[]): Post[] {
   });
 }
 
-export async function getBlogPosts(): Promise<Post[]> {
-  const data = await getPosts({ excludeCategories: ["external"] });
+export async function getBlogPosts(format?: ContentFormat): Promise<Post[]> {
+  const data = await getPosts({ excludeCategories: ["external"], format });
 
   if (!data?.posts) {
     return [];
