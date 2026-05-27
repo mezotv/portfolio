@@ -122,3 +122,21 @@ export async function getBlogPostBySlug(
 
   return post;
 }
+
+export async function getBlogPostMarkdown(
+  slug: string
+): Promise<string | undefined> {
+  if (!slug || slug === "undefined") {
+    return undefined;
+  }
+
+  try {
+    const data = await marble.posts.get({
+      identifier: slug,
+      format: "markdown",
+    });
+    return data.post?.content;
+  } catch (error) {
+    console.error("Error fetching post markdown:", error);
+  }
+}

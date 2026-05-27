@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Prose } from "@/components/prose";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/marble/queries";
+import {
+  getBlogPostBySlug,
+  getBlogPostMarkdown,
+  getBlogPosts,
+} from "@/lib/marble/queries";
+import { getBlogMarkdownUrl } from "@/utils/article";
+import { getReadingTime } from "@/utils/reading-time";
+import { ArticleActions } from "./article-actions";
 
 interface BlogPostPageProps {
   params: {
@@ -55,28 +62,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const markdown = await getBlogPostMarkdown(slug);
+
   const publishDate = new Date(post.publishedAt);
   const formattedDate = publishDate.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  const readingTime = getReadingTime(post.content);
+  const markdownUrl = getBlogMarkdownUrl(slug);
 
   return (
     <article className="flex w-full max-w-2xl flex-col gap-8">
-      <header className="flex flex-col gap-4">
-        <h1 className="font-bold text-2xl">{post.title}</h1>
-
-        <div className="flex flex-col gap-2 text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+      <header className="flex flex-col gap-6">
+        <p className="font-mono text-muted-foreground text-sm">
+          Published{" "}
           <time dateTime={post.publishedAt.toISOString()}>{formattedDate}</time>
-          {post.authors && post.authors.length > 0 && (
-            <div>
-              by{" "}
-              <span className="text-foreground">
-                {post.authors.map((author) => author.name).join(" & ")}
-              </span>
-            </div>
-          )}
+        </p>
+
+        <h1 className="font-bold text-3xl tracking-tight sm:text-4xl">
+          {post.title}
+        </h1>
+
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-mono text-muted-foreground text-sm">
+            {readingTime} min read
+          </span>
+          <ArticleActions markdown={markdown ?? ""} markdownUrl={markdownUrl} />
         </div>
       </header>
 
