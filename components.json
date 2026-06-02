@@ -21,6 +21,7 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@dominik-ui": "https://dominikkoch.dev/r/{name}.json"
+    "@dominik-ui": "https://dominikkoch.dev/r/{name}.json",
+    "@jalco": "https://ui.justinlevine.me/r/{name}.json"
   }
 }

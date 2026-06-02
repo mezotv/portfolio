@@ -154,6 +154,18 @@
   font-family: "Gambarino", serif;
 }
 
+.shiki,
+.shiki span {
+  background-color: var(--shiki-light-bg, inherit);
+  color: var(--shiki-light, inherit);
+}
+
+.dark .shiki,
+.dark .shiki span {
+  background-color: var(--shiki-dark-bg, inherit) !important;
+  color: var(--shiki-dark, inherit) !important;
+}
+
 .precise-age {
   font-family: monospace;
   display: inline-block;

@@ -7,23 +7,52 @@ import type {
   PostsListResponse,
   TagsListResponse,
 } from "@usemarble/sdk/models";
+import type { GetV1PostsStatus } from "@usemarble/sdk/models/operations";
+import { unstable_noStore as noStore } from "next/cache";
 import { marble } from "@/lib/marble/client";
 
 interface GetPostsOptions {
   categories?: string[];
   excludeCategories?: string[];
   format?: ContentFormat;
+  status?: GetV1PostsStatus;
+}
+
+function disableDevCache() {
+  if (process.env.NODE_ENV === "development") {
+    noStore();
+  }
+}
+
+function getDevelopmentPostStatus(): GetV1PostsStatus | undefined {
+  return process.env.NODE_ENV === "development" ? "all" : undefined;
+}
+
+function getDevelopmentRequestOptions():
+  | Omit<RequestInit, "body" | "method">
+  | undefined {
+  return process.env.NODE_ENV === "development"
+    ? {
+        cache: "no-store",
+      }
+    : undefined;
 }
 
 export async function getPosts(
   options?: GetPostsOptions
 ): Promise<PostsListResponse | undefined> {
+  disableDevCache();
+
   try {
-    const data = await marble.posts.list({
-      categories: options?.categories,
-      excludeCategories: options?.excludeCategories,
-      format: options?.format,
-    });
+    const data = await marble.posts.list(
+      {
+        categories: options?.categories,
+        excludeCategories: options?.excludeCategories,
+        format: options?.format,
+        status: options?.status ?? getDevelopmentPostStatus(),
+      },
+      getDevelopmentRequestOptions()
+    );
 
     return data.result;
   } catch (error) {
@@ -32,8 +61,13 @@ export async function getPosts(
 }
 
 export async function getTags(): Promise<TagsListResponse | undefined> {
+  disableDevCache();
+
   try {
-    const data = await marble.tags.list();
+    const data = await marble.tags.list(
+      undefined,
+      getDevelopmentRequestOptions()
+    );
     return data.result;
   } catch (error) {
     console.error("Error fetching tags:", error);
@@ -43,8 +77,13 @@ export async function getTags(): Promise<TagsListResponse | undefined> {
 export async function getCategories(): Promise<
   CategoriesListResponse | undefined
 > {
+  disableDevCache();
+
   try {
-    const data = await marble.categories.list();
+    const data = await marble.categories.list(
+      undefined,
+      getDevelopmentRequestOptions()
+    );
     return data.result;
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -52,8 +91,13 @@ export async function getCategories(): Promise<
 }
 
 export async function getAuthors(): Promise<AuthorsListResponse | undefined> {
+  disableDevCache();
+
   try {
-    const data = await marble.authors.list();
+    const data = await marble.authors.list(
+      undefined,
+      getDevelopmentRequestOptions()
+    );
     return data.result;
   } catch (error) {
     console.error("Error fetching authors:", error);
@@ -63,12 +107,20 @@ export async function getAuthors(): Promise<AuthorsListResponse | undefined> {
 export async function getSinglePost(
   slug: string
 ): Promise<PostResponse | undefined> {
+  disableDevCache();
+
   if (!slug || slug === "undefined") {
     return undefined;
   }
 
   try {
-    const data = await marble.posts.get({ identifier: slug });
+    const data = await marble.posts.get(
+      {
+        identifier: slug,
+        status: getDevelopmentPostStatus(),
+      },
+      getDevelopmentRequestOptions()
+    );
     return data;
   } catch (error) {
     console.error("Error fetching single post:", error);
@@ -126,15 +178,21 @@ export async function getBlogPostBySlug(
 export async function getBlogPostMarkdown(
   slug: string
 ): Promise<string | undefined> {
+  disableDevCache();
+
   if (!slug || slug === "undefined") {
     return undefined;
   }
 
   try {
-    const data = await marble.posts.get({
-      identifier: slug,
-      format: "markdown",
-    });
+    const data = await marble.posts.get(
+      {
+        identifier: slug,
+        format: "markdown",
+        status: getDevelopmentPostStatus(),
+      },
+      getDevelopmentRequestOptions()
+    );
     return data.post?.content;
   } catch (error) {
     console.error("Error fetching post markdown:", error);

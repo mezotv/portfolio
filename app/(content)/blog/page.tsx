@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { BlogPostItem } from "@/components/sections/blog-post-item";
 import { getBlogPosts, getExternalPosts } from "@/lib/marble/queries";
 
@@ -8,7 +9,13 @@ export const metadata: Metadata = {
     "Thoughts on web development, design systems, and modern tooling.",
 };
 
+export const revalidate = 0;
+
 export default async function BlogPage() {
+  if (process.env.NODE_ENV === "development") {
+    await connection();
+  }
+
   const [posts, externalPosts] = await Promise.all([
     getBlogPosts(),
     getExternalPosts(),

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
+import { postComponents } from "@/components/blog/post-components";
 import { Prose } from "@/components/prose";
 import {
   getBlogPostBySlug,
@@ -16,7 +18,13 @@ interface BlogPostPageProps {
   };
 }
 
+export const revalidate = 0;
+
 export async function generateStaticParams() {
+  if (process.env.NODE_ENV === "development") {
+    return [];
+  }
+
   const posts = await getBlogPosts();
 
   return posts.map((post) => ({
@@ -55,6 +63,10 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  if (process.env.NODE_ENV === "development") {
+    await connection();
+  }
+
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
@@ -93,8 +105,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </header>
 
-      <div className="prose prose-sm dark:prose-invert max-w-none">
-        <Prose html={post.content} />
+      <div className="max-w-none">
+        <Prose components={postComponents} html={post.content} />
       </div>
     </article>
   );

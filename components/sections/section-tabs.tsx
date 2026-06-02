@@ -15,26 +15,11 @@ export function SectionTabs() {
     { label: "Blog", href: "/blog", value: "blog" },
   ];
 
-  const currentTab = (() => {
-    if (pathname === "/") {
-      return "about";
-    }
-    if (pathname === "/projects") {
-      return "projects";
-    }
-    if (pathname === "/experience") {
-      return "experience";
-    }
-    if (pathname === "/events") {
-      return "events";
-    }
-    if (pathname.startsWith("/blog")) {
-      return "blog";
-    }
-    return "about";
-  })();
-
   const tabs = getTabs();
+
+  const currentTab =
+    tabs.find((tab) => tab.href !== "/" && pathname.startsWith(tab.href))
+      ?.value ?? "about";
 
   return (
     <Tabs defaultValue={currentTab} value={currentTab}>
