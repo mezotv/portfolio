@@ -4,6 +4,21 @@
   "homepage": "https://dominikkoch.dev",
   "items": [
     {
+      "name": "expandable-tabs",
+      "type": "registry:ui",
+      "title": "Expandable Tabs",
+      "description": "Animated icon tabs with a sliding active pill and an expanding label, built on the shadcn tooltip.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["tooltip"],
+      "files": [
+        {
+          "path": "components/ui/expandable-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/expandable-tabs.tsx"
+        }
+      ]
+    },
+    {
       "name": "braille-loader",
       "type": "registry:ui",
       "title": "Braille Loader",
