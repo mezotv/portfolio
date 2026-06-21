@@ -17,6 +17,17 @@ const handler = createLlmsTxtHandler({
         { title: "Tech Stack", href: `${SITE_URL}/tools` },
       ],
     },
+    {
+      title: "dominik-ui",
+      links: [
+        { title: "Registry Overview", href: `${SITE_URL}/ui` },
+        {
+          title: "Expandable Tabs",
+          href: `${SITE_URL}/ui/docs/expandable-tabs`,
+        },
+        { title: "Braille Loader", href: `${SITE_URL}/ui/docs/braille-loader` },
+      ],
+    },
   ],
 });
 

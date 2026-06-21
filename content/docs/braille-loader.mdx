@@ -1,0 +1,66 @@
+---
+title: Braille Loader
+description: An animated braille loading indicator with wave, typewriter, shimmer, and pulse variants.
+---
+
+## Preview
+
+<div className="grid gap-3 sm:grid-cols-2">
+  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+    <span className="font-mono text-fd-muted-foreground text-xs">Wave</span>
+    <BrailleLoader className="text-lg" text="dominik" variant="wave" />
+  </div>
+  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+    <span className="font-mono text-fd-muted-foreground text-xs">Typewriter</span>
+    <BrailleLoader className="text-lg" text="dominik" variant="typewriter" />
+  </div>
+  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+    <span className="font-mono text-fd-muted-foreground text-xs">Shimmer</span>
+    <BrailleLoader className="text-lg" text="dominik" variant="shimmer" />
+  </div>
+  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+    <span className="font-mono text-fd-muted-foreground text-xs">Pulse</span>
+    <BrailleLoader className="text-lg" text="dominik" variant="pulse" />
+  </div>
+</div>
+
+## Installation
+
+```bash
+npx shadcn@latest add @dominik-ui/braille-loader
+```
+
+This installs the component plus its `text-to-braille` helper into your `lib`
+folder.
+
+## Usage
+
+```tsx
+import { BrailleLoader } from "@/components/ui/braille-loader";
+
+export function Example() {
+  return <BrailleLoader text="loading" variant="wave" />;
+}
+```
+
+Each character of the text is converted to its braille equivalent and animated
+on a staggered loop. The component is purely decorative — it renders with
+`aria-hidden`, so pair it with visible or screen-reader-only status text when it
+communicates loading state.
+
+## Variants
+
+| Variant      | Motion                                                        |
+| ------------ | ------------------------------------------------------------- |
+| `wave`       | A pulse of opacity travels across the characters left to right. |
+| `typewriter` | Characters fade in and out in sequence, like typing.          |
+| `shimmer`    | A softer wave that settles back through a mid-opacity step.    |
+| `pulse`      | Every character breathes in and out together.                  |
+
+## Props
+
+| Prop        | Type                                              | Default  | Description                              |
+| ----------- | ------------------------------------------------- | -------- | ---------------------------------------- |
+| `text`      | `string`                                          | —        | Text converted to braille and animated.  |
+| `variant`   | `"wave" \| "typewriter" \| "shimmer" \| "pulse"` | `"wave"` | Animation style.                         |
+| `className` | `string`                                          | —        | Extra classes for the wrapper.           |

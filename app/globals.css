@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+@source "../node_modules/fumadocs-ui/dist/**/*.js";
 
 @plugin "@tailwindcss/typography";
 @plugin "@toolwind/corner-shape";
@@ -170,4 +174,43 @@
   font-family: monospace;
   display: inline-block;
   min-width: 12ch;
+}
+
+#nd-page .prose {
+  max-width: none;
+  --tw-prose-body: var(--color-fd-foreground);
+  --tw-prose-headings: var(--color-fd-foreground);
+  --tw-prose-lead: var(--color-fd-muted-foreground);
+  --tw-prose-links: var(--color-fd-primary);
+  --tw-prose-bold: var(--color-fd-foreground);
+  --tw-prose-counters: var(--color-fd-muted-foreground);
+  --tw-prose-bullets: var(--color-fd-muted-foreground);
+  --tw-prose-hr: var(--color-fd-border);
+  --tw-prose-quotes: var(--color-fd-foreground);
+  --tw-prose-quote-borders: var(--color-fd-border);
+  --tw-prose-captions: var(--color-fd-muted-foreground);
+  --tw-prose-code: var(--color-fd-foreground);
+  --tw-prose-pre-code: var(--color-fd-foreground);
+  --tw-prose-pre-bg: var(--color-fd-secondary);
+  --tw-prose-th-borders: var(--color-fd-border);
+  --tw-prose-td-borders: var(--color-fd-border);
+}
+
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6) a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+#nd-page .prose a:not(:is(h1, h2, h3, h4, h5, h6) a) {
+  text-decoration: none;
+}
+
+#nd-page .prose a:not(:is(h1, h2, h3, h4, h5, h6) a):hover {
+  text-decoration: underline;
+}
+
+#nd-page .prose code::before,
+#nd-page .prose code::after {
+  content: none;
 }

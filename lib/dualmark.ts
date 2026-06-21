@@ -79,5 +79,46 @@ Tools, libraries, and technologies I use and recommend.
 
 See the HTML page for the current tool list: ${SITE_URL}/tools`,
     },
+    {
+      pattern: "/ui",
+      render: () => `# dominik-ui
+
+Reusable, shadcn-compatible React components served from the dominik-ui registry. Install them with the shadcn CLI:
+
+\`\`\`bash
+npx shadcn@latest add @dominik-ui/<component>
+\`\`\`
+
+## Components
+
+- [Expandable Tabs](${SITE_URL}/ui/docs/expandable-tabs) — animated icon tabs with a sliding active pill and an expanding label.
+- [Braille Loader](${SITE_URL}/ui/docs/braille-loader) — an animated braille loading indicator with wave, typewriter, shimmer, and pulse variants.
+
+See the full docs: ${SITE_URL}/ui/docs`,
+    },
+    {
+      pattern: "/ui/docs/expandable-tabs",
+      render: () => `# Expandable Tabs
+
+Animated icon tabs with a sliding active pill and an expanding label, built on the shadcn tooltip and motion.
+
+\`\`\`bash
+npx shadcn@latest add @dominik-ui/expandable-tabs
+\`\`\`
+
+See the HTML page for live previews, usage, and the full props reference: ${SITE_URL}/ui/docs/expandable-tabs`,
+    },
+    {
+      pattern: "/ui/docs/braille-loader",
+      render: () => `# Braille Loader
+
+An animated braille loading indicator with wave, typewriter, shimmer, and pulse variants.
+
+\`\`\`bash
+npx shadcn@latest add @dominik-ui/braille-loader
+\`\`\`
+
+See the HTML page for live previews, usage, and the full props reference: ${SITE_URL}/ui/docs/braille-loader`,
+    },
   ],
 };

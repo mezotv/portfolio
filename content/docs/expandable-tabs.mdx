@@ -1,0 +1,87 @@
+---
+title: Expandable Tabs
+description: Animated icon tabs with a sliding active pill and an expanding label, built on the shadcn tooltip and motion.
+---
+
+## Preview
+
+<div className="rounded-xl border bg-fd-card p-6">
+  <ExpandableTabs
+    label="Choose your client"
+    items={[
+      { value: "react", label: "React", icon: <span className="text-lg">⚛️</span> },
+      { value: "next", label: "Next.js", icon: <span className="text-lg">▲</span> },
+      { value: "bun", label: "Bun", icon: <span className="text-lg">🥟</span> },
+      { value: "tailwind", label: "Tailwind", icon: <span className="text-lg">🌬️</span> },
+    ]}
+  />
+</div>
+
+## Installation
+
+```bash
+npx shadcn@latest add @dominik-ui/expandable-tabs
+```
+
+This pulls in the `tooltip` component and the `motion` dependency automatically.
+
+## Usage
+
+```tsx
+import { ExpandableTabs } from "@/components/ui/expandable-tabs";
+
+const items = [
+  { value: "react", label: "React", icon: <ReactIcon /> },
+  { value: "next", label: "Next.js", icon: <NextIcon /> },
+];
+
+export function Example() {
+  return <ExpandableTabs items={items} label="Choose your client" />;
+}
+```
+
+Only the active tab reveals its label; the rest collapse to their icon. Hovering
+a collapsed tab shows its label in a tooltip.
+
+## Controlled vs uncontrolled
+
+By default the component manages its own selection (`defaultValue` sets the
+initial tab). Pass `value` and `onValueChange` to control it yourself:
+
+```tsx
+const [tab, setTab] = useState("react");
+
+<ExpandableTabs items={items} onValueChange={setTab} value={tab} />;
+```
+
+## Links
+
+Give an item an `href` and it renders as an anchor with `aria-current` instead
+of a button — handy for navigation rails:
+
+```tsx
+const items = [
+  { value: "home", label: "Home", icon: <HomeIcon />, href: "/" },
+  { value: "docs", label: "Docs", icon: <DocsIcon />, href: "/docs" },
+];
+```
+
+## Props
+
+| Prop            | Type                      | Default            | Description                                              |
+| --------------- | ------------------------- | ------------------ | -------------------------------------------------------- |
+| `items`         | `ExpandableTabsItem[]`    | —                  | The tabs to render.                                      |
+| `value`         | `string`                  | —                  | Controlled active value.                                 |
+| `defaultValue`  | `string`                  | first item         | Initial active value when uncontrolled.                  |
+| `onValueChange` | `(value: string) => void` | —                  | Called when the active tab changes.                      |
+| `label`         | `string`                  | `"Choose an option"` | Accessible label for the tab group.                    |
+| `className`     | `string`                  | —                  | Extra classes for the tab container.                     |
+
+### `ExpandableTabsItem`
+
+| Field   | Type        | Description                                          |
+| ------- | ----------- | ---------------------------------------------------- |
+| `value` | `string`    | Unique identifier for the tab.                       |
+| `label` | `string`    | Text shown when active and in the tooltip.           |
+| `icon`  | `ReactNode` | Icon rendered in both collapsed and active states.   |
+| `href`  | `string?`   | When set, the tab renders as a link instead of a button. |

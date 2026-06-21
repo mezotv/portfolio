@@ -1,6 +1,9 @@
 import { withDualmark } from "@dualmark/nextjs";
+import { createMDX } from "fumadocs-mdx/next";
 import type { NextConfig } from "next";
 import { SITE_URL } from "./lib/constants";
+
+const withMDX = createMDX();
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
@@ -20,6 +23,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withDualmark(nextConfig, {
-  siteUrl: SITE_URL,
-});
+export default withMDX(
+  withDualmark(nextConfig, {
+    siteUrl: SITE_URL,
+  })
+);
