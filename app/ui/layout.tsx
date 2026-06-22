@@ -34,6 +34,7 @@ export default function DocsRootLayout({ children }: { children: ReactNode }) {
             </div>
           ),
         }}
+        themeSwitch={{ enabled: false }}
         tree={source.pageTree}
         {...baseOptions}
       >
