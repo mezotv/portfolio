@@ -17,7 +17,7 @@ export const baseOptions: BaseLayoutProps = {
     },
     {
       text: "GitHub",
-      url: "https://github.com/mezotv",
+      url: "https://github.com/mezotv/portfolio",
       external: true,
     },
   ],

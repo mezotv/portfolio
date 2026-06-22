@@ -33,9 +33,7 @@ export default function UiLandingPage() {
       <section className="flex flex-col gap-3">
         <h1 className="font-bold text-3xl tracking-tight">dominik-ui</h1>
         <p className="text-fd-muted-foreground">
-          Reusable, shadcn-compatible components served from{" "}
-          <span className="font-mono">dominikkoch.dev/r</span>. Install them
-          with the shadcn CLI — you own the code, no runtime dependency.
+          Opinionated components for building modern AI apps.
         </p>
         <Link
           className="group mt-1 flex w-fit items-center gap-2 font-medium text-fd-foreground text-sm transition-colors hover:text-fd-muted-foreground"
