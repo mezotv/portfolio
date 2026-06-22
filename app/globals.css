@@ -190,6 +190,10 @@
   min-width: 12ch;
 }
 
+#nd-docs-layout {
+  background-color: var(--color-fd-background);
+}
+
 #nd-page .prose {
   max-width: none;
   --tw-prose-body: var(--color-fd-foreground);
