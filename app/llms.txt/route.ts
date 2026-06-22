@@ -23,9 +23,9 @@ const handler = createLlmsTxtHandler({
         { title: "Registry Overview", href: `${SITE_URL}/ui` },
         {
           title: "Expandable Tabs",
-          href: `${SITE_URL}/ui/docs/expandable-tabs`,
+          href: `${SITE_URL}/ui/expandable-tabs`,
         },
-        { title: "Braille Loader", href: `${SITE_URL}/ui/docs/braille-loader` },
+        { title: "Braille Loader", href: `${SITE_URL}/ui/braille-loader` },
       ],
     },
   ],

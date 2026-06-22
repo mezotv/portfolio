@@ -10,15 +10,5 @@ export const baseOptions: BaseLayoutProps = {
       text: "Portfolio",
       url: "/",
     },
-    {
-      text: "Docs",
-      url: "/ui/docs",
-      active: "nested-url",
-    },
-    {
-      text: "GitHub",
-      url: "https://github.com/mezotv/portfolio",
-      external: true,
-    },
   ],
 };

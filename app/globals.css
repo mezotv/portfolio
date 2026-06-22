@@ -145,6 +145,20 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+:root {
+  --color-fd-background: var(--color-zinc-50);
+  --color-fd-foreground: var(--color-zinc-900);
+  --sidebar: var(--color-zinc-50);
+  --sidebar-foreground: var(--color-zinc-900);
+}
+
+.dark {
+  --color-fd-background: var(--color-zinc-900);
+  --color-fd-foreground: var(--color-zinc-100);
+  --sidebar: var(--color-zinc-900);
+  --sidebar-foreground: var(--color-zinc-100);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
