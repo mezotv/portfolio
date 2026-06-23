@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { textToBraille } from "@/lib/text-to-braille";
+import { getBrailleCharacters } from "@/lib/text-to-braille";
 import { cn } from "@/lib/utils";
 
 interface BrailleLoaderProps {
@@ -61,7 +61,7 @@ export function BrailleLoader({
   className,
   variant = "wave",
 }: BrailleLoaderProps) {
-  const chars = [...textToBraille(text)];
+  const chars = getBrailleCharacters(text);
 
   return (
     <span
@@ -69,9 +69,8 @@ export function BrailleLoader({
       className={cn("inline-flex font-mono text-muted-foreground", className)}
     >
       <style>{variantStyles[variant]}</style>
-      {chars.map((char, i) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: The loader renders a fixed stateless character sequence.
-        <span key={i} style={getAnimation(variant, i, chars.length)}>
+      {chars.map(({ char, key }, i) => (
+        <span key={key} style={getAnimation(variant, i, chars.length)}>
           {char === " " ? "\u00A0" : char}
         </span>
       ))}

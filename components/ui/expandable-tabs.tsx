@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, domMax, LazyMotion, m } from "motion/react";
 import { type ReactNode, useId, useState } from "react";
 import {
   Tooltip,
@@ -46,7 +46,7 @@ function ExpandableTab({
   const content = (
     <>
       {isActive && (
-        <motion.span
+        <m.span
           className="absolute inset-0 rounded-xl bg-background shadow-sm ring-1 ring-border"
           layoutId={layoutId}
           transition={SPRING}
@@ -56,7 +56,7 @@ function ExpandableTab({
         {item.icon}
         <AnimatePresence initial={false}>
           {isActive && (
-            <motion.span
+            <m.span
               animate={{ width: "auto", opacity: 1 }}
               className="overflow-hidden whitespace-nowrap font-medium text-foreground text-sm"
               exit={{ width: 0, opacity: 0 }}
@@ -64,7 +64,7 @@ function ExpandableTab({
               transition={SPRING}
             >
               <span className="block pr-1 pl-2">{item.label}</span>
-            </motion.span>
+            </m.span>
           )}
         </AnimatePresence>
       </span>
@@ -121,25 +121,25 @@ export function ExpandableTabs({
 
   return (
     <div className="flex justify-center">
-      {/* biome-ignore lint/a11y/useSemanticElements: A fieldset's min-width prevents the horizontal overflow scrolling this group needs. */}
-      <div
-        aria-label={label}
-        className={cn(
-          "flex max-w-full items-center gap-1.5 overflow-x-auto overscroll-none rounded-2xl border bg-muted/50 p-1.5 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:overflow-visible [&::-webkit-scrollbar]:hidden",
-          className
-        )}
-        role="group"
-      >
-        {items.map((item) => (
-          <ExpandableTab
-            isActive={item.value === activeValue}
-            item={item}
-            key={item.value}
-            layoutId={layoutId}
-            onSelect={handleSelect}
-          />
-        ))}
-      </div>
+      <LazyMotion features={domMax}>
+        <menu
+          aria-label={label}
+          className={cn(
+            "m-0 flex max-w-full list-none items-center gap-1.5 overflow-x-auto overscroll-none rounded-2xl border bg-muted/50 p-1.5 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:overflow-visible [&::-webkit-scrollbar]:hidden",
+            className
+          )}
+        >
+          {items.map((item) => (
+            <ExpandableTab
+              isActive={item.value === activeValue}
+              item={item}
+              key={item.value}
+              layoutId={layoutId}
+              onSelect={handleSelect}
+            />
+          ))}
+        </menu>
+      </LazyMotion>
     </div>
   );
 }

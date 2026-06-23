@@ -42,3 +42,17 @@ export function textToBraille(text: string): string {
     })
     .join("");
 }
+
+export function getBrailleCharacters(text: string) {
+  const seen = new Map<string, number>();
+
+  return [...textToBraille(text)].map((char) => {
+    const occurrence = seen.get(char) ?? 0;
+    seen.set(char, occurrence + 1);
+
+    return {
+      char,
+      key: `${char}-${occurrence}`,
+    };
+  });
+}
