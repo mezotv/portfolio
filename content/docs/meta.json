@@ -1,4 +1,4 @@
 {
   "title": "dominik-ui",
-  "pages": ["index", "expandable-tabs", "braille-loader"]
+  "pages": ["index", "expandable-tabs", "permission-selector", "braille-loader"]
 }

@@ -5,17 +5,39 @@ description: Animated icon tabs with a sliding active pill and an expanding labe
 
 ## Preview
 
-<div className="rounded-xl border bg-fd-card p-6">
-  <ExpandableTabs
-    label="Choose your client"
-    items={[
-      { value: "react", label: "React", icon: <span className="text-lg">⚛️</span> },
-      { value: "next", label: "Next.js", icon: <span className="text-lg">▲</span> },
-      { value: "bun", label: "Bun", icon: <span className="text-lg">🥟</span> },
-      { value: "tailwind", label: "Tailwind", icon: <span className="text-lg">🌬️</span> },
-    ]}
-  />
-</div>
+<ComponentPreview
+  preview={
+    <ExpandableTabs
+      label="Choose your client"
+      items={[
+        { value: "react", label: "React", icon: <span className="text-lg">⚛️</span> },
+        { value: "next", label: "Next.js", icon: <span className="text-lg">▲</span> },
+        { value: "bun", label: "Bun", icon: <span className="text-lg">🥟</span> },
+        { value: "tailwind", label: "Tailwind", icon: <span className="text-lg">🌬️</span> },
+      ]}
+    />
+  }
+>
+
+```tsx
+import { ExpandableTabs } from "@/components/ui/expandable-tabs";
+
+export function Example() {
+  return (
+    <ExpandableTabs
+      label="Choose your client"
+      items={[
+        { value: "react", label: "React", icon: <ReactIcon /> },
+        { value: "next", label: "Next.js", icon: <NextIcon /> },
+        { value: "bun", label: "Bun", icon: <BunIcon /> },
+        { value: "tailwind", label: "Tailwind", icon: <TailwindIcon /> },
+      ]}
+    />
+  );
+}
+```
+
+</ComponentPreview>
 
 ## Installation
 

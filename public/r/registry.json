@@ -19,6 +19,20 @@
       ]
     },
     {
+      "name": "permission-selector",
+      "type": "registry:ui",
+      "title": "Permission Selector",
+      "description": "A composable segmented permission control with an animated sliding pill — read/write levels and deny/neutral/allow toggles.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "components/ui/permission-selector.tsx",
+          "type": "registry:ui",
+          "target": "@ui/permission-selector.tsx"
+        }
+      ]
+    },
+    {
       "name": "braille-loader",
       "type": "registry:ui",
       "title": "Braille Loader",

@@ -214,6 +214,18 @@
   --tw-prose-td-borders: var(--color-fd-border);
 }
 
+#nd-page .prose :is(thead, tbody, tfoot) tr {
+  border: 0;
+}
+
+#nd-page .prose :is(th, td):first-child {
+  padding-inline-start: 0.875rem;
+}
+
+#nd-page .prose :is(th, td):last-child {
+  padding-inline-end: 0.875rem;
+}
+
 #nd-page .prose :is(h1, h2, h3, h4, h5, h6) a {
   color: inherit;
   font-weight: inherit;

@@ -5,24 +5,45 @@ description: An animated braille loading indicator with wave, typewriter, shimme
 
 ## Preview
 
-<div className="grid gap-3 sm:grid-cols-2">
-  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
-    <span className="font-mono text-fd-muted-foreground text-xs">Wave</span>
-    <BrailleLoader className="text-lg" text="dominik" variant="wave" />
-  </div>
-  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
-    <span className="font-mono text-fd-muted-foreground text-xs">Typewriter</span>
-    <BrailleLoader className="text-lg" text="dominik" variant="typewriter" />
-  </div>
-  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
-    <span className="font-mono text-fd-muted-foreground text-xs">Shimmer</span>
-    <BrailleLoader className="text-lg" text="dominik" variant="shimmer" />
-  </div>
-  <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
-    <span className="font-mono text-fd-muted-foreground text-xs">Pulse</span>
-    <BrailleLoader className="text-lg" text="dominik" variant="pulse" />
-  </div>
-</div>
+<ComponentPreview
+  preview={
+    <div className="grid w-full gap-3 sm:grid-cols-2">
+      <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+        <span className="font-mono text-fd-muted-foreground text-xs">Wave</span>
+        <BrailleLoader className="text-lg" text="dominik" variant="wave" />
+      </div>
+      <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+        <span className="font-mono text-fd-muted-foreground text-xs">Typewriter</span>
+        <BrailleLoader className="text-lg" text="dominik" variant="typewriter" />
+      </div>
+      <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+        <span className="font-mono text-fd-muted-foreground text-xs">Shimmer</span>
+        <BrailleLoader className="text-lg" text="dominik" variant="shimmer" />
+      </div>
+      <div className="flex flex-col gap-3 rounded-xl border bg-fd-card p-5">
+        <span className="font-mono text-fd-muted-foreground text-xs">Pulse</span>
+        <BrailleLoader className="text-lg" text="dominik" variant="pulse" />
+      </div>
+    </div>
+  }
+>
+
+```tsx
+import { BrailleLoader } from "@/components/ui/braille-loader";
+
+export function Loaders() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <BrailleLoader text="dominik" variant="wave" />
+      <BrailleLoader text="dominik" variant="typewriter" />
+      <BrailleLoader text="dominik" variant="shimmer" />
+      <BrailleLoader text="dominik" variant="pulse" />
+    </div>
+  );
+}
+```
+
+</ComponentPreview>
 
 ## Installation
 

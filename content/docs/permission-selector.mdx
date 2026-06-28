@@ -1,0 +1,296 @@
+---
+title: Permission Selector
+description: A composable segmented permission control with an animated sliding pill — Stripe-style read/write levels and Discord-style deny/neutral/allow toggles.
+---
+
+## Preview
+
+Each `PermissionRow` is an independent segmented control. Compose any set of
+`PermissionOption` levels inside it — the active pill slides between them with a
+spring.
+
+<ComponentPreview
+  preview={
+    <PermissionSelector label="Repository access">
+      <PermissionRow label="Account Evaluations" description="Run risk evaluations" defaultValue="none">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="write">Write</PermissionOption>
+      </PermissionRow>
+      <PermissionRow label="Apple Pay Domains" description="Manage registered domains" defaultValue="read">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="read">Read</PermissionOption>
+        <PermissionOption value="write">Write</PermissionOption>
+      </PermissionRow>
+      <PermissionRow label="Balance" description="View account balance" defaultValue="read">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="read">Read</PermissionOption>
+      </PermissionRow>
+    </PermissionSelector>
+  }
+>
+
+```tsx
+import {
+  PermissionSelector,
+  PermissionRow,
+  PermissionOption,
+} from "@/components/ui/permission-selector";
+
+export function RepositoryAccess() {
+  return (
+    <PermissionSelector label="Repository access">
+      <PermissionRow label="Account Evaluations" defaultValue="none">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="write">Write</PermissionOption>
+      </PermissionRow>
+      <PermissionRow label="Apple Pay Domains" defaultValue="read">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="read">Read</PermissionOption>
+        <PermissionOption value="write">Write</PermissionOption>
+      </PermissionRow>
+      <PermissionRow label="Balance" defaultValue="read">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="read">Read</PermissionOption>
+      </PermissionRow>
+    </PermissionSelector>
+  );
+}
+```
+
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add @dominik-ui/permission-selector
+```
+
+This pulls in the `motion` dependency automatically.
+
+## Usage
+
+Three composable parts:
+
+- **`PermissionSelector`** — the bordered, divided container (a list of rows).
+- **`PermissionRow`** — one resource. Owns its selection and the animated pill.
+- **`PermissionOption`** — one selectable level inside a row.
+
+```tsx
+import {
+  PermissionSelector,
+  PermissionRow,
+  PermissionOption,
+} from "@/components/ui/permission-selector";
+
+export function Example() {
+  return (
+    <PermissionSelector>
+      <PermissionRow label="Balance" defaultValue="read">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="read">Read</PermissionOption>
+        <PermissionOption value="write">Write</PermissionOption>
+      </PermissionRow>
+    </PermissionSelector>
+  );
+}
+```
+
+Because each row declares its own options, you can give every resource a
+**different** set of levels — `None / Read / Write` on one row, just `None / Read`
+on the next.
+
+## Icon toggles with tones
+
+Pass `tone="danger" | "success" | "warning"` to color a level's active pill and
+glyph. For icon-only options, add an `aria-label`. This recreates a
+Discord-style deny / neutral / allow switch:
+
+<ComponentPreview
+  preview={
+    <PermissionSelector label="Channel permissions">
+      <PermissionRow label="View Channel" description="Members can see this channel by default." defaultValue="allow">
+        <PermissionOption value="deny" tone="danger" aria-label="Deny"><span>✕</span></PermissionOption>
+        <PermissionOption value="inherit" aria-label="Inherit"><span>╱</span></PermissionOption>
+        <PermissionOption value="allow" tone="success" aria-label="Allow"><span>✓</span></PermissionOption>
+      </PermissionRow>
+      <PermissionRow label="Manage Channel" description="Members can rename and delete this channel." defaultValue="inherit">
+        <PermissionOption value="deny" tone="danger" aria-label="Deny"><span>✕</span></PermissionOption>
+        <PermissionOption value="inherit" aria-label="Inherit"><span>╱</span></PermissionOption>
+        <PermissionOption value="allow" tone="success" aria-label="Allow"><span>✓</span></PermissionOption>
+      </PermissionRow>
+    </PermissionSelector>
+  }
+>
+
+```tsx
+<PermissionRow label="View Channel" defaultValue="allow">
+  <PermissionOption value="deny" tone="danger" aria-label="Deny">
+    <XIcon />
+  </PermissionOption>
+  <PermissionOption value="inherit" aria-label="Inherit">
+    <SlashIcon />
+  </PermissionOption>
+  <PermissionOption value="allow" tone="success" aria-label="Allow">
+    <CheckIcon />
+  </PermissionOption>
+</PermissionRow>
+```
+
+</ComponentPreview>
+
+## A single level
+
+A row needs at least one option but no more. Drop in a lone `Write` toggle for a
+simple consent row:
+
+<ComponentPreview
+  preview={
+    <PermissionSelector label="Write access">
+      <PermissionRow label="Allow writes" description="Let this integration modify your data.">
+        <PermissionOption value="none">None</PermissionOption>
+        <PermissionOption value="write" tone="warning">Write</PermissionOption>
+      </PermissionRow>
+    </PermissionSelector>
+  }
+>
+
+```tsx
+<PermissionSelector label="Write access">
+  <PermissionRow label="Allow writes" description="Let this integration modify your data.">
+    <PermissionOption value="none">None</PermissionOption>
+    <PermissionOption value="write" tone="warning">
+      Write
+    </PermissionOption>
+  </PermissionRow>
+</PermissionSelector>
+```
+
+</ComponentPreview>
+
+## Standalone row
+
+`PermissionRow` works without the container — it brings its own motion context:
+
+<ComponentPreview
+  preview={
+    <PermissionRow label="Logs" description="Stream production logs" defaultValue="read">
+      <PermissionOption value="none">None</PermissionOption>
+      <PermissionOption value="read">Read</PermissionOption>
+    </PermissionRow>
+  }
+>
+
+```tsx
+<PermissionRow label="Logs" defaultValue="read">
+  <PermissionOption value="none">None</PermissionOption>
+  <PermissionOption value="read">Read</PermissionOption>
+</PermissionRow>
+```
+
+</ComponentPreview>
+
+## Controlled vs uncontrolled
+
+By default each row manages its own selection (`defaultValue` seeds it). Pass
+`value` and `onValueChange` to control a row yourself:
+
+```tsx
+const [level, setLevel] = useState("read");
+
+<PermissionRow label="Balance" onValueChange={setLevel} value={level}>
+  <PermissionOption value="none">None</PermissionOption>
+  <PermissionOption value="read">Read</PermissionOption>
+  <PermissionOption value="write">Write</PermissionOption>
+</PermissionRow>;
+```
+
+## With TanStack Form
+
+Each row is a controlled input — bind `value` and `onValueChange` to a
+[TanStack Form](https://tanstack.com/form) field and the selected level lives in
+your form state. Submit to see the collected values:
+
+<ComponentPreview preview={<PermissionFormDemo />}>
+
+```tsx
+import { useForm } from "@tanstack/react-form";
+import {
+  PermissionSelector,
+  PermissionRow,
+  PermissionOption,
+} from "@/components/ui/permission-selector";
+
+type Level = "none" | "read" | "write";
+
+export function PermissionForm() {
+  const form = useForm({
+    defaultValues: { balance: "read" as Level, customers: "none" as Level },
+    onSubmit: ({ value }) => console.log(value),
+  });
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        form.handleSubmit();
+      }}
+    >
+      <PermissionSelector label="API key permissions">
+        <form.Field name="customers">
+          {(field) => (
+            <PermissionRow
+              label="Customers"
+              value={field.state.value}
+              onValueChange={(v) => field.handleChange(v as Level)}
+            >
+              <PermissionOption value="none">None</PermissionOption>
+              <PermissionOption value="read">Read</PermissionOption>
+              <PermissionOption value="write">Write</PermissionOption>
+            </PermissionRow>
+          )}
+        </form.Field>
+      </PermissionSelector>
+
+      <button type="submit">Save permissions</button>
+    </form>
+  );
+}
+```
+
+</ComponentPreview>
+
+Because `PermissionRow` accepts the standard `value` / `onValueChange` pair, the
+same wiring works with React Hook Form, Formik, or plain `useState`.
+
+## Props
+
+### `PermissionSelector`
+
+| Prop        | Type        | Default         | Description                              |
+| ----------- | ----------- | --------------- | ---------------------------------------- |
+| `label`     | `string`    | `"Permissions"` | Accessible label for the group.          |
+| `className` | `string`    | —               | Extra classes for the container.         |
+| `children`  | `ReactNode` | —               | One or more `PermissionRow` elements.    |
+
+### `PermissionRow`
+
+| Prop            | Type                      | Default | Description                                       |
+| --------------- | ------------------------- | ------- | ------------------------------------------------- |
+| `label`         | `ReactNode`               | —       | Primary label for the resource.                   |
+| `description`   | `ReactNode`               | —       | Optional secondary line under the label.          |
+| `value`         | `string`                  | —       | Controlled selected level.                        |
+| `defaultValue`  | `string`                  | —       | Initial level when uncontrolled (no pill if unset). |
+| `onValueChange` | `(value: string) => void` | —       | Called when the selected level changes.           |
+| `disabled`      | `boolean`                 | `false` | Disables every option in the row.                 |
+| `className`     | `string`                  | —       | Extra classes for the row.                        |
+| `children`      | `ReactNode`               | —       | One or more `PermissionOption` elements.          |
+
+### `PermissionOption`
+
+| Prop         | Type                                            | Default     | Description                                          |
+| ------------ | ----------------------------------------------- | ----------- | ---------------------------------------------------- |
+| `value`      | `string`                                        | —           | Identifier selected when this level is active.       |
+| `tone`       | `"neutral" \| "success" \| "danger" \| "warning"` | `"neutral"` | Color of the active pill and text.                   |
+| `disabled`   | `boolean`                                        | —           | Disables this option only.                           |
+| `aria-label` | `string`                                         | —           | Accessible name for icon-only options.               |
+| `children`   | `ReactNode`                                      | —           | Label text or an icon.                               |

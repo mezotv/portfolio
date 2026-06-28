@@ -16,6 +16,7 @@
     "@dualmark/core": "^0.7.0",
     "@dualmark/nextjs": "^0.7.0",
     "@phosphor-icons/react": "^2.1.10",
+    "@tanstack/react-form": "^1.33.0",
     "@tanstack/react-hotkeys": "^0.10.0",
     "@toolwind/corner-shape": "^0.0.8-3",
     "@types/mdx": "^2.0.14",
