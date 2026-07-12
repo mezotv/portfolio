@@ -134,7 +134,7 @@ function ProjectSection({
 
             <div className="flex grow flex-col">
               <div className="flex flex-col">
-                <div className="mb-1 flex items-center gap-2">
+                <div className="mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                   <h2 className="font-semibold text-lg">{project.name}</h2>
                   <StatusBadge status={project.status} />
                 </div>

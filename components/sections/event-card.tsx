@@ -14,7 +14,7 @@ export function EventCard({
 }) {
   return (
     <a
-      className="-mx-2 flex cursor-pointer flex-col gap-3 rounded-md p-2 transition-colors hover:bg-muted/50"
+      className="-mx-2 flex cursor-pointer flex-col gap-3 rounded-[calc(var(--radius-md)+8px)] p-2 transition-colors hover:bg-muted/50"
       href={`https://lu.ma/event/${event.lumaEventId}?utm_source=dominikkoch.dev`}
       rel="noopener noreferrer"
       target="_blank"
@@ -33,8 +33,8 @@ export function EventCard({
             {event.name.charAt(0)}
           </div>
         )}
-        <div className="flex min-w-0 flex-1 flex-col">
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <h3 className="font-medium">{event.name}</h3>
             {isEventPast(event) && (
               <span
@@ -44,10 +44,12 @@ export function EventCard({
               </span>
             )}
           </div>
-          <p className="text-muted-foreground text-sm">
-            {event.date} &middot; {event.time}
-          </p>
-          <p className="text-muted-foreground text-sm">{event.location}</p>
+          <div>
+            <p className="text-muted-foreground text-sm">
+              {event.date} &middot; {event.time}
+            </p>
+            <p className="text-muted-foreground text-sm">{event.location}</p>
+          </div>
         </div>
       </div>
       <p

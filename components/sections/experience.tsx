@@ -100,8 +100,8 @@ function PositionCard({
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex flex-wrap items-center">
-        <h4 className="mr-2 font-semibold text-base">{position.role}</h4>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <h4 className="font-semibold text-base">{position.role}</h4>
         <span className="text-muted-foreground text-sm">{position.type}</span>
       </div>
       <div className="text-muted-foreground text-sm">
