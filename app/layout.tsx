@@ -38,7 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={dmSans.variable} lang="en" suppressHydrationWarning>
+    <html
+      className={`${dmSans.variable} [scrollbar-gutter:stable]`}
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
