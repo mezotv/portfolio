@@ -132,8 +132,8 @@ function SkillsList({ skills }: { skills: { name: string }[] }) {
         <>
           <span> </span>
           <Tooltip>
-            <TooltipTrigger>
-              <span className="cursor-help underline decoration-dotted underline-offset-2">
+            <TooltipTrigger className="group relative cursor-help before:absolute before:-inset-x-1.5 before:-inset-y-2 before:content-['']">
+              <span className="underline decoration-dotted underline-offset-2 transition-colors group-hover:text-primary group-hover:decoration-solid">
                 {`and +${remainingCount} skill${remainingCount !== 1 ? "s" : ""}`}
               </span>
             </TooltipTrigger>
