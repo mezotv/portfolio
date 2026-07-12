@@ -30,7 +30,7 @@ export function CodeBlock({ code, html, className }: CodeBlockProps) {
       <button
         aria-label={copied ? "Copied code" : "Copy code"}
         className={cn(
-          "absolute top-2 right-2 z-10 inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/60 bg-background/90 px-2 py-1 font-medium text-muted-foreground text-xs opacity-0 shadow-sm backdrop-blur transition",
+          "absolute top-2 right-2 z-10 inline-flex cursor-pointer items-center gap-1.5 rounded-[calc(var(--radius-xl)-8px)] border border-border/60 bg-background/90 px-2 py-1 font-medium text-muted-foreground text-xs opacity-0 shadow-sm backdrop-blur transition",
           "hover:text-foreground focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 group-hover/code:opacity-100"
         )}
         onClick={handleCopy}

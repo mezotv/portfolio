@@ -42,7 +42,7 @@ function ProjectPreview() {
 
           return (
             <a
-              className="group -mx-2 flex items-start gap-3 rounded-md p-2 transition-colors hover:bg-muted/50"
+              className="group -mx-2 flex items-start gap-3 rounded-[calc(var(--radius-md)+8px)] p-2 transition-colors hover:bg-muted/50"
               href={href}
               key={project.name}
               rel="noopener noreferrer"

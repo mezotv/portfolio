@@ -41,13 +41,13 @@ function ExpandableTab({
   onSelect,
 }: ExpandableTabProps) {
   const tabClassName =
-    "relative flex shrink-0 cursor-pointer items-center rounded-xl p-2 outline-none transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-ring";
+    "relative flex shrink-0 cursor-pointer items-center rounded-[calc(var(--radius-2xl)-6px)] p-2 outline-none transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-ring";
 
   const content = (
     <>
       {isActive && (
         <m.span
-          className="absolute inset-0 rounded-xl bg-background shadow-sm ring-1 ring-border"
+          className="absolute inset-0 rounded-[calc(var(--radius-2xl)-6px)] bg-background shadow-sm ring-1 ring-border"
           layoutId={layoutId}
           transition={SPRING}
         />
