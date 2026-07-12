@@ -99,7 +99,7 @@ export function Intro() {
           <LinkedInIcon className="h-5 w-5 transition-all" />
         </a>
         <a
-          className="overflow-hidden text-zinc-900/60 transition-all hover:text-zinc-900 dark:text-zinc-100/60 dark:hover:text-zinc-100"
+          className="overflow-hidden text-zinc-900 opacity-60 transition-all hover:opacity-100 dark:text-zinc-100"
           href="https://brickver.com/@dominik?ref=dominik"
           rel="noopener"
           target="_blank"
