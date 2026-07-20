@@ -20,7 +20,7 @@ export function ComponentPreview({
   return (
     <div
       className={cn(
-        "not-prose my-6 overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm",
+        "not-prose isolate my-6 overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm",
         className
       )}
     >
