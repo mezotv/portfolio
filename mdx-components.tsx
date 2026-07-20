@@ -1,5 +1,6 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
+import { BrailleSpeedDemo } from "@/components/demos/braille-loader-demo";
 import {
   CommandTabsDemo,
   CommandTabsExpandableDemo,
@@ -21,6 +22,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
     BrailleLoader,
+    BrailleSpeedDemo,
     CommandTabs,
     CommandTabsDemo,
     CommandTabsExpandableDemo,

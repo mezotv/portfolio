@@ -45,6 +45,23 @@ export function Loaders() {
 
 </ComponentPreview>
 
+## Speed
+
+The `speed` prop is a multiplier on the animation tempo — `1` is the default,
+`2` runs twice as fast, `0.5` at half speed. Drag the slider to try it.
+
+<ComponentPreview preview={<BrailleSpeedDemo />}>
+
+```tsx
+import { BrailleLoader } from "@/components/ui/braille-loader";
+
+export function FastLoader() {
+  return <BrailleLoader speed={2} text="dominik" variant="wave" />;
+}
+```
+
+</ComponentPreview>
+
 ## Installation
 
 <InstallCommand component="braille-loader" />
@@ -82,4 +99,5 @@ communicates loading state.
 | ----------- | ------------------------------------------------- | -------- | ---------------------------------------- |
 | `text`      | `string`                                          | —        | Text converted to braille and animated.  |
 | `variant`   | `"wave" \| "typewriter" \| "shimmer" \| "pulse"` | `"wave"` | Animation style.                         |
+| `speed`     | `number`                                          | `1`      | Animation speed multiplier — higher is faster. |
 | `className` | `string`                                          | —        | Extra classes for the wrapper.           |

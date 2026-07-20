@@ -6,9 +6,11 @@ interface BrailleLoaderProps {
   text: string;
   className?: string;
   variant?: "wave" | "typewriter" | "shimmer" | "pulse";
+  speed?: number;
 }
 
 const STEP_MS = 120;
+const MIN_SPEED = 0.1;
 
 const variantStyles: Record<
   NonNullable<BrailleLoaderProps["variant"]>,
@@ -40,14 +42,16 @@ const variantStyles: Record<
 function getAnimation(
   variant: NonNullable<BrailleLoaderProps["variant"]>,
   index: number,
-  total: number
+  total: number,
+  speed: number
 ): CSSProperties {
-  const totalDuration = (total + 2) * STEP_MS;
-  const delay = index * STEP_MS;
+  const stepMs = STEP_MS / Math.max(speed, MIN_SPEED);
+  const totalDuration = (total + 2) * stepMs;
+  const delay = index * stepMs;
 
   if (variant === "pulse") {
     return {
-      animation: `braille-pulse ${total * STEP_MS * 1.5}ms ease-in-out ${delay}ms infinite`,
+      animation: `braille-pulse ${total * stepMs * 1.5}ms ease-in-out ${delay}ms infinite`,
     };
   }
 
@@ -60,6 +64,7 @@ export function BrailleLoader({
   text,
   className,
   variant = "wave",
+  speed = 1,
 }: BrailleLoaderProps) {
   const chars = getBrailleCharacters(text);
 
@@ -70,7 +75,7 @@ export function BrailleLoader({
     >
       <style>{variantStyles[variant]}</style>
       {chars.map(({ char, key }, i) => (
-        <span key={key} style={getAnimation(variant, i, chars.length)}>
+        <span key={key} style={getAnimation(variant, i, chars.length, speed)}>
           {char === " " ? "\u00A0" : char}
         </span>
       ))}
