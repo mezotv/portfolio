@@ -8,13 +8,27 @@
       "type": "registry:ui",
       "title": "Expandable Tabs",
       "description": "Animated icon tabs with a sliding active pill and an expanding label, built on the shadcn tooltip.",
-      "dependencies": ["motion"],
       "registryDependencies": ["tooltip"],
       "files": [
         {
           "path": "components/ui/expandable-tabs.tsx",
           "type": "registry:ui",
           "target": "@ui/expandable-tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-tabs",
+      "type": "registry:ui",
+      "title": "Command Tabs",
+      "description": "A copyable command block with attached agent tabs and a sliding active pill — tabs can sit above or below the command.",
+      "dependencies": ["@phosphor-icons/react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "components/ui/command-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/command-tabs.tsx"
         }
       ]
     },

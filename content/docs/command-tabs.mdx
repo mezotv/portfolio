@@ -1,0 +1,201 @@
+---
+title: Command Tabs
+description: A copyable command block with attached agent tabs and a sliding active pill — place the tabs above or below the command.
+---
+
+## Preview
+
+<ComponentPreview preview={<CommandTabsDemo />}>
+
+```tsx
+import { CommandTabs } from "@/components/ui/command-tabs";
+
+const items = [
+  {
+    value: "claude",
+    label: "Customize with Claude",
+    icon: <ClaudeIcon />,
+    command: 'claude "Help me turn this into a real product."',
+  },
+  {
+    value: "codex",
+    label: "Customize with Codex",
+    icon: <OpenAiIcon />,
+    command: 'codex "Help me turn this into a real product."',
+  },
+];
+
+export function Example() {
+  return <CommandTabs items={items} />;
+}
+```
+
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand component="command-tabs" />
+
+This pulls in the `button` component and the `@phosphor-icons/react`
+dependency automatically. The sliding pill is plain CSS — no animation
+library needed.
+
+## Usage
+
+```tsx
+import { CommandTabs } from "@/components/ui/command-tabs";
+
+const items = [
+  { value: "claude", label: "Customize with Claude", icon: <ClaudeIcon />, command: "claude ..." },
+  { value: "codex", label: "Customize with Codex", icon: <OpenAiIcon />, command: "codex ..." },
+];
+
+export function Example() {
+  return <CommandTabs items={items} />;
+}
+```
+
+Each tab carries its own command. Switching tabs swaps the command in the code
+block, and the copy button always copies the command of the active tab.
+
+When a command is longer than the block, it scrolls horizontally with a
+floating scrollbar that appears while scrolling or hovering the command and
+fades out — no native scrollbar reserving space. The thumb is a real
+scrollbar: drag it with the pointer, or focus it and use the arrow keys.
+
+## Icon contrast
+
+Brand icons often ship with their own fill color, which can clash with the
+filled active pill. By default the active tab forces its icon to
+`currentColor` (the pill's foreground) for contrast. Pass
+`invertActiveIcon={false}` to keep original icon colors on the active tab:
+
+```tsx
+<CommandTabs invertActiveIcon={false} items={items} />
+```
+
+## Syntax highlighting
+
+The command renders as plain text by default. Pass `highlight` to tint it with
+a tiny built-in shell tokenizer — the command word, quoted strings, and flags
+each get their own color. No shiki, no async, works during SSR:
+
+<ComponentPreview preview={<CommandTabsHighlightDemo />}>
+
+```tsx
+const items = [
+  {
+    value: "claude",
+    label: "Customize with Claude",
+    icon: <ClaudeIcon />,
+    command: 'claude --model opus -p "Ship this as a real product."',
+  },
+  {
+    value: "codex",
+    label: "Customize with Codex",
+    icon: <OpenAiIcon />,
+    command: 'codex --model gpt-5.2-codex "Ship this as a real product."',
+  },
+];
+
+export function Example() {
+  return <CommandTabs highlight items={items} />;
+}
+```
+
+</ComponentPreview>
+
+## Tabs on top
+
+By default the tabs attach below the command block, like the original. Pass
+`tabsPosition="top"` to attach them above instead:
+
+<ComponentPreview preview={<CommandTabsDemo tabsPosition="top" />}>
+
+```tsx
+<CommandTabs items={items} tabsPosition="top" />
+```
+
+</ComponentPreview>
+
+## Bring your own tabs
+
+Pass `tabsPosition="none"` to render just the command block and drive it from
+any switcher — here the [Expandable Tabs](/ui/expandable-tabs) component,
+controlled with shared state:
+
+<ComponentPreview preview={<CommandTabsExpandableDemo />}>
+
+```tsx
+import { CommandTabs } from "@/components/ui/command-tabs";
+import { ExpandableTabs } from "@/components/ui/expandable-tabs";
+
+export function Example() {
+  const [tab, setTab] = useState("claude");
+
+  return (
+    <div className="flex w-full flex-col">
+      <CommandTabs
+        items={items}
+        onValueChange={setTab}
+        tabsPosition="none"
+        value={tab}
+      />
+      <ExpandableTabs
+        className="-mt-px rounded-t-none border-t-0"
+        items={items.map(({ value, label, icon }) => ({ value, label, icon }))}
+        label="Choose a tool"
+        onValueChange={setTab}
+        value={tab}
+      />
+    </div>
+  );
+}
+```
+
+</ComponentPreview>
+
+## Controlled vs uncontrolled
+
+By default the component manages its own selection (`defaultValue` sets the
+initial tab). Pass `value` and `onValueChange` to control it yourself:
+
+```tsx
+const [tab, setTab] = useState("claude");
+
+<CommandTabs items={items} onValueChange={setTab} value={tab} />;
+```
+
+## Copy callback
+
+Use `onCopy` to hook into a successful copy — for analytics, toasts, and the
+like. The built-in "Copied" state is handled for you:
+
+```tsx
+<CommandTabs items={items} onCopy={(command) => track("copy", { command })} />
+```
+
+## Props
+
+| Prop            | Type                        | Default            | Description                                                |
+| --------------- | --------------------------- | ------------------ | ---------------------------------------------------------- |
+| `items`         | `CommandTabsItem[]`         | —                  | The tabs to render, each with its own command.             |
+| `value`         | `string`                    | —                  | Controlled active value.                                   |
+| `defaultValue`  | `string`                    | first item         | Initial active value when uncontrolled.                    |
+| `onValueChange` | `(value: string) => void`   | —                  | Called when the active tab changes.                        |
+| `tabsPosition`  | `"top" \| "bottom" \| "none"` | `"bottom"`       | Where the tab strip attaches — `"none"` hides it for external switchers. |
+| `invertActiveIcon` | `boolean`                | `true`             | Force the active tab's icon to the pill's foreground color. |
+| `highlight`     | `boolean`                   | `false`            | Tint the command with the built-in shell tokenizer.        |
+| `label`         | `string`                    | `"Choose a tool"`  | Accessible label for the tab group.                        |
+| `copyLabel`     | `string`                    | `"Copy"`           | Label of the copy button in its idle state.                |
+| `onCopy`        | `(command: string) => void` | —                  | Called after the active command is copied.                 |
+| `className`     | `string`                    | —                  | Extra classes for the outer container.                     |
+
+### `CommandTabsItem`
+
+| Field     | Type         | Description                                       |
+| --------- | ------------ | ------------------------------------------------- |
+| `value`   | `string`     | Unique identifier for the tab.                    |
+| `label`   | `string`     | Text shown in the tab.                            |
+| `command` | `string`     | Command shown in the code block for this tab.     |
+| `icon`    | `ReactNode?` | Optional icon rendered before the label.          |
