@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { connection } from "next/server";
+import { Suspense } from "react";
 import { BlogPostItem } from "@/components/sections/blog-post-item";
 import { getBlogPosts, getExternalPosts } from "@/lib/marble/queries";
 
@@ -9,28 +9,15 @@ export const metadata: Metadata = {
     "Thoughts on web development, design systems, and modern tooling.",
 };
 
-export const revalidate = 0;
-
-export default async function BlogPage() {
-  if (process.env.NODE_ENV === "development") {
-    await connection();
-  }
-
+async function BlogPostList() {
   const [posts, externalPosts] = await Promise.all([
     getBlogPosts(),
     getExternalPosts(),
   ]);
 
   return (
-    <div className="flex w-full max-w-2xl flex-col gap-12">
+    <>
       <div className="flex flex-col gap-8">
-        <div className="space-y-2">
-          <h1 className="font-bold text-2xl">Blog</h1>
-          <p className="text-muted-foreground">
-            Thoughts on web development, design systems, and modern tooling.
-          </p>
-        </div>
-
         {posts.length === 0 ? (
           <p className="text-muted-foreground">No blog posts yet.</p>
         ) : (
@@ -58,6 +45,27 @@ export default async function BlogPage() {
           </div>
         </div>
       )}
+    </>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <div className="flex w-full max-w-2xl flex-col gap-12">
+      <div className="flex flex-col gap-8">
+        <div className="space-y-2">
+          <h1 className="font-bold text-2xl">Blog</h1>
+          <p className="text-muted-foreground">
+            Thoughts on web development, design systems, and modern tooling.
+          </p>
+        </div>
+
+        <Suspense
+          fallback={<p className="text-muted-foreground">Loading posts...</p>}
+        >
+          <BlogPostList />
+        </Suspense>
+      </div>
     </div>
   );
 }

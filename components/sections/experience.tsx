@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Tooltip,
@@ -10,13 +11,17 @@ import {
   type Position,
 } from "@/utils/data/experience";
 
-function formatDate(date: Date) {
+function formatDate(date: Date): string {
   return date.toLocaleString("en-US", { month: "short", year: "numeric" });
 }
 
-function calculateDuration(startDate: Date, endDate: Date | "present"): string {
+function calculateDuration(
+  startDate: Date,
+  endDate: Date | "present",
+  now: Date
+): string {
   const start = new Date(startDate);
-  const end = endDate === "present" ? new Date() : new Date(endDate);
+  const end = endDate === "present" ? now : new Date(endDate);
 
   const diffInDays = Math.ceil(
     (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
@@ -45,7 +50,70 @@ function calculateDuration(startDate: Date, endDate: Date | "present"): string {
   }`;
 }
 
-function calculateTotalCompanyDuration(experience: ExperienceItem): string {
+interface ProcessedPosition {
+  role: string;
+  type: string;
+  location: string;
+  note?: string;
+  duration: string;
+  formattedStartDate: string;
+  endDateText: string;
+  isOngoing: boolean;
+  showPresent: boolean;
+}
+
+interface ProcessedExperience {
+  company: string;
+  companyUrl?: string;
+  logo?: string;
+  category: ExperienceItem["category"];
+  note?: string;
+  skills: { name: string }[];
+  currentPosition: ProcessedPosition;
+  promotions: ProcessedPosition[];
+  totalDuration: string;
+}
+
+function processPosition(
+  position: Position,
+  note: string | undefined,
+  isEducation: boolean,
+  now: Date
+): ProcessedPosition {
+  const duration = calculateDuration(position.startDate, position.endDate, now);
+  const isOngoing =
+    position.endDate === "present" ||
+    (position.endDate instanceof Date &&
+      position.endDate > now &&
+      position.startDate <= now);
+  const showPresent = isOngoing && !isEducation;
+
+  let endDateText: string;
+  if (position.endDate === "present") {
+    endDateText = "Present";
+  } else if (showPresent) {
+    endDateText = "Current";
+  } else {
+    endDateText = formatDate(position.endDate as Date);
+  }
+
+  return {
+    role: position.role,
+    type: position.type,
+    location: position.location,
+    note,
+    duration,
+    formattedStartDate: formatDate(position.startDate),
+    endDateText,
+    isOngoing,
+    showPresent,
+  };
+}
+
+function calculateTotalCompanyDuration(
+  experience: ExperienceItem,
+  now: Date
+): string {
   let earliestStart = experience.currentPosition.startDate;
   let latestEnd = experience.currentPosition.endDate;
 
@@ -64,40 +132,80 @@ function calculateTotalCompanyDuration(experience: ExperienceItem): string {
     }
   }
 
-  return calculateDuration(earliestStart, latestEnd);
+  return calculateDuration(earliestStart, latestEnd, now);
 }
 
-function getEndDateText(
-  endDate: Date | "present",
-  showPresent: boolean
-): string {
-  if (endDate === "present") {
-    return "Present";
+function getLatestEndDate(experience: ExperienceItem, now: Date): Date {
+  let latestEnd = experience.currentPosition.endDate;
+
+  if (experience.promotions && experience.promotions.length > 0) {
+    for (const position of experience.promotions) {
+      const isPromotionNewer =
+        position.endDate !== "present" &&
+        latestEnd !== "present" &&
+        position.endDate > (latestEnd as Date);
+
+      if (isPromotionNewer) {
+        latestEnd = position.endDate;
+      }
+    }
   }
-  if (showPresent) {
-    return "Current";
-  }
-  return formatDate(endDate as Date);
+
+  return latestEnd === "present" ? now : (latestEnd as Date);
 }
 
-function PositionCard({
-  position,
-  note,
-  isEducation,
-}: {
-  position: Position;
-  note?: string;
-  isEducation: boolean;
-}) {
-  const duration = calculateDuration(position.startDate, position.endDate);
+function sortByEndDate(items: ExperienceItem[], now: Date): ExperienceItem[] {
+  return [...items].sort((a, b) => {
+    const endDateA = getLatestEndDate(a, now);
+    const endDateB = getLatestEndDate(b, now);
+    return endDateB.getTime() - endDateA.getTime();
+  });
+}
+
+// biome-ignore lint/suspicious/useAwait: "use cache" requires async; computation is synchronous
+async function getProcessedExperience(): Promise<{
+  work: ProcessedExperience[];
+  education: ProcessedExperience[];
+}> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("experience");
+
   const now = new Date();
-  const isOngoing =
-    position.endDate === "present" ||
-    (position.endDate instanceof Date &&
-      position.endDate > now &&
-      position.startDate <= now);
-  const showPresent = isOngoing && !isEducation;
 
+  const process = (item: ExperienceItem): ProcessedExperience => {
+    const isEducation = item.category === "education";
+    return {
+      company: item.company,
+      companyUrl: item.companyUrl,
+      logo: item.logo,
+      category: item.category,
+      note: item.note,
+      skills: item.skills,
+      currentPosition: processPosition(
+        item.currentPosition,
+        item.note,
+        isEducation,
+        now
+      ),
+      promotions:
+        item.promotions?.map((p) =>
+          processPosition(p, undefined, isEducation, now)
+        ) ?? [],
+      totalDuration: calculateTotalCompanyDuration(item, now),
+    };
+  };
+
+  const workExperience = experiences.filter((exp) => exp.category === "work");
+  const education = experiences.filter((exp) => exp.category === "education");
+
+  return {
+    work: sortByEndDate(workExperience, now).map(process),
+    education: sortByEndDate(education, now).map(process),
+  };
+}
+
+function PositionCard({ position }: { position: ProcessedPosition }) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -105,12 +213,13 @@ function PositionCard({
         <span className="text-muted-foreground text-sm">{position.type}</span>
       </div>
       <div className="text-muted-foreground text-sm">
-        {formatDate(position.startDate)} -{" "}
-        {getEndDateText(position.endDate, showPresent)}
-        {duration !== "1 mo" && ` · ${duration}`}
+        {position.formattedStartDate} - {position.endDateText}
+        {position.duration !== "1 mo" && ` · ${position.duration}`}
       </div>
       <span className="text-muted-foreground text-sm">{position.location}</span>
-      {note && <span className="mt-1 text-foreground text-sm">{note}</span>}
+      {position.note && (
+        <span className="mt-1 text-foreground text-sm">{position.note}</span>
+      )}
     </div>
   );
 }
@@ -152,7 +261,7 @@ function ExperienceSection({
   items,
 }: {
   title: string;
-  items: ExperienceItem[];
+  items: ProcessedExperience[];
 }) {
   if (items.length === 0) {
     return null;
@@ -163,7 +272,6 @@ function ExperienceSection({
       <h1 className="font-bold text-2xl">{title}</h1>
       <div className="flex flex-col gap-8">
         {items.map((experience) => {
-          const duration = calculateTotalCompanyDuration(experience);
           const isEducation = experience.category === "education";
 
           return (
@@ -193,12 +301,13 @@ function ExperienceSection({
                   </h2>
                   {!isEducation && (
                     <span className="text-muted-foreground text-sm">
-                      {duration} · {experience.currentPosition.type}
+                      {experience.totalDuration} ·{" "}
+                      {experience.currentPosition.type}
                     </span>
                   )}
                 </div>
 
-                {experience.promotions && experience.promotions.length > 0 ? (
+                {experience.promotions.length > 0 ? (
                   <div className="relative flex flex-col">
                     <div className="absolute top-2 bottom-2 left-[5px] w-[2px] bg-border" />
 
@@ -207,11 +316,7 @@ function ExperienceSection({
                         <div className="z-10 h-3 w-3 rounded-full bg-foreground/80" />
                       </div>
                       <div className="grow pt-1">
-                        <PositionCard
-                          isEducation={isEducation}
-                          note={experience.note}
-                          position={experience.currentPosition}
-                        />
+                        <PositionCard position={experience.currentPosition} />
                         <SkillsList skills={experience.skills} />
                       </div>
                     </div>
@@ -225,10 +330,7 @@ function ExperienceSection({
                           <div className="z-10 h-2 w-2 rounded-full bg-foreground/30" />
                         </div>
                         <div className="grow pt-1">
-                          <PositionCard
-                            isEducation={isEducation}
-                            position={position}
-                          />
+                          <PositionCard position={position} />
                           <SkillsList skills={experience.skills} />
                         </div>
                       </div>
@@ -236,11 +338,7 @@ function ExperienceSection({
                   </div>
                 ) : (
                   <div className="flex flex-col">
-                    <PositionCard
-                      isEducation={isEducation}
-                      note={experience.note}
-                      position={experience.currentPosition}
-                    />
+                    <PositionCard position={experience.currentPosition} />
                     <SkillsList skills={experience.skills} />
                   </div>
                 )}
@@ -253,41 +351,13 @@ function ExperienceSection({
   );
 }
 
-function getLatestEndDate(experience: ExperienceItem): Date {
-  let latestEnd = experience.currentPosition.endDate;
-
-  if (experience.promotions && experience.promotions.length > 0) {
-    for (const position of experience.promotions) {
-      const isPromotionNewer =
-        position.endDate !== "present" &&
-        latestEnd !== "present" &&
-        position.endDate > (latestEnd as Date);
-
-      if (isPromotionNewer) {
-        latestEnd = position.endDate;
-      }
-    }
-  }
-
-  return latestEnd === "present" ? new Date() : (latestEnd as Date);
-}
-
-function sortByEndDate(items: ExperienceItem[]): ExperienceItem[] {
-  return [...items].sort((a, b) => {
-    const endDateA = getLatestEndDate(a);
-    const endDateB = getLatestEndDate(b);
-    return endDateB.getTime() - endDateA.getTime();
-  });
-}
-
-export function Experience() {
-  const workExperience = experiences.filter((exp) => exp.category === "work");
-  const education = experiences.filter((exp) => exp.category === "education");
+export async function Experience() {
+  const { work, education } = await getProcessedExperience();
 
   return (
     <div className="flex w-full max-w-xl flex-col gap-12">
-      <ExperienceSection items={sortByEndDate(workExperience)} title="Work" />
-      <ExperienceSection items={sortByEndDate(education)} title="Education" />
+      <ExperienceSection items={work} title="Work" />
+      <ExperienceSection items={education} title="Education" />
     </div>
   );
 }

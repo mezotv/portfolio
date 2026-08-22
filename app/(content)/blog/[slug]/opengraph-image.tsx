@@ -11,9 +11,7 @@ const FOREGROUND = "#fafafa";
 const MUTED = "#a1a1a1";
 
 interface OpenGraphImageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function Image({ params }: OpenGraphImageProps) {

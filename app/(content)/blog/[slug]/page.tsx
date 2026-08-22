@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { connection } from "next/server";
+import { Suspense } from "react";
 import { postComponents } from "@/components/blog/post-components";
 import { Prose } from "@/components/prose";
 import {
@@ -13,12 +13,8 @@ import { getReadingTime } from "@/utils/reading-time";
 import { ArticleActions } from "./article-actions";
 
 interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
-
-export const revalidate = 0;
 
 export async function generateStaticParams() {
   if (process.env.NODE_ENV === "development") {
@@ -60,11 +56,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  if (process.env.NODE_ENV === "development") {
-    await connection();
-  }
-
+async function BlogPostContent({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
@@ -107,5 +99,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <Prose components={postComponents} html={post.content} />
       </div>
     </article>
+  );
+}
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex w-full max-w-2xl flex-col gap-8">
+          <p className="text-muted-foreground">Loading post...</p>
+        </div>
+      }
+    >
+      <BlogPostContent params={params} />
+    </Suspense>
   );
 }

@@ -7,6 +7,8 @@ const withMDX = createMDX();
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  cacheComponents: true,
+  partialPrefetching: true,
   experimental: {
     turbopackFileSystemCacheForDev: false,
   },

@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { Suspense } from "react";
 import { ContentHeader } from "@/components/sections/content-header";
 import { Sponsors } from "@/components/sections/sponsors";
 
@@ -17,7 +18,9 @@ export default function ContentLayout({
           </section>
 
           <section className="mt-12">
-            <Sponsors />
+            <Suspense fallback={null}>
+              <Sponsors />
+            </Suspense>
           </section>
         </main>
         <footer className="relative z-50 mt-8">

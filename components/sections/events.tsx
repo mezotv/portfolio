@@ -6,17 +6,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { events } from "@/utils/data/events";
-import { getLatestEventsByStartDate } from "@/utils/event";
+import type { EventWithStatus } from "@/lib/events";
 
 const EVENTS_DESCRIPTION = "Events I hosted or helped out at.";
 
 const eventsTitleTriggerClass =
   "relative cursor-help border-0 bg-transparent p-0 font-inherit text-inherit outline-none after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 focus-visible:after:scale-x-100 dark:after:bg-zinc-100";
 
-export function Events() {
-  const sortedEvents = getLatestEventsByStartDate(events, events.length);
-
+export function Events({ events }: { events: EventWithStatus[] }) {
   return (
     <div className="flex w-full max-w-xl flex-col gap-6">
       <h1 className="font-bold text-2xl">
@@ -37,8 +34,12 @@ export function Events() {
         </Tooltip>
       </h1>
       <div className="flex flex-col gap-6">
-        {sortedEvents.map((event) => (
-          <EventCard event={event} key={event.lumaEventId} />
+        {events.map((event) => (
+          <EventCard
+            event={event}
+            isPast={event.isPast}
+            key={event.lumaEventId}
+          />
         ))}
       </div>
     </div>

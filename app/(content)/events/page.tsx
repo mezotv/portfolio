@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Events } from "@/components/sections/events";
+import { getEventsWithStatus } from "@/lib/events";
 
 export const metadata: Metadata = {
   title: "Events",
   description: "Events I hosted or helped out at.",
 };
 
-export const dynamic = "force-static";
+async function EventsList() {
+  const events = await getEventsWithStatus();
+  return <Events events={events} />;
+}
 
 export default function EventsPage() {
-  return <Events />;
+  return (
+    <Suspense
+      fallback={<p className="text-muted-foreground">Loading events...</p>}
+    >
+      <EventsList />
+    </Suspense>
+  );
 }

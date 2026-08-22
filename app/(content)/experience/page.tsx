@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Experience } from "@/components/sections/experience";
 
 export const metadata: Metadata = {
@@ -7,5 +8,11 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
-  return <Experience />;
+  return (
+    <Suspense
+      fallback={<p className="text-muted-foreground">Loading experience...</p>}
+    >
+      <Experience />
+    </Suspense>
+  );
 }

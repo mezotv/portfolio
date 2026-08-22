@@ -1,7 +1,5 @@
 import { SITE_URL } from "@/lib/constants";
 
-export const dynamic = "force-static";
-
 export function GET() {
   return new Response(
     `User-agent: *

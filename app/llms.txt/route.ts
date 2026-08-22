@@ -31,5 +31,4 @@ const handler = createLlmsTxtHandler({
   ],
 });
 
-export const dynamic = "force-static";
 export const GET = handler.GET;

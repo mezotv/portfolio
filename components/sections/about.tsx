@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { EventCard } from "@/components/sections/event-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getLatestEventsWithStatus } from "@/lib/events";
 import { getBlogPosts } from "@/lib/marble/queries";
 import { events } from "@/utils/data/events";
 import { projects, statusConfig } from "@/utils/data/projects";
-import { getLatestEventsByStartDate } from "@/utils/event";
 
 function SectionHeader({
   title,
@@ -77,19 +78,24 @@ function ProjectPreview() {
   );
 }
 
-function EventPreview() {
+async function EventPreview() {
   if (events.length === 0) {
     return null;
   }
 
-  const previewEvents = getLatestEventsByStartDate(events, 2);
+  const previewEvents = await getLatestEventsWithStatus(2);
 
   return (
     <div className="flex flex-col gap-4">
       <SectionHeader href="/events" linkText="View all" title="Events" />
       <div className="flex flex-col gap-4">
         {previewEvents.map((event) => (
-          <EventCard clampDescription event={event} key={event.lumaEventId} />
+          <EventCard
+            clampDescription
+            event={event}
+            isPast={event.isPast}
+            key={event.lumaEventId}
+          />
         ))}
       </div>
     </div>
@@ -121,6 +127,7 @@ async function BlogPreview() {
               className="group flex flex-col gap-1 rounded-md transition-colors"
               href={`/blog/${post.slug}`}
               key={post.id}
+              prefetch
             >
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="font-medium group-hover:underline">
@@ -180,9 +187,27 @@ export function About() {
         </p>
       </div>
 
-      <EventPreview />
+      <Suspense
+        fallback={
+          <div className="flex flex-col gap-4">
+            <SectionHeader href="/events" linkText="View all" title="Events" />
+            <p className="text-muted-foreground text-sm">Loading events...</p>
+          </div>
+        }
+      >
+        <EventPreview />
+      </Suspense>
       <ProjectPreview />
-      <BlogPreview />
+      <Suspense
+        fallback={
+          <div className="flex flex-col gap-4">
+            <SectionHeader href="/blog" linkText="Read more" title="Blog" />
+            <p className="text-muted-foreground text-sm">Loading posts...</p>
+          </div>
+        }
+      >
+        <BlogPreview />
+      </Suspense>
     </div>
   );
 }

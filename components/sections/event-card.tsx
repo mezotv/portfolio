@@ -3,13 +3,14 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { EventItem } from "@/types/event";
 import { statusConfig } from "@/utils/data/projects";
-import { isEventPast } from "@/utils/event";
 
 export function EventCard({
   event,
+  isPast = false,
   clampDescription = false,
 }: {
   event: EventItem;
+  isPast?: boolean;
   clampDescription?: boolean;
 }) {
   return (
@@ -36,7 +37,7 @@ export function EventCard({
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <h3 className="font-medium">{event.name}</h3>
-            {isEventPast(event) && (
+            {isPast && (
               <span
                 className={`rounded-md px-2 py-1 font-medium text-xs ${statusConfig.inactive.className}`}
               >

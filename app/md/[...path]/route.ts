@@ -3,6 +3,5 @@ import { dualmarkConfig } from "@/lib/dualmark";
 
 const handler = createDualmarkRouteHandler(dualmarkConfig);
 
-export const dynamic = "force-static";
 export const GET = handler.GET;
 export const generateStaticParams = handler.generateStaticParams;

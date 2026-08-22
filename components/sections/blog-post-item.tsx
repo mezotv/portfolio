@@ -61,7 +61,7 @@ export function BlogPostItem({ post }: BlogPostItemProps) {
   }
 
   return (
-    <Link href={`/blog/${post.slug}`} prefetch={false}>
+    <Link href={`/blog/${post.slug}`} prefetch>
       {content}
     </Link>
   );

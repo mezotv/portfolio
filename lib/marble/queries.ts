@@ -8,7 +8,7 @@ import type {
   TagsListResponse,
 } from "@usemarble/sdk/models";
 import type { GetV1PostsStatus } from "@usemarble/sdk/models/operations";
-import { unstable_noStore as noStore } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { marble } from "@/lib/marble/client";
 
 interface GetPostsOptions {
@@ -18,41 +18,24 @@ interface GetPostsOptions {
   status?: GetV1PostsStatus;
 }
 
-function disableDevCache() {
-  if (process.env.NODE_ENV === "development") {
-    noStore();
-  }
-}
-
 function getDevelopmentPostStatus(): GetV1PostsStatus | undefined {
   return process.env.NODE_ENV === "development" ? "all" : undefined;
-}
-
-function getDevelopmentRequestOptions():
-  | Omit<RequestInit, "body" | "method">
-  | undefined {
-  return process.env.NODE_ENV === "development"
-    ? {
-        cache: "no-store",
-      }
-    : undefined;
 }
 
 export async function getPosts(
   options?: GetPostsOptions
 ): Promise<PostsListResponse | undefined> {
-  disableDevCache();
+  "use cache";
+  cacheLife("hours");
+  cacheTag("posts");
 
   try {
-    const data = await marble.posts.list(
-      {
-        categories: options?.categories,
-        excludeCategories: options?.excludeCategories,
-        format: options?.format,
-        status: options?.status ?? getDevelopmentPostStatus(),
-      },
-      getDevelopmentRequestOptions()
-    );
+    const data = await marble.posts.list({
+      categories: options?.categories,
+      excludeCategories: options?.excludeCategories,
+      format: options?.format,
+      status: options?.status ?? getDevelopmentPostStatus(),
+    });
 
     return data.result;
   } catch (error) {
@@ -61,13 +44,12 @@ export async function getPosts(
 }
 
 export async function getTags(): Promise<TagsListResponse | undefined> {
-  disableDevCache();
+  "use cache";
+  cacheLife("days");
+  cacheTag("posts");
 
   try {
-    const data = await marble.tags.list(
-      undefined,
-      getDevelopmentRequestOptions()
-    );
+    const data = await marble.tags.list();
     return data.result;
   } catch (error) {
     console.error("Error fetching tags:", error);
@@ -77,13 +59,12 @@ export async function getTags(): Promise<TagsListResponse | undefined> {
 export async function getCategories(): Promise<
   CategoriesListResponse | undefined
 > {
-  disableDevCache();
+  "use cache";
+  cacheLife("days");
+  cacheTag("posts");
 
   try {
-    const data = await marble.categories.list(
-      undefined,
-      getDevelopmentRequestOptions()
-    );
+    const data = await marble.categories.list();
     return data.result;
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -91,13 +72,12 @@ export async function getCategories(): Promise<
 }
 
 export async function getAuthors(): Promise<AuthorsListResponse | undefined> {
-  disableDevCache();
+  "use cache";
+  cacheLife("days");
+  cacheTag("posts");
 
   try {
-    const data = await marble.authors.list(
-      undefined,
-      getDevelopmentRequestOptions()
-    );
+    const data = await marble.authors.list();
     return data.result;
   } catch (error) {
     console.error("Error fetching authors:", error);
@@ -107,20 +87,20 @@ export async function getAuthors(): Promise<AuthorsListResponse | undefined> {
 export async function getSinglePost(
   slug: string
 ): Promise<PostResponse | undefined> {
-  disableDevCache();
+  "use cache";
+  cacheLife("hours");
+  cacheTag("posts");
+  cacheTag(slug);
 
   if (!slug || slug === "undefined") {
     return undefined;
   }
 
   try {
-    const data = await marble.posts.get(
-      {
-        identifier: slug,
-        status: getDevelopmentPostStatus(),
-      },
-      getDevelopmentRequestOptions()
-    );
+    const data = await marble.posts.get({
+      identifier: slug,
+      status: getDevelopmentPostStatus(),
+    });
     return data;
   } catch (error) {
     console.error("Error fetching single post:", error);
@@ -178,21 +158,21 @@ export async function getBlogPostBySlug(
 export async function getBlogPostMarkdown(
   slug: string
 ): Promise<string | undefined> {
-  disableDevCache();
+  "use cache";
+  cacheLife("hours");
+  cacheTag("posts");
+  cacheTag(slug);
 
   if (!slug || slug === "undefined") {
     return undefined;
   }
 
   try {
-    const data = await marble.posts.get(
-      {
-        identifier: slug,
-        format: "markdown",
-        status: getDevelopmentPostStatus(),
-      },
-      getDevelopmentRequestOptions()
-    );
+    const data = await marble.posts.get({
+      identifier: slug,
+      format: "markdown",
+      status: getDevelopmentPostStatus(),
+    });
     return data.post?.content;
   } catch (error) {
     console.error("Error fetching post markdown:", error);

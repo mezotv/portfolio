@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import { Fragment, type HTMLAttributes, type ReactNode } from "react";
 import { codeToHtml } from "shiki";
 import { CodeBlock } from "@/components/code-block";
@@ -366,6 +367,10 @@ async function highlightCodeBlock(
   codeAttrs: string,
   code: string
 ): Promise<{ code: string; html: string }> {
+  "use cache";
+  cacheLife("days");
+  cacheTag("posts");
+
   const decodedCode = decodeEntities(code);
   const language = getCodeLanguage(preAttrs, codeAttrs);
 
