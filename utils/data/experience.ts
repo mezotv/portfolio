@@ -82,8 +82,8 @@ export const experiences: ExperienceItem[] = [
     category: "work",
   },
   {
-    company: "Mail0 (X25)",
-    companyUrl: "https://0.email/",
+    company: "Orchid (P25)",
+    companyUrl: "https://orchid.ai/",
     location: "Remote, Germany",
     currentPosition: {
       role: "Discord Community Manager",
@@ -97,7 +97,7 @@ export const experiences: ExperienceItem[] = [
       { name: "Community" },
       { name: "Management" },
     ],
-    logo: "/images/mail0.webp",
+    logo: "/images/orchid.webp",
     category: "work",
   },
   {
