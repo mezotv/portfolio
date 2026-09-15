@@ -7,28 +7,28 @@ import { ThemeProvider } from "@/components/theme-provider";
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
+  variable: "--font-geist-sans",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
+  description:
+    "Software Engineer based in Germany with a passion for open source. Currently working on Notra and maintaining Hotkeys and Rivo.",
   title: {
     default: "Dominik Koch",
     template: "%s by Dominik Koch",
   },
-  description:
-    "Software Engineer based in Germany with a passion for open source. Currently working on Notra and maintaining Hotkeys and Rivo.",
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#212121" },
+    { color: "#ffffff", media: "(prefers-color-scheme: light)" },
+    { color: "#212121", media: "(prefers-color-scheme: dark)" },
   ],
 };
 

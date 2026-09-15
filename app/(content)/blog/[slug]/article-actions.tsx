@@ -85,11 +85,11 @@ export function ArticleActions({ markdown, markdownUrl }: ArticleActionsProps) {
 }
 
 interface ArticleActionItemProps {
-  title: string;
   description: string;
-  icon: ReactNode;
   href?: string;
+  icon: ReactNode;
   onClick?: () => void;
+  title: string;
 }
 
 const ITEM_CLASS =

@@ -169,8 +169,8 @@ export async function getBlogPostMarkdown(
 
   try {
     const data = await marble.posts.get({
-      identifier: slug,
       format: "markdown",
+      identifier: slug,
       status: getDevelopmentPostStatus(),
     });
     return data.post?.content;

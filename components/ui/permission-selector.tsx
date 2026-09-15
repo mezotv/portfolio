@@ -12,27 +12,27 @@ import { cn } from "@/lib/utils";
 
 type PermissionTone = "neutral" | "success" | "danger" | "warning";
 
-const SPRING = { type: "spring", bounce: 0.2, duration: 0.4 } as const;
+const SPRING = { bounce: 0.2, duration: 0.4, type: "spring" } as const;
 
 const TONE_TEXT: Record<PermissionTone, string> = {
+  danger: "text-destructive",
   neutral: "text-foreground",
   success: "text-emerald-600 dark:text-emerald-400",
-  danger: "text-destructive",
   warning: "text-amber-600 dark:text-amber-500",
 };
 
 const TONE_PILL: Record<PermissionTone, string> = {
+  danger: "bg-destructive/10 ring-destructive/30",
   neutral: "bg-background ring-border",
   success: "bg-emerald-500/10 ring-emerald-500/30",
-  danger: "bg-destructive/10 ring-destructive/30",
   warning: "bg-amber-500/10 ring-amber-500/30",
 };
 
 interface PermissionRowContextValue {
-  value: string | undefined;
-  select: (value: string) => void;
-  layoutId: string;
   disabled: boolean;
+  layoutId: string;
+  select: (value: string) => void;
+  value: string | undefined;
 }
 
 const PermissionRowContext = createContext<PermissionRowContextValue | null>(
@@ -49,8 +49,8 @@ function usePermissionRow() {
 
 interface PermissionSelectorProps {
   children: ReactNode;
-  label?: string;
   className?: string;
+  label?: string;
 }
 
 function PermissionSelector({
@@ -73,13 +73,13 @@ function PermissionSelector({
 
 interface PermissionRowProps {
   children: ReactNode;
-  label: ReactNode;
-  description?: ReactNode;
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  disabled?: boolean;
   className?: string;
+  defaultValue?: string;
+  description?: ReactNode;
+  disabled?: boolean;
+  label: ReactNode;
+  onValueChange?: (value: string) => void;
+  value?: string;
 }
 
 function PermissionRow({
@@ -102,10 +102,10 @@ function PermissionRow({
   };
 
   const context: PermissionRowContextValue = {
-    value: activeValue,
-    select,
-    layoutId,
     disabled,
+    layoutId,
+    select,
+    value: activeValue,
   };
 
   return (
@@ -139,12 +139,12 @@ function PermissionRow({
 }
 
 interface PermissionOptionProps {
-  value: string;
-  children: ReactNode;
-  tone?: PermissionTone;
-  disabled?: boolean;
-  className?: string;
   "aria-label"?: string;
+  children: ReactNode;
+  className?: string;
+  disabled?: boolean;
+  tone?: PermissionTone;
+  value: string;
 }
 
 function PermissionOption({
@@ -198,10 +198,10 @@ function PermissionOption({
   );
 }
 
-export { PermissionSelector, PermissionRow, PermissionOption };
 export type {
-  PermissionSelectorProps,
-  PermissionRowProps,
   PermissionOptionProps,
+  PermissionRowProps,
+  PermissionSelectorProps,
   PermissionTone,
 };
+export { PermissionOption, PermissionRow, PermissionSelector };

@@ -15,9 +15,9 @@ export function BlogPostItem({ post }: BlogPostItemProps) {
     : undefined;
   const publishDate = new Date(post.publishedAt);
   const formattedDate = publishDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
     day: "numeric",
+    month: "short",
+    year: "numeric",
   });
 
   const content = (

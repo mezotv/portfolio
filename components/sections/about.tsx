@@ -117,9 +117,9 @@ async function BlogPreview() {
         {previewPosts.map((post) => {
           const publishDate = new Date(post.publishedAt);
           const formattedDate = publishDate.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
             day: "numeric",
+            month: "short",
+            year: "numeric",
           });
 
           return (

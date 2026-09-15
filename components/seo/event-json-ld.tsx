@@ -1,13 +1,13 @@
 import type { EventItem, EventOrganizer } from "@/types/event";
 
 interface EventJsonLdProps {
-  events: EventItem[];
   baseUrl: string;
+  events: EventItem[];
 }
 
 function formatOrganizers(organizers: EventOrganizer[] | undefined) {
   if (!organizers || organizers.length === 0) {
-    return undefined;
+    return;
   }
 
   const formatted = organizers.map((org) => ({
@@ -23,32 +23,32 @@ export function EventJsonLd({ events, baseUrl }: EventJsonLdProps) {
   const structuredData = events.map((event) => ({
     "@context": "https://schema.org",
     "@type": "Event",
-    name: event.name,
     description: event.description,
-    startDate: event.startDate,
     endDate: event.endDate,
-    eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    image: event.image ? `${baseUrl}${event.image}` : undefined,
     location: event.eventLocation
       ? {
           "@type": "Place",
-          name: event.eventLocation.name,
           address: {
             "@type": "PostalAddress",
-            streetAddress: event.eventLocation.streetAddress,
+            addressCountry: event.eventLocation.addressCountry,
             addressLocality: event.eventLocation.addressLocality,
             addressRegion: event.eventLocation.addressRegion,
             postalCode: event.eventLocation.postalCode,
-            addressCountry: event.eventLocation.addressCountry,
+            streetAddress: event.eventLocation.streetAddress,
           },
+          name: event.eventLocation.name,
         }
       : {
           "@type": "Place",
           name: event.location,
         },
-    image: event.image ? `${baseUrl}${event.image}` : undefined,
-    url: `https://lu.ma/event/${event.lumaEventId}?utm_source=dominikkoch.dev`,
+    name: event.name,
     organizer: formatOrganizers(event.organizers),
+    startDate: event.startDate,
+    url: `https://lu.ma/event/${event.lumaEventId}?utm_source=dominikkoch.dev`,
   }));
 
   return (

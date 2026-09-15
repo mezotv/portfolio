@@ -6,32 +6,32 @@ async function getBlogEntries() {
   const posts = await getBlogPosts("markdown");
 
   return posts.map((post) => ({
-    id: post.slug,
-    data: {
-      title: post.title,
-      description: post.description,
-      author: post.authors?.map((author) => author.name).join(" & "),
-      publishedDate: new Date(post.publishedAt),
-      modifiedDate: new Date(post.updatedAt),
-      category: post.category.name,
-    },
     body: post.content,
+    data: {
+      author: post.authors?.map((author) => author.name).join(" & "),
+      category: post.category.name,
+      description: post.description,
+      modifiedDate: new Date(post.updatedAt),
+      publishedDate: new Date(post.publishedAt),
+      title: post.title,
+    },
+    id: post.slug,
   }));
 }
 
 export const dualmarkConfig: DualmarkNextConfig = {
-  siteUrl: SITE_URL,
   collections: {
     blog: {
       converter: "blog",
       getEntries: getBlogEntries,
       listingMetadata: {
-        title: "Blog",
         description:
           "Thoughts on web development, design systems, and modern tooling.",
+        title: "Blog",
       },
     },
   },
+  siteUrl: SITE_URL,
   staticPages: [
     {
       pattern: "/",

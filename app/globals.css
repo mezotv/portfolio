@@ -174,20 +174,20 @@
 
 .shiki,
 .shiki span {
-  background-color: var(--shiki-light-bg, inherit);
   color: var(--shiki-light, inherit);
+  background-color: var(--shiki-light-bg, inherit);
 }
 
 .dark .shiki,
 .dark .shiki span {
-  background-color: var(--shiki-dark-bg, inherit) !important;
   color: var(--shiki-dark, inherit) !important;
+  background-color: var(--shiki-dark-bg, inherit) !important;
 }
 
 .precise-age {
-  font-family: monospace;
   display: inline-block;
   min-width: 12ch;
+  font-family: monospace;
 }
 
 #nd-docs-layout {
@@ -195,7 +195,6 @@
 }
 
 #nd-page .prose {
-  max-width: none;
   --tw-prose-body: var(--color-fd-foreground);
   --tw-prose-headings: var(--color-fd-foreground);
   --tw-prose-lead: var(--color-fd-muted-foreground);
@@ -212,6 +211,7 @@
   --tw-prose-pre-bg: var(--color-fd-secondary);
   --tw-prose-th-borders: var(--color-fd-border);
   --tw-prose-td-borders: var(--color-fd-border);
+  max-width: none;
 }
 
 #nd-page .prose :is(thead, tbody, tfoot) tr {
@@ -227,8 +227,8 @@
 }
 
 #nd-page .prose :is(h1, h2, h3, h4, h5, h6) a {
-  color: inherit;
   font-weight: inherit;
+  color: inherit;
   text-decoration: none;
 }
 

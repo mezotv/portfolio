@@ -6,22 +6,22 @@ import { SITE_URL } from "./lib/constants";
 const withMDX = createMDX();
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
   cacheComponents: true,
-  partialPrefetching: true,
   experimental: {
     turbopackFileSystemCacheForDev: false,
-  },
-  turbopack: {
-    root: process.cwd(),
   },
   images: {
     remotePatterns: [
       {
-        protocol: "https",
         hostname: "**",
+        protocol: "https",
       },
     ],
+  },
+  partialPrefetching: true,
+  reactCompiler: true,
+  turbopack: {
+    root: process.cwd(),
   },
 };
 

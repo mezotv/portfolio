@@ -11,195 +11,195 @@ export type PositionType =
   | "Contract";
 
 export interface Position {
-  role: string;
-  type: PositionType;
-  startDate: Date;
   endDate: Date | "present";
   location: string;
+  role: string;
+  startDate: Date;
+  type: PositionType;
 }
 
 export interface ExperienceItem {
+  category: "work" | "education";
   company: string;
   companyUrl?: string;
-  location: string;
-  skills: Skill[];
-  logo?: string;
   currentPosition: Position;
-  promotions?: Position[];
-  category: "work" | "education";
+  location: string;
+  logo?: string;
   note?: string;
+  promotions?: Position[];
+  skills: Skill[];
 }
 
 export const experiences: ExperienceItem[] = [
   {
+    category: "work",
     company: "Databricks (Neon)",
     companyUrl: "https://neon.com/",
-    location: "Remote",
     currentPosition: {
-      role: "DX Engineer",
-      type: "Contract",
-      startDate: new Date("2026-01-15"),
       endDate: "present",
       location: "Remote",
+      role: "DX Engineer",
+      startDate: new Date("2026-01-15"),
+      type: "Contract",
     },
-    skills: [{ name: "v0" }, { name: "Next.js" }, { name: "TailwindCSS" }],
+    location: "Remote",
     logo: "/images/databricks.svg",
-    category: "work",
+    skills: [{ name: "v0" }, { name: "Next.js" }, { name: "TailwindCSS" }],
   },
   {
+    category: "work",
     company: "RentMyHeader",
     companyUrl: "https://rentmyheader.com/",
-    location: "Remote",
     currentPosition: {
-      role: "Software Engineer",
-      type: "Contract",
-      startDate: new Date("2025-11-28"),
       endDate: new Date("2026-03-31"),
       location: "Remote",
+      role: "Software Engineer",
+      startDate: new Date("2025-11-28"),
+      type: "Contract",
     },
-    skills: [{ name: "TypeScript" }, { name: "Next.js" }, { name: "Drizzle" }],
+    location: "Remote",
     logo: "/images/rentmyheader.svg",
-    category: "work",
+    skills: [{ name: "TypeScript" }, { name: "Next.js" }, { name: "Drizzle" }],
   },
   {
+    category: "work",
     company: "Rivo",
     companyUrl: "https://rivo.gg/",
-    location: "Riedlingen, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Founder & Lead Developer",
-      type: "Self-Employed",
-      startDate: new Date("2023-02-01"),
       endDate: "present",
       location: "Riedlingen, Baden-Württemberg, Germany",
+      role: "Founder & Lead Developer",
+      startDate: new Date("2023-02-01"),
+      type: "Self-Employed",
     },
+    location: "Riedlingen, Baden-Württemberg, Germany",
+    logo: "/images/rivo.webp",
     skills: [
       { name: "TypeScript" },
       { name: "GoLang" },
       { name: "SEO" },
       { name: "PostgreSQL" },
     ],
-    logo: "/images/rivo.webp",
-    category: "work",
   },
   {
+    category: "work",
     company: "Orchid (P25)",
     companyUrl: "https://orchid.ai/",
-    location: "Remote, Germany",
     currentPosition: {
-      role: "Discord Community Manager",
-      type: "Contract",
-      startDate: new Date("2025-07-17"),
       endDate: new Date("2025-08-17"),
       location: "Remote, Germany",
+      role: "Discord Community Manager",
+      startDate: new Date("2025-07-17"),
+      type: "Contract",
     },
+    location: "Remote, Germany",
+    logo: "/images/orchid.webp",
     skills: [
       { name: "Discord" },
       { name: "Community" },
       { name: "Management" },
     ],
-    logo: "/images/orchid.webp",
-    category: "work",
   },
   {
+    category: "work",
     company: "RSU GmbH - E-Commerce",
     companyUrl: "https://www.rsu.de",
-    location: "Ulm, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Software Engineer",
-      type: "Co-op",
-      startDate: new Date("2024-10-01"),
       endDate: new Date("2025-08-19"),
       location: "Ulm, Baden-Württemberg, Germany",
+      role: "Software Engineer",
+      startDate: new Date("2024-10-01"),
+      type: "Co-op",
     },
+    location: "Ulm, Baden-Württemberg, Germany",
+    logo: "/images/RSU.webp",
     promotions: [
       {
-        role: "Software Engineer",
-        type: "Internship",
-        startDate: new Date("2024-09-01"),
         endDate: new Date("2024-10-01"),
         location: "Riedlingen, Baden-Württemberg, Germany",
+        role: "Software Engineer",
+        startDate: new Date("2024-09-01"),
+        type: "Internship",
       },
     ],
     skills: [{ name: "Git" }, { name: "Angular" }, { name: "Laravel" }],
-    logo: "/images/RSU.webp",
-    category: "work",
   },
   {
+    category: "work",
     company: "Koch - Bautechnik Energieberatung",
     companyUrl: "https://www.koch-bautechnik.de/",
-    location: "Riedlingen, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Office Assistant",
-      type: "Part-time",
-      startDate: new Date("2021-08-01"),
       endDate: "present",
       location: "Riedlingen, Baden-Württemberg, Germany",
+      role: "Office Assistant",
+      startDate: new Date("2021-08-01"),
+      type: "Part-time",
     },
-    skills: [{ name: "Adobe Photoshop" }, { name: "Adobe XD" }],
+    location: "Riedlingen, Baden-Württemberg, Germany",
     logo: "/images/koch-bautechnik.webp",
-    category: "work",
+    skills: [{ name: "Adobe Photoshop" }, { name: "Adobe XD" }],
   },
   {
+    category: "work",
     company: "BFG MEDIA GROUP®",
     companyUrl: "https://www.bfg-mediagroup.com/",
-    location: "Aulendorf, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Digital Marketing",
-      type: "Internship",
-      startDate: new Date("2020-11-02"),
       endDate: new Date("2020-11-06"),
       location: "Aulendorf, Baden-Württemberg, Germany",
+      role: "Digital Marketing",
+      startDate: new Date("2020-11-02"),
+      type: "Internship",
     },
+    location: "Aulendorf, Baden-Württemberg, Germany",
+    logo: "/images/BFG.webp",
     skills: [
       { name: "Adobe Lightroom" },
       { name: "Adobe Premiere Pro" },
       { name: "Adobe Photoshop" },
     ],
-    logo: "/images/BFG.webp",
-    category: "work",
   },
   {
+    category: "education",
     company: "Baden-Wuerttemberg Cooperative State University Heidenheim",
-    location: "Heidenheim, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Bachelor of Science - BS, Computer Science",
-      type: "Full-time",
-      startDate: new Date("2024-10-01"),
       endDate: new Date("2025-08-11"),
       location: "Heidenheim, Baden-Württemberg, Germany",
+      role: "Bachelor of Science - BS, Computer Science",
+      startDate: new Date("2024-10-01"),
+      type: "Full-time",
     },
-    skills: [],
+    location: "Heidenheim, Baden-Württemberg, Germany",
     logo: "/images/DHBW.webp",
-    category: "education",
     note: "Dropped Out",
+    skills: [],
   },
   {
+    category: "education",
     company: "Kaufmännische Schule Ehingen",
-    location: "Ehingen, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Fachhochschulreife, Foreign Languages",
-      type: "Full-time",
-      startDate: new Date("2022-09-01"),
       endDate: new Date("2024-07-31"),
       location: "Ehingen, Baden-Württemberg, Germany",
+      role: "Fachhochschulreife, Foreign Languages",
+      startDate: new Date("2022-09-01"),
+      type: "Full-time",
     },
-    skills: [],
+    location: "Ehingen, Baden-Württemberg, Germany",
     logo: "/images/KSE.webp",
-    category: "education",
     note: "Grade: 2.9",
+    skills: [],
   },
   {
+    category: "education",
     company: "Geschwister-Scholl-Realschule Riedlingen",
-    location: "Riedlingen, Baden-Württemberg, Germany",
     currentPosition: {
-      role: "Middle School Diploma",
-      type: "Full-time",
-      startDate: new Date("2016-09-01"),
       endDate: new Date("2022-07-31"),
       location: "Riedlingen, Baden-Württemberg, Germany",
+      role: "Middle School Diploma",
+      startDate: new Date("2016-09-01"),
+      type: "Full-time",
     },
-    skills: [{ name: "Englisch" }, { name: "German" }],
+    location: "Riedlingen, Baden-Württemberg, Germany",
     logo: "/images/GSR.webp",
-    category: "education",
+    skills: [{ name: "Englisch" }, { name: "German" }],
   },
 ];

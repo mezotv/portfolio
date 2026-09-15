@@ -5,9 +5,9 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface CodeBlockProps {
+  className?: string;
   code: string;
   html: string;
-  className?: string;
 }
 
 export function CodeBlock({ code, html, className }: CodeBlockProps) {

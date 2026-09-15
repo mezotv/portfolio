@@ -3,7 +3,7 @@ import { getBlogPostBySlug } from "@/lib/marble/queries";
 import { getFaviconDataUri } from "@/utils/og-image";
 
 export const alt = "Blog post by Dominik Koch";
-export const size = { width: 1200, height: 630 };
+export const size = { height: 630, width: 1200 };
 export const contentType = "image/png";
 
 const BACKGROUND = "#18181b";
@@ -24,14 +24,14 @@ export default async function Image({ params }: OpenGraphImageProps) {
   return new ImageResponse(
     <div
       style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         backgroundColor: BACKGROUND,
         color: FOREGROUND,
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        justifyContent: "space-between",
         padding: 96,
+        width: "100%",
       }}
     >
       {/** biome-ignore lint/performance/noImgElement: Satori only supports img */}
@@ -41,13 +41,13 @@ export default async function Image({ params }: OpenGraphImageProps) {
           display: "flex",
           fontSize: 72,
           fontWeight: 700,
-          lineHeight: 1.1,
           letterSpacing: "-0.02em",
+          lineHeight: 1.1,
         }}
       >
         {title}
       </div>
-      <span style={{ fontSize: 32, color: MUTED }}>Dominik Koch</span>
+      <span style={{ color: MUTED, fontSize: 32 }}>Dominik Koch</span>
     </div>,
     size
   );

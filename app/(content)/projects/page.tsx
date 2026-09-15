@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Projects } from "@/components/sections/projects";
 
 export const metadata: Metadata = {
-  title: "Projects",
   description: "My latest projects and open source contributions.",
+  title: "Projects",
 };
 
 export default function ProjectsPage() {

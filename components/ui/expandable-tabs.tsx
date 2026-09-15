@@ -16,24 +16,24 @@ import {
 import { cn } from "@/lib/utils";
 
 interface ExpandableTabsItem {
-  value: string;
-  label: string;
-  icon: ReactNode;
   href?: string;
+  icon: ReactNode;
+  label: string;
+  value: string;
 }
 
 interface ExpandableTabsProps {
-  items: ExpandableTabsItem[];
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  label?: string;
   className?: string;
+  defaultValue?: string;
+  items: ExpandableTabsItem[];
+  label?: string;
+  onValueChange?: (value: string) => void;
+  value?: string;
 }
 
 interface ExpandableTabProps {
-  item: ExpandableTabsItem;
   isActive: boolean;
+  item: ExpandableTabsItem;
   onSelect: (value: string) => void;
 }
 
@@ -111,10 +111,10 @@ function useActivePill(activeValue: string | undefined) {
       return;
     }
     setPill({
+      height: active.offsetHeight,
       left: active.offsetLeft,
       top: active.offsetTop,
       width: active.offsetWidth,
-      height: active.offsetHeight,
     });
   }, [activeValue]);
 
@@ -172,10 +172,10 @@ export function ExpandableTabs({
             aria-hidden="true"
             className="pointer-events-none absolute rounded-[calc(var(--radius-2xl)-6px)] bg-background shadow-sm ring-1 ring-border transition-[left,top,width,height] duration-300 ease-out"
             style={{
+              height: pill.height,
               left: pill.left,
               top: pill.top,
               width: pill.width,
-              height: pill.height,
             }}
           />
         )}

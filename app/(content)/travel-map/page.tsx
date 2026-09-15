@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Travel Map",
   description: "A map of the places I have traveled to.",
+  title: "Travel Map",
 };
 
 export default function TravelMapPage() {

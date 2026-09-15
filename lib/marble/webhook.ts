@@ -39,15 +39,15 @@ export function handleWebhookEvent(payload: PostEventData) {
     }
 
     return {
-      revalidated: true,
-      now: Date.now(),
       message: `Revalidated tags: posts${data.slug ? `, ${data.slug}` : ""}`,
+      now: Date.now(),
+      revalidated: true,
     };
   }
 
   return {
-    revalidated: false,
-    now: Date.now(),
     message: "Event ignored",
+    now: Date.now(),
+    revalidated: false,
   };
 }

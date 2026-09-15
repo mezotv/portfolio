@@ -13,14 +13,14 @@ type PermissionLevel = "none" | "read" | "write";
 
 interface PermissionFormValues {
   balance: PermissionLevel;
-  customers: PermissionLevel;
   charges: PermissionLevel;
+  customers: PermissionLevel;
 }
 
 const DEFAULT_VALUES: PermissionFormValues = {
   balance: "read",
-  customers: "none",
   charges: "write",
+  customers: "none",
 };
 
 export function PermissionFormDemo() {

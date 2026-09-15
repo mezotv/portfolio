@@ -3,10 +3,10 @@ import { BrailleLoader } from "@/components/ui/braille-loader";
 const DEMO_TEXT = "notra";
 
 const variants = [
-  { name: "wave", label: "Wave" },
-  { name: "typewriter", label: "Typewriter" },
-  { name: "shimmer", label: "Shimmer" },
-  { name: "pulse", label: "Pulse" },
+  { label: "Wave", name: "wave" },
+  { label: "Typewriter", name: "typewriter" },
+  { label: "Shimmer", name: "shimmer" },
+  { label: "Pulse", name: "pulse" },
 ] as const;
 
 export function BrailleDemo() {

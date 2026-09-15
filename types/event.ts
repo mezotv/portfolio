@@ -1,28 +1,28 @@
 export interface EventLocation {
-  name?: string;
-  streetAddress?: string;
+  addressCountry: string;
   addressLocality: string;
   addressRegion?: string;
+  name?: string;
   postalCode?: string;
-  addressCountry: string;
+  streetAddress?: string;
 }
 
 export interface EventOrganizer {
-  type: "Person" | "Organization";
   name: string;
+  type: "Person" | "Organization";
   url?: string;
 }
 
 export interface EventItem {
-  name: string;
-  description: string;
   date: string;
-  time: string;
-  location: string;
-  image?: string;
-  lumaEventId: string;
-  startDate: string;
+  description: string;
   endDate?: string;
   eventLocation?: EventLocation;
+  image?: string;
+  location: string;
+  lumaEventId: string;
+  name: string;
   organizers?: EventOrganizer[];
+  startDate: string;
+  time: string;
 }

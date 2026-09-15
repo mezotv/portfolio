@@ -16,24 +16,24 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface CommandTabsItem {
-  value: string;
-  label: string;
   command: string;
   icon?: ReactNode;
+  label: string;
+  value: string;
 }
 
 interface CommandTabsProps {
-  items: CommandTabsItem[];
-  value?: string;
+  className?: string;
+  copyLabel?: string;
   defaultValue?: string;
+  highlight?: boolean;
+  invertActiveIcon?: boolean;
+  items: CommandTabsItem[];
+  label?: string;
+  onCopy?: (command: string) => void;
   onValueChange?: (value: string) => void;
   tabsPosition?: "top" | "bottom" | "none";
-  invertActiveIcon?: boolean;
-  highlight?: boolean;
-  label?: string;
-  copyLabel?: string;
-  onCopy?: (command: string) => void;
-  className?: string;
+  value?: string;
 }
 
 const COPY_FEEDBACK_MS = 2000;
@@ -44,9 +44,9 @@ const SCROLL_STEP_PX = 40;
 type CommandTokenType = "command" | "string" | "flag" | "plain";
 
 interface CommandToken {
+  start: number;
   text: string;
   type: CommandTokenType;
-  start: number;
 }
 
 const COMMAND_TOKEN_RE = /"[^"]*"?|'[^']*'?|\s+|[^\s"']+/g;
@@ -54,9 +54,9 @@ const WHITESPACE_RE = /^\s+$/;
 
 const TOKEN_CLASS: Record<CommandTokenType, string | undefined> = {
   command: "text-sky-600 dark:text-sky-400",
-  string: "text-emerald-600 dark:text-emerald-400",
   flag: "text-muted-foreground",
   plain: undefined,
+  string: "text-emerald-600 dark:text-emerald-400",
 };
 
 function classifyToken(text: string, isFirstWord: boolean): CommandTokenType {
@@ -75,9 +75,9 @@ function tokenizeCommand(command: string): CommandToken[] {
   let start = 0;
   for (const text of command.match(COMMAND_TOKEN_RE) ?? []) {
     if (WHITESPACE_RE.test(text)) {
-      tokens.push({ text, type: "plain", start });
+      tokens.push({ start, text, type: "plain" });
     } else {
-      tokens.push({ text, type: classifyToken(text, firstWord), start });
+      tokens.push({ start, text, type: classifyToken(text, firstWord) });
       firstWord = false;
     }
     start += text.length;
@@ -94,9 +94,9 @@ function HighlightedCommand({ command }: { command: string }) {
 }
 
 interface CommandTabProps {
-  item: CommandTabsItem;
-  isActive: boolean;
   invertIcon: boolean;
+  isActive: boolean;
+  item: CommandTabsItem;
   onSelect: (value: string) => void;
 }
 
@@ -176,7 +176,7 @@ function useActivePill(activeValue: string | undefined) {
 function useFloatingScrollbar(activeCommand: string | undefined) {
   const scrollRef = useRef<HTMLElement>(null);
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [thumb, setThumb] = useState({ widthPct: 0, leftPct: 0 });
+  const [thumb, setThumb] = useState({ leftPct: 0, widthPct: 0 });
   const [scrolling, setScrolling] = useState(false);
 
   const measure = useCallback(() => {
@@ -186,12 +186,12 @@ function useFloatingScrollbar(activeCommand: string | undefined) {
     }
     const { scrollWidth, clientWidth, scrollLeft } = el;
     if (scrollWidth <= clientWidth) {
-      setThumb({ widthPct: 0, leftPct: 0 });
+      setThumb({ leftPct: 0, widthPct: 0 });
       return;
     }
     setThumb({
-      widthPct: (clientWidth / scrollWidth) * PERCENT,
       leftPct: (scrollLeft / scrollWidth) * PERCENT,
+      widthPct: (clientWidth / scrollWidth) * PERCENT,
     });
   }, []);
 
@@ -245,7 +245,7 @@ function useFloatingScrollbar(activeCommand: string | undefined) {
       }
       event.preventDefault();
       event.currentTarget.setPointerCapture(event.pointerId);
-      dragStart.current = { x: event.clientX, scrollLeft: el.scrollLeft };
+      dragStart.current = { scrollLeft: el.scrollLeft, x: event.clientX };
       setDragging(true);
     },
     []
@@ -288,27 +288,27 @@ function useFloatingScrollbar(activeCommand: string | undefined) {
   );
 
   return {
+    dragging,
+    handleScroll,
+    handleThumbKeyDown,
+    handleThumbPointerDown,
+    handleThumbPointerEnd,
+    handleThumbPointerMove,
     scrollRef,
     thumb,
     visible: scrolling || dragging,
-    dragging,
-    handleScroll,
-    handleThumbPointerDown,
-    handleThumbPointerMove,
-    handleThumbPointerEnd,
-    handleThumbKeyDown,
   };
 }
 
 interface ScrollbarThumbProps {
   controls: string;
-  thumb: { widthPct: number; leftPct: number };
-  visible: boolean;
   dragging: boolean;
   onKeyDown: (event: ReactKeyboardEvent<HTMLElement>) => void;
   onPointerDown: (event: ReactPointerEvent<HTMLElement>) => void;
-  onPointerMove: (event: ReactPointerEvent<HTMLElement>) => void;
   onPointerEnd: () => void;
+  onPointerMove: (event: ReactPointerEvent<HTMLElement>) => void;
+  thumb: { widthPct: number; leftPct: number };
+  visible: boolean;
 }
 
 function ScrollbarThumb({
@@ -348,8 +348,8 @@ function ScrollbarThumb({
       onPointerUp={onPointerEnd}
       role="scrollbar"
       style={{
-        width: `${thumb.widthPct}%`,
         left: `${thumb.leftPct}%`,
+        width: `${thumb.widthPct}%`,
       }}
       tabIndex={0}
     >

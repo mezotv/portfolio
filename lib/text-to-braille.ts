@@ -1,4 +1,9 @@
 const braille: Record<string, string> = {
+  " ": " ",
+  ",": "⠂",
+  "!": "⠖",
+  "?": "⠦",
+  ".": "⠲",
   a: "⠁",
   b: "⠃",
   c: "⠉",
@@ -25,11 +30,6 @@ const braille: Record<string, string> = {
   x: "⠭",
   y: "⠽",
   z: "⠵",
-  " ": " ",
-  ".": "⠲",
-  ",": "⠂",
-  "?": "⠦",
-  "!": "⠖",
 };
 
 export function textToBraille(text: string): string {

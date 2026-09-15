@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 interface ToolProps {
-  name: string;
   icon: string;
+  name: string;
 }
 
 interface ToolGroupProps {
@@ -14,29 +14,29 @@ const toolGroups: ToolGroupProps[] = [
   {
     title: "Frontend",
     tools: [
-      { name: "React", icon: "/tools/react.svg" },
-      { name: "Next.js", icon: "/tools/nextjs_icon.svg" },
-      { name: "TailwindCSS", icon: "/tools/tailwindcss.svg" },
+      { icon: "/tools/react.svg", name: "React" },
+      { icon: "/tools/nextjs_icon.svg", name: "Next.js" },
+      { icon: "/tools/tailwindcss.svg", name: "TailwindCSS" },
     ],
   },
   {
     title: "Backend & Infrastructure",
     tools: [
-      { name: "Node.js", icon: "/tools/nodejs.svg" },
-      { name: "Bun", icon: "/tools/bun.svg" },
-      { name: "PostgreSQL", icon: "/tools/postgresql.svg" },
-      { name: "Hono", icon: "/tools/hono.svg" },
-      { name: "Neon", icon: "/tools/neon.svg" },
-      { name: "Drizzle", icon: "/tools/drizzle-orm.svg" },
+      { icon: "/tools/nodejs.svg", name: "Node.js" },
+      { icon: "/tools/bun.svg", name: "Bun" },
+      { icon: "/tools/postgresql.svg", name: "PostgreSQL" },
+      { icon: "/tools/hono.svg", name: "Hono" },
+      { icon: "/tools/neon.svg", name: "Neon" },
+      { icon: "/tools/drizzle-orm.svg", name: "Drizzle" },
     ],
   },
   {
     title: "Development Tools",
     tools: [
-      { name: "Docker", icon: "/tools/docker.svg" },
-      { name: "Vitest", icon: "/tools/vitest.svg" },
-      { name: "PostHog", icon: "/tools/posthog.svg" },
-      { name: "Upstash", icon: "/tools/upstash.svg" },
+      { icon: "/tools/docker.svg", name: "Docker" },
+      { icon: "/tools/vitest.svg", name: "Vitest" },
+      { icon: "/tools/posthog.svg", name: "PostHog" },
+      { icon: "/tools/upstash.svg", name: "Upstash" },
     ],
   },
 ];

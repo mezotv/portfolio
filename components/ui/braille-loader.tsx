@@ -3,10 +3,10 @@ import { getBrailleCharacters } from "@/lib/text-to-braille";
 import { cn } from "@/lib/utils";
 
 interface BrailleLoaderProps {
-  text: string;
   className?: string;
-  variant?: "wave" | "typewriter" | "shimmer" | "pulse";
   speed?: number;
+  text: string;
+  variant?: "wave" | "typewriter" | "shimmer" | "pulse";
 }
 
 const STEP_MS = 120;
@@ -16,16 +16,9 @@ const variantStyles: Record<
   NonNullable<BrailleLoaderProps["variant"]>,
   string
 > = {
-  wave: `@keyframes braille-wave {
+  pulse: `@keyframes braille-pulse {
     0%, 100% { opacity: 0.15; }
-    12%, 25% { opacity: 1; }
-    37% { opacity: 0.15; }
-  }`,
-  typewriter: `@keyframes braille-typewriter {
-    0%, 10% { opacity: 0; }
-    12% { opacity: 1; }
-    80% { opacity: 1; }
-    90%, 100% { opacity: 0; }
+    50% { opacity: 1; }
   }`,
   shimmer: `@keyframes braille-shimmer {
     0%, 100% { opacity: 0.15; }
@@ -33,9 +26,16 @@ const variantStyles: Record<
     37% { opacity: 0.4; }
     50% { opacity: 0.15; }
   }`,
-  pulse: `@keyframes braille-pulse {
+  typewriter: `@keyframes braille-typewriter {
+    0%, 10% { opacity: 0; }
+    12% { opacity: 1; }
+    80% { opacity: 1; }
+    90%, 100% { opacity: 0; }
+  }`,
+  wave: `@keyframes braille-wave {
     0%, 100% { opacity: 0.15; }
-    50% { opacity: 1; }
+    12%, 25% { opacity: 1; }
+    37% { opacity: 0.15; }
   }`,
 };
 

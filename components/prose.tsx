@@ -24,20 +24,20 @@ const TARGET_ATTRIBUTE_RE =
 const WHITESPACE_RE = /\s/;
 const NAME_CHAR_RE = /[\w.-]/;
 const ENTITIES: Record<string, string> = {
-  "&amp;": "&",
-  "&lt;": "<",
-  "&gt;": ">",
-  "&quot;": '"',
-  "&apos;": "'",
-  "&nbsp;": "\u00A0",
   "&#39;": "'",
-  "&#x27;": "'",
   "&#X27;": "'",
+  "&#x27;": "'",
+  "&amp;": "&",
+  "&apos;": "'",
+  "&gt;": ">",
+  "&lt;": "<",
+  "&nbsp;": "\u00A0",
+  "&quot;": '"',
 };
 const NAME_RE = /^[A-Za-z][\w.-]*$/;
 const CODE_THEMES = {
-  light: "github-light",
   dark: "github-dark",
+  light: "github-light",
 } as const;
 
 function decodeEntities(value: string): string {
@@ -106,7 +106,7 @@ function readAttributeName(
   }
 
   const name = input.slice(index, next);
-  return NAME_RE.test(name) ? { name, index: next } : null;
+  return NAME_RE.test(name) ? { index: next, name } : null;
 }
 
 function readAttributeValue(
@@ -124,8 +124,8 @@ function readAttributeValue(
     }
 
     return {
-      value: input.slice(valueStart, next),
       index: input[next] === quoteEnd ? next + 1 : next,
+      value: input.slice(valueStart, next),
     };
   }
 
@@ -139,7 +139,7 @@ function readAttributeValue(
     next += 1;
   }
 
-  return { value: input.slice(index, next), index: next };
+  return { index: next, value: input.slice(index, next) };
 }
 
 function parseAttributes(input: string): Record<string, string> {
@@ -322,18 +322,18 @@ function appendPlaceholderSegments(segments: Segment[], html: string) {
 
     if (match.index > lastIndex) {
       segments.push({
-        kind: "html",
         id: `seg-${segments.length}`,
+        kind: "html",
         value: html.slice(lastIndex, match.index),
       });
     }
 
     segments.push({
-      kind: "component",
       id: `seg-${segments.length}`,
+      kind: "component",
       name: placeholder.name,
-      raw: match[0],
       props: placeholder.props,
+      raw: match[0],
     });
     lastIndex = match.index + match[0].length;
     match = PARAGRAPH_RE.exec(html);
@@ -341,8 +341,8 @@ function appendPlaceholderSegments(segments: Segment[], html: string) {
 
   if (lastIndex < html.length) {
     segments.push({
-      kind: "html",
       id: `seg-${segments.length}`,
+      kind: "html",
       value: html.slice(lastIndex),
     });
   }
@@ -376,17 +376,17 @@ async function highlightCodeBlock(
 
   try {
     const html = await codeToHtml(decodedCode, {
+      defaultColor: "light",
       lang: language,
       themes: CODE_THEMES,
-      defaultColor: "light",
     });
 
     return { code: decodedCode, html };
   } catch {
     const html = await codeToHtml(decodedCode, {
+      defaultColor: "light",
       lang: "text",
       themes: CODE_THEMES,
-      defaultColor: "light",
     });
 
     return { code: decodedCode, html };
@@ -404,8 +404,8 @@ async function splitContent(html: string): Promise<Segment[]> {
 
     const highlighted = await highlightCodeBlock(match[1], match[2], match[3]);
     segments.push({
-      kind: "code",
       id: `seg-${segments.length}`,
+      kind: "code",
       ...highlighted,
     });
 

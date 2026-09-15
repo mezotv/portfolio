@@ -39,19 +39,19 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.title,
     description: post.description,
     openGraph: {
-      title: post.title,
       description: post.description,
-      type: "article",
-      publishedTime: post.publishedAt.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
+      publishedTime: post.publishedAt.toISOString(),
+      title: post.title,
+      type: "article",
     },
+    title: post.title,
     twitter: {
       card: "summary_large_image",
-      title: post.title,
       description: post.description,
+      title: post.title,
     },
   };
 }
@@ -68,9 +68,9 @@ async function BlogPostContent({ params }: BlogPostPageProps) {
 
   const publishDate = new Date(post.publishedAt);
   const formattedDate = publishDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
     day: "numeric",
+    month: "long",
+    year: "numeric",
   });
   const readingTime = getReadingTime(post.content);
   const markdownUrl = getBlogMarkdownUrl(slug);

@@ -27,13 +27,13 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CommandTabsDemo,
     CommandTabsExpandableDemo,
     CommandTabsHighlightDemo,
-    ExpandableTabs,
-    PermissionSelector,
-    PermissionRow,
-    PermissionOption,
-    PermissionFormDemo,
     ComponentPreview,
+    ExpandableTabs,
     InstallCommand,
+    PermissionFormDemo,
+    PermissionOption,
+    PermissionRow,
+    PermissionSelector,
     ...components,
   };
 }

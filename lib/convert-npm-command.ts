@@ -1,9 +1,9 @@
 interface PackageManagerCommands {
-  pnpm: string;
-  yarn: string;
-  npm: string;
   bun: string;
+  npm: string;
+  pnpm: string;
   shadcn?: string;
+  yarn: string;
 }
 
 const SHADCN_NPX_RE = /^npx\s+shadcn(?:@\S+)?\s+(.+)$/;
@@ -23,11 +23,11 @@ export function convertNpmCommand(npmCommand: string): PackageManagerCommands {
     const subcommand = shadcnMatch[1];
     const npxArgs = trimmed.replace(NPX_PREFIX_RE, "");
     return {
+      bun: `bunx --bun ${npxArgs}`,
       npm: trimmed,
       pnpm: `pnpm dlx ${npxArgs}`,
-      yarn: `yarn dlx ${npxArgs}`,
-      bun: `bunx --bun ${npxArgs}`,
       shadcn: `shadcn ${subcommand}`,
+      yarn: `yarn dlx ${npxArgs}`,
     };
   }
 
@@ -36,10 +36,10 @@ export function convertNpmCommand(npmCommand: string): PackageManagerCommands {
   if (createMatch) {
     const rest = createMatch[1];
     return {
+      bun: `bunx --bun create-${rest}`,
       npm: trimmed,
       pnpm: `pnpm create ${rest}`,
       yarn: `yarn create ${rest}`,
-      bun: `bunx --bun create-${rest}`,
     };
   }
 
@@ -47,10 +47,10 @@ export function convertNpmCommand(npmCommand: string): PackageManagerCommands {
   if (trimmed.startsWith("npm create ")) {
     const rest = trimmed.replace(NPM_CREATE_PREFIX_RE, "");
     return {
+      bun: `bun create ${rest}`,
       npm: trimmed,
       pnpm: `pnpm create ${rest}`,
       yarn: `yarn create ${rest}`,
-      bun: `bun create ${rest}`,
     };
   }
 
@@ -58,10 +58,10 @@ export function convertNpmCommand(npmCommand: string): PackageManagerCommands {
   if (trimmed.startsWith("npx ")) {
     const rest = trimmed.replace(NPX_PREFIX_RE, "");
     return {
+      bun: `bunx --bun ${rest}`,
       npm: trimmed,
       pnpm: `pnpm dlx ${rest}`,
       yarn: `yarn ${rest}`,
-      bun: `bunx --bun ${rest}`,
     };
   }
 
@@ -69,10 +69,10 @@ export function convertNpmCommand(npmCommand: string): PackageManagerCommands {
   if (trimmed.startsWith("npm run ")) {
     const rest = trimmed.replace(NPM_RUN_PREFIX_RE, "");
     return {
+      bun: `bun ${rest}`,
       npm: trimmed,
       pnpm: `pnpm ${rest}`,
       yarn: `yarn ${rest}`,
-      bun: `bun ${rest}`,
     };
   }
 
@@ -80,18 +80,18 @@ export function convertNpmCommand(npmCommand: string): PackageManagerCommands {
   if (trimmed.startsWith("npm install ") || trimmed.startsWith("npm i ")) {
     const rest = trimmed.replace(NPM_INSTALL_PREFIX_RE, "");
     return {
+      bun: `bun add ${rest}`,
       npm: trimmed,
       pnpm: `pnpm add ${rest}`,
       yarn: `yarn add ${rest}`,
-      bun: `bun add ${rest}`,
     };
   }
 
   // Fallback
   return {
+    bun: trimmed.replace(NPM_PREFIX_RE, "bun "),
     npm: trimmed,
     pnpm: trimmed.replace(NPM_PREFIX_RE, "pnpm "),
     yarn: trimmed.replace(NPM_PREFIX_RE, "yarn "),
-    bun: trimmed.replace(NPM_PREFIX_RE, "bun "),
   };
 }

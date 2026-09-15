@@ -7,26 +7,26 @@ const handler = createLlmsTxtHandler({
     "Software Engineer based in Germany with a passion for open source.",
   sections: [
     {
-      title: "Pages",
       links: [
-        { title: "Home", href: `${SITE_URL}/` },
-        { title: "Blog", href: `${SITE_URL}/blog` },
-        { title: "Projects", href: `${SITE_URL}/projects` },
-        { title: "Experience", href: `${SITE_URL}/experience` },
-        { title: "Events", href: `${SITE_URL}/events` },
-        { title: "Tech Stack", href: `${SITE_URL}/tools` },
+        { href: `${SITE_URL}/`, title: "Home" },
+        { href: `${SITE_URL}/blog`, title: "Blog" },
+        { href: `${SITE_URL}/projects`, title: "Projects" },
+        { href: `${SITE_URL}/experience`, title: "Experience" },
+        { href: `${SITE_URL}/events`, title: "Events" },
+        { href: `${SITE_URL}/tools`, title: "Tech Stack" },
       ],
+      title: "Pages",
     },
     {
-      title: "dominik-ui",
       links: [
-        { title: "Registry Overview", href: `${SITE_URL}/ui` },
+        { href: `${SITE_URL}/ui`, title: "Registry Overview" },
         {
-          title: "Expandable Tabs",
           href: `${SITE_URL}/ui/expandable-tabs`,
+          title: "Expandable Tabs",
         },
-        { title: "Braille Loader", href: `${SITE_URL}/ui/braille-loader` },
+        { href: `${SITE_URL}/ui/braille-loader`, title: "Braille Loader" },
       ],
+      title: "dominik-ui",
     },
   ],
 });

@@ -28,7 +28,7 @@ function calculateDuration(
   );
 
   if (diffInDays < 30) {
-    return `${diffInDays} day${diffInDays !== 1 ? "s" : ""}`;
+    return `${diffInDays} day${diffInDays === 1 ? "" : "s"}`;
   }
 
   const diffInMonths =
@@ -40,37 +40,37 @@ function calculateDuration(
   const months = diffInMonths % 12;
 
   if (years === 0) {
-    return `${months} mo${months !== 1 ? "s" : ""}`;
+    return `${months} mo${months === 1 ? "" : "s"}`;
   }
   if (months === 0) {
-    return `${years} yr${years !== 1 ? "s" : ""}`;
+    return `${years} yr${years === 1 ? "" : "s"}`;
   }
-  return `${years} yr${years !== 1 ? "s" : ""} ${months} mo${
-    months !== 1 ? "s" : ""
+  return `${years} yr${years === 1 ? "" : "s"} ${months} mo${
+    months === 1 ? "" : "s"
   }`;
 }
 
 interface ProcessedPosition {
-  role: string;
-  type: string;
+  duration: string;
+  endDateText: string;
+  formattedStartDate: string;
+  isOngoing: boolean;
   location: string;
   note?: string;
-  duration: string;
-  formattedStartDate: string;
-  endDateText: string;
-  isOngoing: boolean;
+  role: string;
   showPresent: boolean;
+  type: string;
 }
 
 interface ProcessedExperience {
+  category: ExperienceItem["category"];
   company: string;
   companyUrl?: string;
-  logo?: string;
-  category: ExperienceItem["category"];
-  note?: string;
-  skills: { name: string }[];
   currentPosition: ProcessedPosition;
+  logo?: string;
+  note?: string;
   promotions: ProcessedPosition[];
+  skills: { name: string }[];
   totalDuration: string;
 }
 
@@ -98,15 +98,15 @@ function processPosition(
   }
 
   return {
-    role: position.role,
-    type: position.type,
+    duration,
+    endDateText,
+    formattedStartDate: formatDate(position.startDate),
+    isOngoing,
     location: position.location,
     note,
-    duration,
-    formattedStartDate: formatDate(position.startDate),
-    endDateText,
-    isOngoing,
+    role: position.role,
     showPresent,
+    type: position.type,
   };
 }
 
@@ -176,22 +176,22 @@ async function getProcessedExperience(): Promise<{
   const process = (item: ExperienceItem): ProcessedExperience => {
     const isEducation = item.category === "education";
     return {
+      category: item.category,
       company: item.company,
       companyUrl: item.companyUrl,
-      logo: item.logo,
-      category: item.category,
-      note: item.note,
-      skills: item.skills,
       currentPosition: processPosition(
         item.currentPosition,
         item.note,
         isEducation,
         now
       ),
+      logo: item.logo,
+      note: item.note,
       promotions:
         item.promotions?.map((p) =>
           processPosition(p, undefined, isEducation, now)
         ) ?? [],
+      skills: item.skills,
       totalDuration: calculateTotalCompanyDuration(item, now),
     };
   };
@@ -200,8 +200,8 @@ async function getProcessedExperience(): Promise<{
   const education = experiences.filter((exp) => exp.category === "education");
 
   return {
-    work: sortByEndDate(workExperience, now).map(process),
     education: sortByEndDate(education, now).map(process),
+    work: sortByEndDate(workExperience, now).map(process),
   };
 }
 
@@ -243,7 +243,7 @@ function SkillsList({ skills }: { skills: { name: string }[] }) {
           <Tooltip>
             <TooltipTrigger className="group relative cursor-help before:absolute before:-inset-x-1.5 before:-inset-y-2 before:content-['']">
               <span className="underline decoration-dotted underline-offset-2 transition-colors group-hover:text-primary group-hover:decoration-solid">
-                {`and +${remainingCount} skill${remainingCount !== 1 ? "s" : ""}`}
+                {`and +${remainingCount} skill${remainingCount === 1 ? "" : "s"}`}
               </span>
             </TooltipTrigger>
             <TooltipContent>

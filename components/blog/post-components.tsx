@@ -16,9 +16,9 @@ const addBrailleSchema = z
   .catch({ command: DEFAULT_BRAILLE_COMMAND });
 
 export const postComponents: Record<string, PostEmbed> = {
-  BrailleDemo: () => <BrailleDemo />,
   AddBrailleComponent: (rawProps) => {
     const { command } = addBrailleSchema.parse(rawProps);
     return <AddBrailleComponent command={command} />;
   },
+  BrailleDemo: () => <BrailleDemo />,
 };

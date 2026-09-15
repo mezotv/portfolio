@@ -1,10 +1,10 @@
 import { cacheLife, cacheTag } from "next/cache";
 
 export interface Sponsor {
-  type: "User" | "Organization";
+  avatarUrl: string;
   login: string;
   name: string | null;
-  avatarUrl: string;
+  type: "User" | "Organization";
   url: string;
   websiteUrl: string | null;
 }
@@ -71,15 +71,15 @@ async function fetchSponsorsData(): Promise<{
   }
 
   const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
     body: JSON.stringify({
       query: SPONSORS_QUERY,
       variables: { username: GITHUB_USERNAME },
     }),
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
   });
 
   if (!response.ok) {
@@ -99,10 +99,10 @@ async function fetchSponsorsData(): Promise<{
   }
 
   const sponsors: Sponsor[] = sponsorsData.nodes.map((node) => ({
-    type: node.__typename,
+    avatarUrl: node.avatarUrl,
     login: node.login,
     name: node.name ?? null,
-    avatarUrl: node.avatarUrl,
+    type: node.__typename,
     url: node.url,
     websiteUrl: node.websiteUrl ?? null,
   }));
@@ -120,21 +120,21 @@ export async function getSponsors(): Promise<{
 }> {
   if (!process.env.GITHUB_TOKEN) {
     return {
+      error: "GitHub token not configured",
       sponsors: [],
       totalCount: 0,
-      error: "GitHub token not configured",
     };
   }
 
   try {
     const { sponsors, totalCount } = await fetchSponsorsData();
-    return { sponsors, totalCount, error: null };
+    return { error: null, sponsors, totalCount };
   } catch (err) {
     console.error("Error fetching sponsors:", err);
     return {
+      error: err instanceof Error ? err.message : "Failed to fetch sponsors",
       sponsors: [],
       totalCount: 0,
-      error: err instanceof Error ? err.message : "Failed to fetch sponsors",
     };
   }
 }

@@ -4,9 +4,9 @@ import { BlogPostItem } from "@/components/sections/blog-post-item";
 import { getBlogPosts, getExternalPosts } from "@/lib/marble/queries";
 
 export const metadata: Metadata = {
-  title: "Blog",
   description:
     "Thoughts on web development, design systems, and modern tooling.",
+  title: "Blog",
 };
 
 async function BlogPostList() {

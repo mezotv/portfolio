@@ -5,9 +5,9 @@ import { type ReactNode, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface ComponentPreviewProps {
-  preview: ReactNode;
   children: ReactNode;
   className?: string;
+  preview: ReactNode;
 }
 
 export function ComponentPreview({

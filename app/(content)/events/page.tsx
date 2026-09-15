@@ -4,8 +4,8 @@ import { Events } from "@/components/sections/events";
 import { getEventsWithStatus } from "@/lib/events";
 
 export const metadata: Metadata = {
-  title: "Events",
   description: "Events I hosted or helped out at.",
+  title: "Events",
 };
 
 async function EventsList() {

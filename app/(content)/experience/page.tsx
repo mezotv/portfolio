@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import { Experience } from "@/components/sections/experience";
 
 export const metadata: Metadata = {
-  title: "Experience",
   description: "My professional experience and work history.",
+  title: "Experience",
 };
 
 export default function ExperiencePage() {

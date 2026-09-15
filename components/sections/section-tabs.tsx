@@ -8,11 +8,11 @@ export function SectionTabs() {
   const pathname = usePathname();
 
   const getTabs = () => [
-    { label: "About", href: "/", value: "about" },
-    { label: "Projects", href: "/projects", value: "projects" },
-    { label: "Experience", href: "/experience", value: "experience" },
-    { label: "Events", href: "/events", value: "events" },
-    { label: "Blog", href: "/blog", value: "blog" },
+    { href: "/", label: "About", value: "about" },
+    { href: "/projects", label: "Projects", value: "projects" },
+    { href: "/experience", label: "Experience", value: "experience" },
+    { href: "/events", label: "Events", value: "events" },
+    { href: "/blog", label: "Blog", value: "blog" },
   ];
 
   const tabs = getTabs();
