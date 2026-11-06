@@ -49,6 +49,21 @@ export const experiences: ExperienceItem[] = [
   },
   {
     category: "work",
+    company: "Notra",
+    companyUrl: "https://www.usenotra.com/",
+    currentPosition: {
+      endDate: "present",
+      location: "Remote",
+      role: "Software Engineer",
+      startDate: new Date("2026-03-17"),
+      type: "Full-time",
+    },
+    location: "Remote",
+    logo: "/images/notra.svg",
+    skills: [{ name: "Next.js" }, { name: "TypeScript" }, { name: "Drizzle" }],
+  },
+  {
+    category: "work",
     company: "RentMyHeader",
     companyUrl: "https://rentmyheader.com/",
     currentPosition: {
