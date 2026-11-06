@@ -8,7 +8,8 @@ export type PositionType =
   | "Part-time"
   | "Full-time"
   | "Self-Employed"
-  | "Contract";
+  | "Contract"
+  | "Shareholder";
 
 export interface Position {
   endDate: Date | "present";
@@ -138,6 +139,21 @@ export const experiences: ExperienceItem[] = [
     location: "Riedlingen, Baden-Württemberg, Germany",
     logo: "/images/koch-bautechnik.webp",
     skills: [{ name: "Adobe Photoshop" }, { name: "Adobe XD" }],
+  },
+  {
+    category: "work",
+    company: "ImmoKoch eGbR",
+    companyUrl: "https://www.linkedin.com/company/immo-koch",
+    currentPosition: {
+      endDate: "present",
+      location: "Riedlingen, Baden-Württemberg, Germany",
+      role: "Shareholder",
+      startDate: new Date("2026-08-24"),
+      type: "Shareholder",
+    },
+    location: "Riedlingen, Baden-Württemberg, Germany",
+    logo: "/images/immo-koch.webp",
+    skills: [],
   },
   {
     category: "work",
