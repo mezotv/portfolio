@@ -39,7 +39,7 @@ export const dualmarkConfig: DualmarkNextConfig = {
 
 Software Engineer based in Germany with a passion for open source.
 
-Currently working full-time on Notra and maintaining Hotkeys and Rivo.
+Currently working full-time on [Notra](https://www.usenotra.com/) and as a DX Engineer at [Databricks](https://www.databricks.com/) ([Neon](https://neon.com/)).
 
 - [Blog](${SITE_URL}/blog)
 - [Projects](${SITE_URL}/projects)

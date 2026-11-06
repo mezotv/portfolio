@@ -41,25 +41,25 @@ export function Intro() {
         >
           Notra
         </a>{" "}
-        and maintaining{" "}
+        and as a DX Engineer at{" "}
         <a
           className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
-          href="https://hotkeys.dominikkoch.dev/"
+          href="https://www.databricks.com/"
           rel="noopener"
           target="_blank"
         >
-          Hotkeys
+          Databricks
         </a>{" "}
-        and{" "}
+        (
         <a
           className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
-          href="https://rivo.gg/"
+          href="https://neon.com/"
           rel="noopener"
           target="_blank"
         >
-          Rivo
+          Neon
         </a>
-        .
+        ).
       </p>
       <div className="flex flex-row gap-4">
         <a

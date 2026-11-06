@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   description:
-    "Software Engineer based in Germany with a passion for open source. Currently working on Notra and maintaining Hotkeys and Rivo.",
+    "Software Engineer based in Germany with a passion for open source. Currently working on Notra and as a DX Engineer at Databricks (Neon).",
   title: {
     default: "Dominik Koch",
     template: "%s by Dominik Koch",
