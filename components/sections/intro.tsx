@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BrickverIcon } from "@/components/icons/brickver-icon";
 import { CalIcon } from "@/components/icons/cal-icon";
 import { GitHubIcon } from "@/components/icons/github-icon";
@@ -6,6 +7,34 @@ import { TwitterIcon } from "@/components/icons/twitter-icon";
 import { ModeToggle } from "@/components/mode-toggle";
 
 const age = 21.311_538_647_36;
+
+function companyFavicon(url: string) {
+  const { hostname } = new URL(url);
+  return new URL(`${hostname}.ico`, "https://icons.duckduckgo.com/ip3/").href;
+}
+
+function CompanyLink({ href, name }: { href: string; name: string }) {
+  return (
+    <a
+      className="group inline-flex items-center gap-1 whitespace-nowrap align-middle"
+      href={href}
+      rel="noopener"
+      target="_blank"
+    >
+      <Image
+        alt=""
+        className="size-4 shrink-0"
+        height={16}
+        src={companyFavicon(href)}
+        unoptimized
+        width={16}
+      />
+      <span className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out group-hover:after:scale-x-100 dark:after:bg-zinc-100">
+        {name}
+      </span>
+    </a>
+  );
+}
 
 export function Intro() {
   return (
@@ -33,33 +62,12 @@ export function Intro() {
           {age}
         </span>{" "}
         years old with a passion for open source. Currently working on{" "}
-        <a
-          className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
-          href="https://www.usenotra.com/"
-          rel="noopener"
-          target="_blank"
-        >
-          Notra
-        </a>{" "}
-        and as a DX Engineer at{" "}
-        <a
-          className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
-          href="https://www.databricks.com/"
-          rel="noopener"
-          target="_blank"
-        >
-          Databricks
-        </a>{" "}
-        (
-        <a
-          className="relative font-bold after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 dark:after:bg-zinc-100"
-          href="https://neon.com/"
-          rel="noopener"
-          target="_blank"
-        >
-          Neon
-        </a>
-        ).
+        <CompanyLink href="https://www.usenotra.com/" name="Notra" /> and as a
+        DX Engineer at{" "}
+        <CompanyLink href="https://www.databricks.com/" name="Databricks" />
+        {" working on "}
+        <CompanyLink href="https://neon.com/" name="Neon" />
+        {"."}
       </p>
       <div className="flex flex-row gap-4">
         <a
