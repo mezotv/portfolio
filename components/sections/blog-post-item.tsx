@@ -33,7 +33,10 @@ export function BlogPostItem({ post }: BlogPostItemProps) {
         <p className="text-muted-foreground">{post.description}</p>
 
         {isExternal && originalAuthor && (
-          <p className="text-muted-foreground text-sm">by {originalAuthor}</p>
+          <p className="text-muted-foreground text-sm">
+            by{" "}
+            <span className="font-bold text-foreground">{originalAuthor}</span>
+          </p>
         )}
 
         {post.tags && post.tags.length > 0 && (
