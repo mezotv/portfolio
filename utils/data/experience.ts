@@ -39,7 +39,7 @@ export const experiences: ExperienceItem[] = [
       endDate: "present",
       location: "Remote",
       role: "DX Engineer",
-      startDate: new Date("2026-01-15"),
+      startDate: new Date("2026-03-15"),
       type: "Contract",
     },
     location: "Remote",
